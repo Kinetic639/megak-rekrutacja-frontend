@@ -57,7 +57,7 @@ const UserLogin = () => {
                 })}
               />
               {errors.email && (
-                <p className={`errorP`}>{errors.email.message}</p>
+                <p className={`errorP mt-1`}>{errors.email.message}</p>
               )}
               {/*TODO Error label if email from database isn't correct.*/}
             </Col>
@@ -78,7 +78,7 @@ const UserLogin = () => {
                 })}
               />
               {errors.password && (
-                <p className={`errorP`}>{errors.password.message}</p>
+                <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
