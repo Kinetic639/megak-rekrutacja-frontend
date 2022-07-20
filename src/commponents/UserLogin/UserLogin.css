@@ -1,0 +1,22 @@
+.container {
+    width: 27rem;
+    background-color: #222225;
+}
+
+#formHorizontalEmail {
+    border-radius: 0;
+    background-color: #292a2c;
+    border: none;
+}
+#formHorizontalEmail:active {
+    border: #d52525;
+}
+#formHorizontalPassword {
+    border-radius: 0;
+    background-color: #292a2c;
+    border: none;
+}
+
+#buttonLogin {
+    border-radius: 0 !important;
+}
