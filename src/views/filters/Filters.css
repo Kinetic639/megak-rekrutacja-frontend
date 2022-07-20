@@ -1,0 +1,13 @@
+.backdrop{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0a0a0a;
+  opacity: 0.5;
+}
+
+.filtersPanel{
+  background-color: #0a0a0a;
+}
