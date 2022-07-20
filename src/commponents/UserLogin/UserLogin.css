@@ -22,7 +22,13 @@
 }
 
 .errorP {
-    color: #bf1650;
+    color: #942424;
     margin: 0;
     padding-top: 10px;
+}
+
+.errorP::before {
+    color: #942424;
+    display: inline;
+    content: "⚠ ";
 }

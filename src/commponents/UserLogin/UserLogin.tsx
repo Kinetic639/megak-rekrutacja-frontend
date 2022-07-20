@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -15,12 +15,23 @@ const UserLogin = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormLoginType>();
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
+    setLoading(true);
+
+    try {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Container
         className={`position-absolute top-50 start-50 translate-middle container`}
       >
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Image
             className={`mx-auto d-block mb-5`}
             src={'https://platforma.megak.pl/public/ui/logo.png'}
@@ -39,7 +50,6 @@ const UserLogin = () => {
                 {...register('email', {
                   required: `To pole nie może być puste!`,
                   maxLength: 255,
-                  minLength: 3,
                 })}
               />
               {errors.email && (
@@ -61,8 +71,6 @@ const UserLogin = () => {
                 placeholder="Hasło"
                 {...register('password', {
                   required: `To pole nie może być puste!`,
-                  maxLength: 36,
-                  minLength: 8,
                 })}
               />
               {errors.password && (
