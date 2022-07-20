@@ -36,8 +36,15 @@ const UserLogin = () => {
                 className={'text-light'}
                 type="email"
                 placeholder="E-mail"
-                {...register('email')}
+                {...register('email', {
+                  required: `To pole nie może być puste!`,
+                  maxLength: 255,
+                  minLength: 3,
+                })}
               />
+              {errors.email && (
+                <p className={`errorP`}>{errors.email.message}</p>
+              )}
               {/*TODO Error label if email from database isn't correct.*/}
             </Col>
           </Form.Group>
@@ -52,8 +59,15 @@ const UserLogin = () => {
                 className={'text-light'}
                 type="password"
                 placeholder="Hasło"
-                {...register('password')}
+                {...register('password', {
+                  required: `To pole nie może być puste!`,
+                  maxLength: 36,
+                  minLength: 8,
+                })}
               />
+              {errors.password && (
+                <p className={`errorP`}>{errors.password.message}</p>
+              )}
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
           </Form.Group>

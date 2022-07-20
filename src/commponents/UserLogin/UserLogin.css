@@ -20,3 +20,9 @@
 #buttonLogin {
     border-radius: 0 !important;
 }
+
+.errorP {
+    color: #bf1650;
+    margin: 0;
+    padding-top: 10px;
+}
