@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "types": [
+        "../megak-rekrutacja-backend/src/types"
+      ]
+    }
+  }
+}
