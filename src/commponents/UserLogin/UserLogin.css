@@ -28,7 +28,7 @@
 }
 
 .errorP::before {
-    color: #942424;
     display: inline;
-    content: "⚠ ";
+    content: "⛔ ";
+
 }

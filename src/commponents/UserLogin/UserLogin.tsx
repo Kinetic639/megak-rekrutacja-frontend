@@ -45,11 +45,15 @@ const UserLogin = () => {
             <Col sm={12}>
               <Form.Control
                 className={'text-light'}
-                type="email"
+                type="text"
                 placeholder="E-mail"
                 {...register('email', {
                   required: `To pole nie może być puste!`,
                   maxLength: 255,
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Zły format adresu E-mail.',
+                  },
                 })}
               />
               {errors.email && (
