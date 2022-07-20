@@ -31,6 +31,6 @@
 
 .errorP::before {
     display: inline;
-    content: "⛔ ";
+    content: "🛡️ ";
 
 }
