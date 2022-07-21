@@ -5,54 +5,154 @@ export const Filters = () => {
     <>
       <div className="backdrop">
         <article className="filtersPanel">
-          <section>
+          <section className='filtersPanel__head'>
             <h2>Filtrowanie</h2>
             <button>Wyczyść wszystkie</button>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Ocena przejścia kursu</h3>
             <ul>
-              <li>5</li>
-              <li>4</li>
-              <li>3</li>
-              <li>2</li>
-              <li>1</li>
+              <li>
+                <button>
+                  <span>5</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>4</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>3</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>2</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>1</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Ocena aktywności i zaangażowania w kursie</h3>
             <ul>
-              <li>5</li>
-              <li>4</li>
-              <li>3</li>
-              <li>2</li>
-              <li>1</li>
+              <li>
+                <button>
+                  <span>5</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>4</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>3</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>2</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>1</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
             </ul>
           </section>
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Ocena kodu w projekcie własnym</h3>
             <ul>
-              <li>5</li>
-              <li>4</li>
-              <li>3</li>
-              <li>2</li>
-              <li>1</li>
+              <li>
+                <button>
+                  <span>5</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>4</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>3</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>2</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>1</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
             </ul>
           </section>
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Ocena pracy w zespole scrum</h3>
             <ul>
-              <li>5</li>
-              <li>4</li>
-              <li>3</li>
-              <li>2</li>
-              <li>1</li>
+              <li>
+                <button>
+                  <span>5</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>4</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>3</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>2</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <li>
+                <button>
+                  <span>1</span>
+                  <img src="" alt="" />
+                </button>
+              </li>
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Preferowane miejsce pracy</h3>
             <ul>
               <li><button>Praca zdalna</button></li>
@@ -60,7 +160,7 @@ export const Filters = () => {
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Oczekiwany typ kontraktu</h3>
             <ul>
               <li><button>Umowa o pracę</button></li>
@@ -70,7 +170,7 @@ export const Filters = () => {
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Oczekiwane wynagrodzenie miesięczne netto</h3>
             <ul>
               <li>
@@ -88,7 +188,7 @@ export const Filters = () => {
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Zgoda na odbycie bezpłatnych praktyk/stażu na początek</h3>
             <ul>
               <li>
@@ -106,7 +206,7 @@ export const Filters = () => {
             </ul>
           </section>
 
-          <section className="filter">
+          <section className="filtersPanel__filter">
             <h3 className="subTitle">Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu</h3>
             <ul>
               <li>

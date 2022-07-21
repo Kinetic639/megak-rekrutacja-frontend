@@ -9,5 +9,7 @@
 }
 
 .filtersPanel{
+  margin-left:auto;
+  margin-right: auto;
   background-color: #0a0a0a;
 }
