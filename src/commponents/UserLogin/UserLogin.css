@@ -35,5 +35,4 @@
 .errorP::before {
     display: inline;
     content: "🛡️ ";
-
 }

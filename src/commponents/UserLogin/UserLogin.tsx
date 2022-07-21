@@ -3,10 +3,11 @@ import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import './UserLogin.css';
+import { apiUrl } from '../../config/api';
 
 interface FormLoginType {
   email: string;
-  password: string;
+  pwd: string;
 }
 
 const UserLogin = () => {
@@ -16,11 +17,27 @@ const UserLogin = () => {
     handleSubmit,
   } = useForm<FormLoginType>();
   const [loading, setLoading] = useState(false);
-
+  const [resError, setResError] = useState('');
   const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
     setLoading(true);
 
     try {
+      const res = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+        }),
+        credentials: 'include',
+      });
+      const dataLoginRes = await res.json();
+      console.log(dataLoginRes);
+
+      if (dataLoginRes.message !== 'Login successful.') {
+        setResError(dataLoginRes.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -73,12 +90,17 @@ const UserLogin = () => {
                 className={'text-light'}
                 type="password"
                 placeholder="Hasło"
-                {...register('password', {
+                {...register('pwd', {
                   required: `To pole nie może być puste!`,
                 })}
               />
-              {errors.password && (
-                <p className={`errorP mt-1`}>{errors.password.message}</p>
+              {errors.pwd && (
+                <p className={`errorP mt-1`}>{errors.pwd.message}</p>
+              )}
+              {resError === 'Invalid login data.' && (
+                <p
+                  className={`errorP mt-1`}
+                >{`Wprowadzone dane są nieprawidłowe.`}</p>
               )}
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
