@@ -46,7 +46,7 @@ const UserLogin = () => {
   return (
     <>
       <Container
-        className={`position-absolute top-50 start-50 translate-middle container`}
+        className={`position-absolute top-50 start-50 translate-middle container-user-login`}
       >
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Image
@@ -76,7 +76,6 @@ const UserLogin = () => {
               {errors.email && (
                 <p className={`errorP mt-1`}>{errors.email.message}</p>
               )}
-              {/*TODO Error label if email from database isn't correct.*/}
             </Col>
           </Form.Group>
 
@@ -102,7 +101,6 @@ const UserLogin = () => {
                   className={`errorP mt-1`}
                 >{`Wprowadzone dane są nieprawidłowe.`}</p>
               )}
-              {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
           </Form.Group>
           <p className={'mb-4 text-light'}>
