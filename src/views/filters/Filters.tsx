@@ -6,39 +6,39 @@ export const Filters = () => {
       <div className="backdrop">
         <article className="filtersPanel">
           <section className='filtersPanel__head'>
-            <h2>Filtrowanie</h2>
-            <button>Wyczyść wszystkie</button>
+            <h2 className='filtersPanel__title'>Filtrowanie</h2>
+            <button className='filtersPanel__element'>Wyczyść wszystkie</button>
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Ocena przejścia kursu</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Ocena przejścia kursu</h3>
+            <ul className="filtersPanel__options-list">
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>5</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>4</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>3</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>2</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>1</span>
                   <img src="" alt="" />
                 </button>
@@ -47,34 +47,34 @@ export const Filters = () => {
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Ocena aktywności i zaangażowania w kursie</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Ocena aktywności i zaangażowania w kursie</h3>
+            <ul className="filtersPanel__options-list">
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>5</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>4</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>3</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>2</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>1</span>
                   <img src="" alt="" />
                 </button>
@@ -82,34 +82,34 @@ export const Filters = () => {
             </ul>
           </section>
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Ocena kodu w projekcie własnym</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Ocena kodu w projekcie własnym</h3>
+            <ul className="filtersPanel__options-list">
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>5</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>4</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>3</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>2</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>1</span>
                   <img src="" alt="" />
                 </button>
@@ -117,34 +117,34 @@ export const Filters = () => {
             </ul>
           </section>
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Ocena pracy w zespole scrum</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Ocena pracy w zespole scrum</h3>
+            <ul className="filtersPanel__options-list">
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>5</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>4</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>3</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>2</span>
                   <img src="" alt="" />
                 </button>
               </li>
               <li>
-                <button>
+                <button className='filtersPanel__element'>
                   <span>1</span>
                   <img src="" alt="" />
                 </button>
@@ -153,26 +153,26 @@ export const Filters = () => {
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Preferowane miejsce pracy</h3>
-            <ul>
-              <li><button>Praca zdalna</button></li>
-              <li><button>Praca w biurze</button></li>
+            <h3 className="filtersPanel__subtitle">Preferowane miejsce pracy</h3>
+            <ul className="filtersPanel__options-list">
+              <li><button className='filtersPanel__element'>Praca zdalna</button></li>
+              <li><button className='filtersPanel__element'>Praca w biurze</button></li>
             </ul>
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Oczekiwany typ kontraktu</h3>
-            <ul>
-              <li><button>Umowa o pracę</button></li>
-              <li><button>B2B</button></li>
-              <li><button>Umowa Zlecenie</button></li>
-              <li><button>Umowa o dzieło</button></li>
+            <h3 className="filtersPanel__subtitle">Oczekiwany typ kontraktu</h3>
+            <ul className="filtersPanel__options-list">
+              <li><button className='filtersPanel__element'>Umowa o pracę</button></li>
+              <li><button className='filtersPanel__element'>B2B</button></li>
+              <li><button className='filtersPanel__element'>Umowa Zlecenie</button></li>
+              <li><button className='filtersPanel__element'>Umowa o dzieło</button></li>
             </ul>
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Oczekiwane wynagrodzenie miesięczne netto</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Oczekiwane wynagrodzenie miesięczne netto</h3>
+            <ul className="filtersPanel__options-list">
               <li>
                 <label>
                   Od
@@ -189,8 +189,8 @@ export const Filters = () => {
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Zgoda na odbycie bezpłatnych praktyk/stażu na początek</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Zgoda na odbycie bezpłatnych praktyk/stażu na początek</h3>
+            <ul className="filtersPanel__options-list">
               <li>
                 <label>
                   Tak
@@ -207,8 +207,8 @@ export const Filters = () => {
           </section>
 
           <section className="filtersPanel__filter">
-            <h3 className="subTitle">Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu</h3>
-            <ul>
+            <h3 className="filtersPanel__subtitle">Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu</h3>
+            <ul className="filtersPanel__options-list">
               <li>
                 <input type="number" id="commercialExp" name="commercialExp" placeholder='0 miesięcy'></input>
               </li>
