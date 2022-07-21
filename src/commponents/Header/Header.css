@@ -1,0 +1,22 @@
+.container-header-second {
+    max-width: 78%;
+}
+
+.navbar-color {
+    background-color: #1E1E1F !important;
+}
+
+#collasible-nav-dropdown {
+    background-color:  #1E1E1F !important;
+}
+
+.dropdown-menu {
+    background-color: #1E1E1F !important;
+    border-radius: unset !important;
+    margin-top: 0.9rem !important;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(255, 0, 212);
+}
