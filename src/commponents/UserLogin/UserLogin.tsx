@@ -10,7 +10,7 @@ interface FormLoginType {
   pwd: string;
 }
 
-const UserLogin = () => {
+export const UserLogin = () => {
   const {
     register,
     formState: { errors },
@@ -123,5 +123,3 @@ const UserLogin = () => {
     </>
   );
 };
-
-export { UserLogin };
