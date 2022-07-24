@@ -1,9 +1,8 @@
-import { SyntheticEvent, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
 import './FiltersPanel.css';
-import { useEffectOnce } from 'src/hooks/useEffectOnce';
 
 export const FiltersPanel = () => {
 
