@@ -1,13 +1,16 @@
-import { forwardRef } from "react"
+import { forwardRef, SyntheticEvent } from "react"
 
 export interface InputI{
     labelText:string,
     placeholder?:string,
     type: 'number'| 'radio',
     name: string,
+    value?:string,
+    callback:(e:SyntheticEvent)=>void,
+    dataProp: {[prop:string]:string}
 }
 
-export const Input=forwardRef<HTMLInputElement,InputI>(({labelText, ...props},ref)=>{
+export const Input=forwardRef<HTMLInputElement,InputI>(({labelText, dataProp, callback, ...props},ref)=>{
 
   const typePropClasses= {
     radio: 'filtersPanel__input--radio ',
@@ -22,7 +25,7 @@ export const Input=forwardRef<HTMLInputElement,InputI>(({labelText, ...props},re
   return(
             <label className={labelClasses[props.type]}>
                   {labelText}
-                  <input ref={ref} className={typePropClasses[props.type]} {...props}></input>
+                  <input ref={ref} className={typePropClasses[props.type]} onChange={callback} {...dataProp} {...props}></input>
             </label>
   )  
 })

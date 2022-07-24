@@ -1,53 +1,97 @@
-import { useCallback, useRef } from 'react';
+import { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
 import './FiltersPanel.css';
 
-export const FiltersPanel = () => {
+interface activeFiltersI{
+  courseCompletion:string[],
+  courseEngagement:string[],
+  projectDegree:string[],
+  teamProjectDegree:string[],
+  expectedTypeWork:string[],
+  expectedContractType:string[],
+  expectedSalaryFrom:string,
+  expectedSalaryTo:string,
+  canTakeApprenticeship:string,
+  monthsOfCommercialExp:string,
+  [prop:string]:string[]|string
+}
 
+export const FiltersPanel = () => {
+  const [activeFilters,setActiveFilters]=useState<activeFiltersI>({
+    courseCompletion:[],
+  courseEngagement:[],
+  projectDegree:[],
+  teamProjectDegree:[],
+  expectedTypeWork:[],
+  expectedContractType:[],
+  expectedSalaryFrom:'',
+  expectedSalaryTo:'',
+  canTakeApprenticeship:'',
+  monthsOfCommercialExp:'',
+  });
   const btnElementsRef = useRef<HTMLButtonElement[]>([]);
   const inputElementsRef = useRef<HTMLInputElement[]>([]);
+  
+console.log(activeFilters);
 
-  const ratingsContents=useCallback(()=> new Array(5).fill('rating').map((item,index,arr) => {
+  const setFilter=useCallback((e:SyntheticEvent)=>{ 
+    if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.currentTarget instanceof HTMLInputElement)) {      
+      return;
+    }
+    const filter= e.currentTarget.dataset.filter;
+    const value= e.currentTarget.dataset?.value ?? e.currentTarget.value;    
+  
+    setActiveFilters((prev)=>{
+      if(prev[`${filter}`].includes(value)) return {...prev};
+      const newValue=Array.isArray(prev[`${filter}`])? [...prev[`${filter}`]as string[], value]: value;
+      return {...prev, [`${filter}`]:newValue}});
+  }
+,[]);
+
+  const ratingsContents=useCallback((filterName:string)=> new Array(5).fill(filterName).map((item,index,arr) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) }>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) } data-filter={item} data-value={`${arr.length-index}`} onClick={setFilter}>
       <span className='filtersPanel__btn-text'>{arr.length-index}</span>
       <StarIcon classes='star-icon'/>
     </button>
     )
   }),[]);
 
-  const workPlaceContents=useCallback(()=> ['Praca zdalna', 'Praca w biurze'].map((item, index)=>{
+  const workPlaceContents=useCallback((filterName:string)=> ['Praca zdalna', 'Praca w biurze'].map((item, index)=>{
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) }>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) } data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
     )
   }),[]);
 
-  const workTypeContents=useCallback(()=>['Umowa o pracę','B2B', 'Umowa Zlecenie', 'Umowa Zlecenie'].map((item, index)=>{
+  const workTypeContents=useCallback((filterName:string)=>['Umowa o pracę','B2B', 'Umowa Zlecenie', 'Umowa Zlecenie'].map((item, index)=>{
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) }>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e:any) => btnElementsRef.current.push(e) } data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
     )
   }),[]);
 
-  const expectedSalaryContents=useCallback(()=>([
-    {labelText:'Od', placeholder:'np. 1000', type:'number', name:`from`},
-     {labelText:'Do', placeholder:'np. 10000',type:'number', name:'to'}]as InputI[])
+  const expectedSalaryContents=useCallback((filterName:string)=>([
+    {labelText:'Od', placeholder:'np. 1000', type:'number', name:`From`},
+     {labelText:'Do', placeholder:'np. 10000',type:'number', name:'To'}]as InputI[])
      .map((item, index)=>{
-    return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.labelText}${index}`}/>
+      const dataProp= {[`data-filter`]:`${filterName}${item.name}`};
+    return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} callback={setFilter}/>
   }),[]);
 
- const canTakeApprenticeshipContents=useCallback(()=> ([
-  {labelText:'Tak', type:'radio',  name:'canTakeApprenticeship'},
-   {labelText:'Nie', type:'radio', name:'canTakeApprenticeship'}]as InputI[])
+ const canTakeApprenticeshipContents=useCallback((filterName:string)=> ([
+  {labelText:'Tak', type:'radio',  name:'canTakeApprenticeship', value:'true'},
+   {labelText:'Nie', type:'radio', name:'canTakeApprenticeship', value:'false'}]as InputI[])
    .map((item, index)=>{
-  return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} name={item.name} type={item.type} key={`${item.labelText}${index}`}/>
+    const dataProp= {[`data-filter`]:`${filterName}`, [`data-value`]:`${item.value}`};
+  return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} value={item.value} callback={setFilter}/>
 }),[]);
 
-const commercialExpContents=useCallback(()=> ([
+const commercialExpContents=useCallback((filterName:string)=> ([
   {labelText:'', type:'number',placeholder:'0 miesięcy',  name:'commercialExp'}]as InputI[])
    .map((item, index)=>{
-  return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.name}${index}`}/>
+    const dataProp= {[`data-filter`]:`${filterName}`};
+  return <Input ref={(e:any) => inputElementsRef.current.push(e) } labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.name}${index}`} dataProp={dataProp} callback={setFilter}/>
 }),[]);
 
   return (
@@ -61,16 +105,16 @@ const commercialExpContents=useCallback(()=> ([
             <button className='filtersPanel__option-btn'>Wyczyść wszystkie</button>
           </section>
 
-          <Filter subTitle='Ocena przejścia kursu' listComponents={ratingsContents()}/>
-          <Filter subTitle='Ocena aktywności i zaangażowania w kursie' listComponents={ratingsContents()}/>
-          <Filter subTitle='Ocena kodu w projekcie własnym' listComponents={ratingsContents()}/>
-          <Filter subTitle='Ocena pracy w zespole scrum' listComponents={ratingsContents()}/>
-          <Filter subTitle='Preferowane miejsce pracy' listComponents={workPlaceContents()}/>
-          <Filter subTitle='Oczekiwany typ kontraktu ' listComponents={workTypeContents()}/>
-          <Filter subTitle='Oczekiwane wynagrodzenie miesięczne netto ' listComponents={expectedSalaryContents()}/>
-          <Filter subTitle='Zgoda na odbycie bezpłatnych praktyk/stażu na początek ' listComponents={canTakeApprenticeshipContents()} 
+          <Filter subTitle='Ocena przejścia kursu' listComponents={ratingsContents('courseCompletion')}/>
+          <Filter subTitle='Ocena aktywności i zaangażowania w kursie' listComponents={ratingsContents('courseEngagement')}/>
+          <Filter subTitle='Ocena kodu w projekcie własnym' listComponents={ratingsContents('projectDegree')}/>
+          <Filter subTitle='Ocena pracy w zespole scrum' listComponents={ratingsContents('teamProjectDegree')}/>
+          <Filter subTitle='Preferowane miejsce pracy' listComponents={workPlaceContents('expectedTypeWork')}/>
+          <Filter subTitle='Oczekiwany typ kontraktu ' listComponents={workTypeContents('expectedContractType')}/>
+          <Filter subTitle='Oczekiwane wynagrodzenie miesięczne netto ' listComponents={expectedSalaryContents('expectedSalary')}/>
+          <Filter subTitle='Zgoda na odbycie bezpłatnych praktyk/stażu na początek ' listComponents={canTakeApprenticeshipContents('canTakeApprenticeship')} 
           classes='filtersPanel__options-list--column'/>
-          <Filter subTitle='Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu ' listComponents={commercialExpContents()}/>
+          <Filter subTitle='Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu ' listComponents={commercialExpContents('monthsOfCommercialExp')}/>
 
         </article>
       
