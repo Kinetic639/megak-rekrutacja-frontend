@@ -1,11 +1,13 @@
+import { forwardRef } from "react"
+
 export interface InputI{
     labelText:string,
     placeholder?:string,
     type: 'number'| 'radio',
-    name: string
+    name: string,
 }
 
-export const Input:React.FC<InputI> =({labelText, ...props})=>{
+export const Input=forwardRef<HTMLInputElement,InputI>(({labelText, ...props},ref)=>{
 
   const typePropClasses= {
     radio: 'filtersPanel__input--radio ',
@@ -20,7 +22,7 @@ export const Input:React.FC<InputI> =({labelText, ...props})=>{
   return(
             <label className={labelClasses[props.type]}>
                   {labelText}
-                  <input className={typePropClasses[props.type]} {...props}></input>
+                  <input ref={ref} className={typePropClasses[props.type]} {...props}></input>
             </label>
   )  
-}
+})
