@@ -1,0 +1,35 @@
+.admin {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    /*    TODO do zmiany jak będzie header*/
+    height: 100vh;
+}
+.admin__buttons {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 3px solid var(--primary-color);
+}
+.admin__users-table {
+    height: 85%;
+    width: 100%;
+}
+.button {
+    padding: 10px;
+    background-color: var(--button-color);
+    border-radius: 3px;
+    transition: 0.2s ease;
+    margin: 0 10px;
+    color: white;
+    border: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--button-color-hover);
+}
