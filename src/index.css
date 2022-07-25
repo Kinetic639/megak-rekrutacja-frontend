@@ -1,5 +1,17 @@
+:root {
+  /*zmienne*/
+  --primary-color: #222225;
+  --secondary-color: #292a2b;
+  --button-color: #e02735;
+  --button-color-hover: #931922;
+}
+
 * {
   margin: 0;
   padding: 0;
-  background-color: #222225;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary-color);
 }
