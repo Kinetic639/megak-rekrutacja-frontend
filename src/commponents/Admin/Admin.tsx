@@ -9,9 +9,6 @@ export const Admin = () => {
   return (
     <div className="admin">
       <div className="admin__buttons">
-        <button className="buttons-register-student__button button">
-          Zarejestruj Studenta
-        </button>
         <button className="buttons-register-hr__button button">
           Zarejestruj Rekrutera
         </button>
@@ -30,7 +27,52 @@ export const Admin = () => {
           />
         </label>
       </div>
-      <div className="admin__users-table"></div>
+      <div className="admin__users-table">
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+        <div className="table-row">
+          <span className="table-row__name">Jan K.</span>
+          <span className="table-row__expand">X</span>
+        </div>
+      </div>
     </div>
   );
 };

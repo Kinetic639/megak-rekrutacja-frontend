@@ -4,11 +4,9 @@
     display: flex;
     flex-direction: column;
     background-color: var(--secondary-color);
-    /*    TODO do zmiany jak będzie header*/
-    height: 100vh;
 }
 .admin__buttons {
-    height: 15%;
+    height: 15vh;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -16,9 +14,11 @@
     border-bottom: 3px solid var(--primary-color);
 }
 .admin__users-table {
-    height: 85%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
 .button {
     padding: 10px;
     background-color: var(--button-color);
@@ -32,4 +32,32 @@
 .button:hover {
     cursor: pointer;
     background-color: var(--button-color-hover);
+}
+
+.table-row {
+    width: 90%;
+    color: white;
+    margin: 15px auto auto auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 15px solid var(--primary-color);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+    margin-bottom: 25px;
+}
+
+.table-row__name {
+    margin-left: 10px;
+}
+
+.table-row__expand {
+    margin-right: 10px;
+    transition: 0.3s ease;
+}
+
+.table-row__expand:hover {
+    cursor: pointer;
 }
