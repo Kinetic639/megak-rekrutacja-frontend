@@ -1,0 +1,21 @@
+.custom-container {
+    max-width: 78%;
+}
+
+.accordion-button {
+    background-color: #292a2b !important;
+    color: white !important;
+}
+
+.accordion-button::after {
+    background-image: url("/public/collapse-icon/Group 29.svg");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("/public/collapse-icon/Group 29.svg");
+}
+
+.test {
+    color: white !important;
+    background-color: #e7eaee !important;
+}
