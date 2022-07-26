@@ -7,7 +7,7 @@ import { apiUrl } from '../../config/api';
 
 interface FormLoginType {
   email: string;
-  pwd: string;
+  password: string;
 }
 
 const UserLogin = () => {
@@ -35,7 +35,7 @@ const UserLogin = () => {
       const dataLoginRes = await res.json();
       console.log(dataLoginRes);
 
-      if (dataLoginRes.message !== 'Login successful.') {
+      if (dataLoginRes.message !== 'Login successful') {
         setResError(dataLoginRes.message);
       }
     } finally {
@@ -90,17 +90,17 @@ const UserLogin = () => {
                 className={'text-light'}
                 type="password"
                 placeholder="Hasło"
-                {...register('pwd', {
+                {...register('password', {
                   required: `To pole nie może być puste!`,
                 })}
               />
-              {errors.pwd && (
-                <p className={`errorP mt-1`}>{errors.pwd.message}</p>
+              {errors.password && (
+                <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
-              {resError === 'Invalid login data.' && (
+              {resError !== '' && (
                 <p
                   className={`errorP mt-1`}
-                >{`Wprowadzone dane są nieprawidłowe.`}</p>
+                >{`${resError}`}</p>
               )}
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
