@@ -2,6 +2,7 @@
   /*zmienne*/
   --primary-color: #222225;
   --secondary-color: #292a2b;
+  --popout-color: #0a0a0a;
   --button-color: #e02735;
   --button-color-hover: #931922;
 }
@@ -15,4 +16,17 @@
 body {
   background-color: var(--primary-color);
   height: 100vh;
+}
+
+.background-blur {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #202020;
+  opacity: 0.55;
+  overflow: hidden;
+  z-index: 98;
 }

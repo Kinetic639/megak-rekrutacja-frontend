@@ -11,6 +11,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
     border-bottom: 3px solid var(--primary-color);
 }
 .admin__users-table {
@@ -19,19 +20,36 @@
     flex-direction: column;
 }
 
-.button {
-    padding: 10px;
-    background-color: var(--button-color);
-    border-radius: 3px;
-    transition: 0.2s ease;
-    margin: 0 10px;
+.buttons-csv__help {
     color: white;
-    border: none;
+    border: 3px solid white;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 10px;
+    margin-right: 10px;
+    transition: 0.2s ease;
 }
 
-.button:hover {
+.buttons-csv__help:hover {
+    background-color: white;
+    color: var(--secondary-color);
     cursor: pointer;
-    background-color: var(--button-color-hover);
+}
+
+.csv-help {
+    background-color: var(--popout-color);
+    padding: 5px;
+    border-radius: 2%;
+    position: absolute;
+    bottom: -25vh;
+    right: 0;
+    display: none;
+    color: white;
+}
+
+.buttons-csv__help:hover + .csv-help {
+    display: block;
 }
 
 .table-row {
