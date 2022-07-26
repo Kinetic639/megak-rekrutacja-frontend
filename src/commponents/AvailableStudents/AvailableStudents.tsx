@@ -1,5 +1,14 @@
 import React from 'react';
-import { Accordion, Button, ButtonGroup, Container } from 'react-bootstrap';
+import {
+  Accordion,
+  Button,
+  ButtonGroup,
+  Card,
+  CardGroup,
+  Col,
+  Container,
+  Row,
+} from 'react-bootstrap';
 
 import './AvailableStudents.css';
 
@@ -19,13 +28,28 @@ const AvailableStudents = () => {
           </Accordion.Header>
 
           <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            <Container fluid>
+              <Row className={'p-3 row-main row-cols-8'}>
+                <Col>Ocena przejścia kursu</Col>
+                <Col>Ocena aktywności i zaangażowania na kursie</Col>
+                <Col>Ocena kodu w projekcie własnym</Col>
+                <Col>Ocena pracy w zespole Scrum</Col>
+                <Col>Preferowane miejsce pracy</Col>
+                <Col>Docelowe miasto, gdzie chce pracować kandydat</Col>
+                <Col>Oczekiwant typ kontraktu</Col>
+                <Col>Oczekiwane wynagrodzenie miesięczne netto</Col>
+              </Row>
+              <Row className={'p-3 row-second'}>
+                <Col>5/5</Col>
+                <Col>3/5</Col>
+                <Col>4/5</Col>
+                <Col>5/5</Col>
+                <Col>Biuro</Col>
+                <Col>Warszawa</Col>
+                <Col>Ummowa o pracę</Col>
+                <Col>8 000 zł</Col>
+              </Row>
+            </Container>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
