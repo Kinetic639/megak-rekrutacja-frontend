@@ -38,7 +38,7 @@ export const RegisterHr = () => {
       });
       const dataLoginRes = await res.json();
       console.log(dataLoginRes);
-
+      setTimeout(() => setResError(''), 8000);
       if (dataLoginRes.message !== 'Login successful.') {
         setResError(dataLoginRes.message);
       }
@@ -55,11 +55,7 @@ export const RegisterHr = () => {
           Dodaj nowego użytkownika HR/Headhunter:
         </h4>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group
-            as={Row}
-            className="mb-3 mt-3"
-            // controlId="formHorizontalEmail"
-          >
+          <Form.Group as={Row} className="mb-3 mt-3">
             <Col sm={12}>
               <Form.Control
                 type="text"
@@ -91,11 +87,6 @@ export const RegisterHr = () => {
               {errors.firstName && (
                 <p className={`errorP mt-1`}>{errors.firstName.message}</p>
               )}
-              {/*{resError === 'Invalid login data.' && (*/}
-              {/*  <p*/}
-              {/*    className={`errorP mt-1`}*/}
-              {/*  >{`Wprowadzone dane są nieprawidłowe.`}</p>*/}
-              {/*)}*/}
             </Col>
           </Form.Group>
 
@@ -111,11 +102,6 @@ export const RegisterHr = () => {
               {errors.lastName && (
                 <p className={`errorP mt-1`}>{errors.lastName.message}</p>
               )}
-              {/*{resError === 'Invalid login data.' && (*/}
-              {/*  <p*/}
-              {/*    className={`errorP mt-1`}*/}
-              {/*  >{`Wprowadzone dane są nieprawidłowe.`}</p>*/}
-              {/*)}*/}
             </Col>
           </Form.Group>
 
@@ -131,11 +117,6 @@ export const RegisterHr = () => {
               {errors.company && (
                 <p className={`errorP mt-1`}>{errors.company.message}</p>
               )}
-              {/*{resError === 'Invalid login data.' && (*/}
-              {/*  <p*/}
-              {/*    className={`errorP mt-1`}*/}
-              {/*  >{`Wprowadzone dane są nieprawidłowe.`}</p>*/}
-              {/*)}*/}
             </Col>
           </Form.Group>
 
@@ -165,7 +146,7 @@ export const RegisterHr = () => {
                 variant="danger"
                 type="submit"
               >
-                Zapisz HR
+                Zapisz
               </Button>
             </Col>
           </Form.Group>
