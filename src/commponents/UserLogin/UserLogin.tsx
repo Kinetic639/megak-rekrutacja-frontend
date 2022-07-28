@@ -7,7 +7,7 @@ import { apiUrl } from '../../config/api';
 
 interface FormLoginType {
   email: string;
-  pwd: string;
+  password: string;
 }
 
 export const UserLogin = () => {
@@ -33,10 +33,13 @@ export const UserLogin = () => {
         credentials: 'include',
       });
       const dataLoginRes = await res.json();
-      console.log(dataLoginRes);
 
-      if (dataLoginRes.message !== 'Login successful.') {
-        setResError(dataLoginRes.message);
+      setTimeout(() => setResError(''), 3000);
+      if (dataLoginRes.user.message !== 'Login successful.') {
+        setResError(dataLoginRes.user.message);
+      }
+      if (dataLoginRes.user.id) {
+        setResError('Login successful.');
       }
     } finally {
       setLoading(false);
@@ -89,12 +92,12 @@ export const UserLogin = () => {
                 className={'text-light'}
                 type="password"
                 placeholder="Hasło"
-                {...register('pwd', {
+                {...register('password', {
                   required: `To pole nie może być puste!`,
                 })}
               />
-              {errors.pwd && (
-                <p className={`errorP mt-1`}>{errors.pwd.message}</p>
+              {errors.password && (
+                <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
               {resError === 'Invalid login data.' && (
                 <p
@@ -119,6 +122,7 @@ export const UserLogin = () => {
             </Col>
           </Form.Group>
         </Form>
+        <h3 className="text-light">{resError ? resError : ''}</h3>
       </Container>
     </>
   );
