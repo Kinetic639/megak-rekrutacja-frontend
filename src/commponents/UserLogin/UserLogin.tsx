@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import './UserLogin.css';
 import { apiUrl } from '../../config/api';
+import { useNavigate } from 'react-router';
 
 interface FormLoginType {
   email: string;
@@ -11,6 +12,7 @@ interface FormLoginType {
 }
 
 export const UserLogin = () => {
+  const nav = useNavigate();
   const {
     register,
     formState: { errors },
@@ -40,6 +42,7 @@ export const UserLogin = () => {
       }
       if (dataLoginRes.user.id) {
         setResError('Login successful.');
+        nav('/admin');
       }
     } finally {
       setLoading(false);

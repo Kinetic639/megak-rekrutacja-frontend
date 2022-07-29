@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import './App.css';
 import './button.css';
@@ -11,6 +11,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate replace to="/auth/login" />} />
         <Route path={'/auth/login'} element={<UserLoginSite />} />
         <Route
           path={'/available-students'}
