@@ -1,0 +1,131 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --white: #f7f7f7;
+  --black: #0a0a0a;
+  --dark: #172A35;
+  --dark2:#292A2B;
+  --red:#E02735;
+}
+
+@font-face {
+	font-family: 'Catamaran';
+	src: 
+		local('../../assets/fonts/catamaran.medium.ttf'),
+		format('truetype');
+	font-weight: 500;
+}
+
+.backdrop{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: 0.5;
+  z-index: 99;
+}
+
+.filtersPanel{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 520px;
+  font-family: 'Catamaran', Arial, Helvetica, sans-serif;
+  font-size: 14.5px;
+  padding: 1em .8em;
+  color: var(--white);
+  background-color: var(--black);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.filtersPanel__head{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.filtersPanel__filter{
+  margin-bottom: 1.3rem;
+}
+
+.filtersPanel__title, .filtersPanel__subtitle{
+  font-weight: 500;
+}
+
+.filtersPanel__subtitle{
+  margin-bottom: .3em;
+}
+
+.filtersPanel__options-list{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.filtersPanel__options-list--column{
+  flex-direction: column;
+}
+
+.filtersPanel__option-btn{
+  appearance: none;
+  padding: .3em;
+  border: 0;
+  margin-right: 10px;
+  background-color: var(--dark);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.filtersPanel__btn-text{
+  margin-right: .2em;
+}
+
+.filtersPanel__input{
+  max-width: 95px;
+  appearance: none;
+  padding: .3em;
+  border: 0;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.filtersPanel__input--radio{
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  margin-right: .5em;
+  border: 1px solid var(--dark2);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.filtersPanel__label{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: .5em;
+  margin-right: 1em;
+}
+
+.filtersPanel__label--reverse{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-bottom: .5em;
+}
+
+.filtersPanel__input--radio:checked{
+  background-color: var(--red);
+}
+
+.star-icon{
+  fill: var(--red);
+}
