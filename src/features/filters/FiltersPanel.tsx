@@ -6,6 +6,7 @@ import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
 import './FiltersPanel.css';
+import { useEffectOnce } from '../../hooks/useEffectOnce';
 
 export interface activeFiltersI {
   courseCompletion: string[],
@@ -22,8 +23,7 @@ export interface activeFiltersI {
 }
 
 export const FiltersPanel = () => {
-  const btnElementsRef = useRef<HTMLButtonElement[]>([]);
-  const inputElementsRef = useRef<HTMLInputElement[]>([]);
+  const elementsRef = useRef<(HTMLButtonElement | HTMLInputElement)[]>([]);
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
 
@@ -38,9 +38,28 @@ export const FiltersPanel = () => {
   }
     , []);
 
+  const initUIFilterOptionsActiveStatus = () => {
+    elementsRef.current.forEach(elem => {
+      if (!elem) return;
+
+      const attr = elem.dataset?.filter;
+      const currFilterValue = filters[`${attr}`];
+      console.log(attr, currFilterValue);
+
+      if (elem instanceof HTMLButtonElement && Array.isArray(currFilterValue) && currFilterValue.length && currFilterValue.find(item => item === `${elem.dataset.value}`)) {
+        elem.classList.add('filtersPanel__option-btn--active')
+      }
+
+      if (elem instanceof HTMLInputElement && typeof currFilterValue === 'string' && currFilterValue.length) {
+        elem.value = currFilterValue;
+      }
+    })
+
+  };
+
   const ratingsContents = useCallback((filterName: string) => new Array(5).fill(filterName).map((item, index, arr) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => btnElementsRef.current.push(e)} data-filter={item} data-value={`${arr.length - index}`} onClick={setFilter}>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={item} data-value={`${arr.length - index}`} onClick={setFilter}>
         <span className='filtersPanel__btn-text'>{arr.length - index}</span>
         <StarIcon classes='star-icon' />
       </button>
@@ -49,13 +68,13 @@ export const FiltersPanel = () => {
 
   const workPlaceContents = useCallback((filterName: string) => ['Praca zdalna', 'Praca w biurze'].map((item, index) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => btnElementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
     )
   }), []);
 
   const workTypeContents = useCallback((filterName: string) => ['Umowa o pracę', 'B2B', 'Umowa Zlecenie', 'Umowa Zlecenie'].map((item, index) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => btnElementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
     )
   }), []);
 
@@ -64,7 +83,7 @@ export const FiltersPanel = () => {
     { labelText: 'Do', placeholder: 'np. 10000', type: 'number', name: 'To' }] as InputI[])
     .map((item, index) => {
       const dataProp = { [`data-filter`]: `${filterName}${item.name}` };
-      return <Input ref={(e: any) => inputElementsRef.current.push(e)} labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} callback={setFilter} />
+      return <Input ref={(e: any) => elementsRef.current.push(e)} labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} callback={setFilter} />
     }), []);
 
   const canTakeApprenticeshipContents = useCallback((filterName: string) => ([
@@ -72,15 +91,21 @@ export const FiltersPanel = () => {
     { labelText: 'Nie', type: 'radio', name: 'canTakeApprenticeship', value: 'false' }] as InputI[])
     .map((item, index) => {
       const dataProp = { [`data-filter`]: `${filterName}`, [`data-value`]: `${item.value}` };
-      return <Input ref={(e: any) => inputElementsRef.current.push(e)} labelText={item.labelText} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} value={item.value} callback={setFilter} />
+      return <Input ref={(e: any) => elementsRef.current.push(e)} labelText={item.labelText} name={item.name} type={item.type} key={`${item.labelText}${index}`} dataProp={dataProp} value={item.value} callback={setFilter} />
     }), []);
 
   const commercialExpContents = useCallback((filterName: string) => ([
     { labelText: '', type: 'number', placeholder: '0 miesięcy', name: 'commercialExp' }] as InputI[])
     .map((item, index) => {
       const dataProp = { [`data-filter`]: `${filterName}` };
-      return <Input ref={(e: any) => inputElementsRef.current.push(e)} labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.name}${index}`} dataProp={dataProp} callback={setFilter} />
+      return <Input ref={(e: any) => elementsRef.current.push(e)} labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.name}${index}`} dataProp={dataProp} callback={setFilter} />
     }), []);
+
+  //useEffectOnce(initUIFilterOptionsActiveStatus);
+
+  useEffect(() => {
+    initUIFilterOptionsActiveStatus();
+  }, [filters])
 
   return (
     <>
