@@ -1,6 +1,7 @@
 import { SyntheticEvent, useCallback, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../types/hooks';
-import { selectFilters, setFilters } from '../../store/filtersSlice';
+import { useGetStudentsQuery } from '../../store/apiSlice';
+import { selectFilters, setFilters, setQuery } from '../../store/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
@@ -24,7 +25,8 @@ export const FiltersPanel = () => {
   const btnElementsRef = useRef<HTMLButtonElement[]>([]);
   const inputElementsRef = useRef<HTMLInputElement[]>([]);
   const dispatch = useAppDispatch();
-  const filters = useAppSelector(selectFilters);
+  const filtersState = useAppSelector(selectFilters);
+  //const {data}=useGetStudentsQuery('');
 
   const setFilter = useCallback((e: SyntheticEvent) => {
     if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.currentTarget instanceof HTMLInputElement)) {
@@ -36,19 +38,6 @@ export const FiltersPanel = () => {
     dispatch(setFilters({ filter: filter, value: value }));
   }
     , []);
-
-  const sendQuery = () => {
-    let query = '';
-    for (const param in filters) {
-      if (filters[param] && filters[param].length) {
-        query += `${encodeURIComponent(param)}=${encodeURIComponent(`${filters[param]}`)}`;
-      }
-
-    }
-
-    console.log(decodeURIComponent(query));
-
-  }
 
   const ratingsContents = useCallback((filterName: string) => new Array(5).fill(filterName).map((item, index, arr) => {
     return (
@@ -118,7 +107,7 @@ export const FiltersPanel = () => {
 
         <section className='filtersPanel__bottom'>
           <button className='filtersPanel__cancel-btn'>Anuluj</button>
-          <button className='filtersPanel__show-results-btn' onClick={sendQuery}>Pokaż wyniki</button>
+          <button className='filtersPanel__show-results-btn' onClick={setQuery}>Pokaż wyniki</button>
         </section>
       </article>
 

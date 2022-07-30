@@ -1,28 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: `https://firestore.googleapis.com/v1/projects/wobclone-3d29b/databases/(default)/documents/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `https://localhost:3001/` }),
   reducerPath: 'apiSlice',
   endpoints: (build) => ({
-    // getEbooks: build.query<ProductModel[], string>({
-    //   query: (param: any) => `ebooks?key=AIzaSyBcPWLW6D0lZqB-FyT0Fdtz1XUi0nhS2Zo&pageSize=50`,
-    //   transformResponse(response: { documents: { fields: any }[] }) {
-    //     return response.documents.map(item => normalizeFirestoreRes(item.fields) as ProductModel);
-    //   },
-    // }),
-    // getCategories: build.query<ProductCategories[], string>({
-    //   query: (param: any) => `categories?key=AIzaSyBcPWLW6D0lZqB-FyT0Fdtz1XUi0nhS2Zo`,
-    //   transformResponse(response: { documents: { fields: any }[] }) {
-    //     return response.documents.map(item => normalizeFirestoreRes(item.fields) as ProductCategories);
-    //   },
-    // }),
-    // getPromotions: build.query<Promotions, string>({
-    //   query: (param: any) => `promotions?key=AIzaSyBcPWLW6D0lZqB-FyT0Fdtz1XUi0nhS2Zo`,
-    //   transformResponse(response: { documents: { fields: any }[] }) {
-    //     return response.documents.map(item => normalizeFirestoreRes(item.fields))[0] as Promotions;
-    //   },
-    // }),
+    getStudents: build.query<any, string>({
+      query: (queryString: string) => `students${queryString}`,
+    }),
   }),
 })
 
-export const { } = apiSlice;
+export const { useGetStudentsQuery } = apiSlice;
