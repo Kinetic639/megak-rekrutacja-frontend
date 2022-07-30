@@ -6,6 +6,7 @@ import { AdminButtons } from './AdminButtons';
 import Papa, { ParseResult } from 'papaparse';
 import { AdminHrTable } from './AdminHrTable';
 import './Table.css';
+import { apiUrl } from '../../config/api';
 
 export interface CsvRow {
   email: string;
@@ -47,34 +48,20 @@ export const Admin = () => {
     maxReservedStudents: 0,
   });
 
-  const handleLoadCSV = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleLoadCSV = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     if (!e.target.files) return;
 
-    Papa.parse(e.target.files[0], {
-      header: true,
-      complete: async (results: ParseResult<CsvRow>) => {
-        const parsedData: ParsedData = results.data.map((result) =>
-          (({
-            email,
-            courseCompletion,
-            courseEngagement,
-            projectDegree,
-            teamProjectDegree,
-          }) => ({
-            email,
-            courseCompletion,
-            courseEngagement,
-            projectDegree,
-            teamProjectDegree,
-            bonusProjectUrls: result.bonusProjectUrls.split(','),
-          }))(result),
-        );
-        setCsvData(parsedData);
-        setShowStudentsTable(true);
-      },
+    const formData = new FormData();
+    formData.append('file_asset', e.target.files[0]);
+    const response = await fetch(`${apiUrl}/user/create/students`, {
+      method: 'POST',
+      body: formData,
     });
+
+    // setCsvData(parsedData);
+    // setShowStudentsTable(true);
   };
 
   const handleHrAddSubmit = (e: FormEvent<HTMLFormElement>) => {
