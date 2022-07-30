@@ -1,6 +1,22 @@
 .custom-container {
-    max-width: 78%;
-    min-width: 833px;
+    max-width: 75%;
+    min-width: 840px;
+    background-color: #292A2B;
+    padding: 10px;
+}
+
+
+.accordion-item {
+    border-radius: 0px !important;
+    border-color: rgb(38, 38, 38);
+    --bs-accordion-bg: #1e1e20;
+    --bs-accordion-inner-border-radius: 0px;
+    --bs-accordion-border-color: #292A2B;
+    --bs-accordion-border-radius: 0px;
+}
+
+.accordion-header {
+    border-radius: 0px !important;
 }
 
 .accordion-button {
@@ -17,17 +33,45 @@
     background-image: url("/public/collapse-icon/Group 29.svg");
 }
 
+.accordion-button:focus {
+    box-shadow: none;
+    border-width: unset;
+    border-color: unset;
+}
+
 .accordion-body {
     padding: 0;
+}
+
+.accordion-body-color {
+    background-color: #222324;
 }
 
 .row-main {
     color: #CFCFCF;
     font-size: 15px;
+
 }
 
 .row-second {
+    color: #f7f7f7;
+}
+
+.row-second-span {
     color: #9e9e9e;
+}
+
+.col-main {
+    border-right-width: 1px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-color: #292a2c;
+    border-style: solid;
+}
+
+col-second {
+
 }
 
 .test {
