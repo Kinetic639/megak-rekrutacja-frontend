@@ -1,7 +1,7 @@
-import { SyntheticEvent, useCallback, useRef } from 'react';
+import { SyntheticEvent, useCallback, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../types/hooks';
 import { useGetStudentsQuery } from '../../store/apiSlice';
-import { selectFilters, setFilters, setQuery } from '../../store/filtersSlice';
+import { selectFilters, selectQueryString, setFilters, setQuery } from '../../store/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
@@ -25,8 +25,7 @@ export const FiltersPanel = () => {
   const btnElementsRef = useRef<HTMLButtonElement[]>([]);
   const inputElementsRef = useRef<HTMLInputElement[]>([]);
   const dispatch = useAppDispatch();
-  const filtersState = useAppSelector(selectFilters);
-  //const {data}=useGetStudentsQuery('');
+  const filters = useAppSelector(selectFilters);
 
   const setFilter = useCallback((e: SyntheticEvent) => {
     if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.currentTarget instanceof HTMLInputElement)) {
@@ -107,7 +106,7 @@ export const FiltersPanel = () => {
 
         <section className='filtersPanel__bottom'>
           <button className='filtersPanel__cancel-btn'>Anuluj</button>
-          <button className='filtersPanel__show-results-btn' onClick={setQuery}>Pokaż wyniki</button>
+          <button className='filtersPanel__show-results-btn' onClick={() => dispatch(setQuery())}>Pokaż wyniki</button>
         </section>
       </article>
 

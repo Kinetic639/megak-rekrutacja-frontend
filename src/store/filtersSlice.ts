@@ -57,7 +57,8 @@ export const filtersSlice = createSlice({
   },
 });
 
-export const selectFilters = (state: RootState) => state.filters;
+export const selectFilters = (state: RootState) => state.filters.filters;
+export const selectQueryString = (state: RootState) => state.filters.queryString;
 
 
 export const { setFilters, setQuery } = filtersSlice.actions;

@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   reducerPath: 'apiSlice',
   endpoints: (build) => ({
     getStudents: build.query<any, string>({
-      query: (queryString: string) => `students${queryString}`,
+      query: (queryString: string) => `student/students${queryString}`,
     }),
   }),
 })
