@@ -126,6 +126,31 @@
   background-color: var(--red);
 }
 
+.filtersPanel__bottom{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filtersPanel__cancel-btn{
+  appearance: none;
+  padding: .3em;
+  border: 0;
+  margin-right: 10px;
+  background-color: transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.filtersPanel__show-results-btn{
+  appearance: none;
+  padding: .3em;
+  border: 0;
+  margin-right: 10px;
+  background-color: var(--red);
+  color: var(--white);
+  cursor: pointer;
+}
+
 .star-icon{
   fill: var(--red);
 }

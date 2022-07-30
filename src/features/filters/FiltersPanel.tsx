@@ -37,6 +37,19 @@ export const FiltersPanel = () => {
   }
     , []);
 
+  const sendQuery = () => {
+    let query = '';
+    for (const param in filters) {
+      if (filters[param] && filters[param].length) {
+        query += `${encodeURIComponent(param)}=${encodeURIComponent(`${filters[param]}`)}`;
+      }
+
+    }
+
+    console.log(decodeURIComponent(query));
+
+  }
+
   const ratingsContents = useCallback((filterName: string) => new Array(5).fill(filterName).map((item, index, arr) => {
     return (
       <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => btnElementsRef.current.push(e)} data-filter={item} data-value={`${arr.length - index}`} onClick={setFilter}>
@@ -103,6 +116,10 @@ export const FiltersPanel = () => {
           classes='filtersPanel__options-list--column' />
         <Filter subTitle='Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu ' listComponents={commercialExpContents('monthsOfCommercialExp')} />
 
+        <section className='filtersPanel__bottom'>
+          <button className='filtersPanel__cancel-btn'>Anuluj</button>
+          <button className='filtersPanel__show-results-btn' onClick={sendQuery}>Pokaż wyniki</button>
+        </section>
       </article>
 
     </>
