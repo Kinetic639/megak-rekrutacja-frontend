@@ -67,15 +67,23 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({ closeCallback = () =
     )
   }), []);
 
-  const workPlaceContents = useCallback((filterName: string) => ['Praca zdalna', 'Praca w biurze'].map((item, index) => {
+  const workPlaceContents = useCallback((filterName: string) => [
+    { content: 'Praca zdalna', code: 'remote' },
+    { content: 'Praca w biurze', code: 'office' }
+  ].map((item, index) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item.code}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item.code} onClick={setFilter}>{item.content}</button>
     )
   }), []);
 
-  const workTypeContents = useCallback((filterName: string) => ['Umowa o pracę', 'B2B', 'Umowa Zlecenie', 'Umowa Zlecenie'].map((item, index) => {
+  const workTypeContents = useCallback((filterName: string) => [
+    { content: 'Umowa o pracę', code: 'uop' },
+    { content: 'B2B', code: 'b2b' },
+    { content: 'Umowa Zlecenie', code: 'uz' },
+    { content: 'Umowa o dzieło', code: 'uod' }
+  ].map((item, index) => {
     return (
-      <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item} onClick={setFilter}>{item}</button>
+      <button className='filtersPanel__option-btn' key={`${item.code}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={filterName} data-value={item.code} onClick={setFilter}>{item.content}</button>
     )
   }), []);
 
