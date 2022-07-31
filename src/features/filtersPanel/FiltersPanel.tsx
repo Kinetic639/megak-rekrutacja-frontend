@@ -20,7 +20,11 @@ export interface activeFiltersI {
   [prop: string]: string[] | string
 }
 
-export const FiltersPanel = () => {
+interface FiltersPanelProps {
+  closeCallback: () => void;
+}
+
+export const FiltersPanel: React.FC<FiltersPanelProps> = ({ closeCallback = () => { } }) => {
   const elementsRef = useRef<(HTMLButtonElement | HTMLInputElement)[]>([]);
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
@@ -125,7 +129,7 @@ export const FiltersPanel = () => {
         <Filter subTitle='Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu ' listComponents={commercialExpContents('monthsOfCommercialExp')} />
 
         <section className='filtersPanel__bottom'>
-          <button className='filtersPanel__cancel-btn'>Anuluj</button>
+          <button className='filtersPanel__cancel-btn' onClick={closeCallback}>Anuluj</button>
           <button className='filtersPanel__show-results-btn' onClick={() => dispatch(setQuery())}>Pokaż wyniki</button>
         </section>
       </article>
