@@ -1,6 +1,9 @@
+import { StudentCV } from "../features/studentCV/StudentCV"
 
 export const StudentCVSite = () => {
   return (
-    <div>StudentCVSite</div>
+    <>
+      <StudentCV />
+    </>
   )
 }

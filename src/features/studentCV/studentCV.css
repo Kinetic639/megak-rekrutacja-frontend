@@ -1,0 +1,106 @@
+ :root{
+  --black:#222224;
+  --black2:#292A2B;
+  --dark:#4d4d4d;
+  --dirty-white:#F7F7F7;
+  --red:#e02735;
+  --line-height-ratio: 1.68em;
+ }
+
+ @font-face {
+	font-family: 'Catamaran';
+	src: 
+		local('../../assets/fonts/catamaran.medium.ttf'),
+		format('truetype');
+	font-weight: 500;
+}
+
+.wrapper, .student-cv{
+  display: flex;
+  align-items: flex-start;
+}
+
+.wrapper{
+  padding:0 12.76vw 0 12.76vw;
+  background: var(--black) 0% 0% no-repeat padding-box;
+}
+
+.student-cv{
+  color:var(--dirty-white);
+  font-family: 'Catamaran', Arial, Helvetica, sans-serif;
+  line-height: var(--line-height-ratio);
+  gap:4px;
+}
+
+.student-panel{
+  display: flex;
+  flex-direction: column;
+  gap:1.2em;
+  max-width: 250px;
+  padding: 1.5em;
+  background-color: var(--black2);
+}
+
+.student-panel__identity{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: .5em;
+}
+
+.wrapper-img{
+  width: 150px;
+  height: 150px;
+}
+
+.student-panel__contact{
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.student-panel__about-me-title{
+  color: var(--dark);
+}
+
+.student-panel__status-btns{
+ display: flex;
+ flex-direction: column;
+ gap:14px;
+}
+
+.student-panel__status-btn{
+  appearance: none;
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  font-size: 1rem;
+  border: 0;
+  color: var(--dirty-white);
+  background-color: var(--red);
+}
+
+.student-cv__section-title{
+  font-size: 1.25rem;
+  line-height: 3em;
+  padding-left: 1.3em;
+  background-color: var(--black2);
+}
+
+.student-cv__grid{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: 50% 50%;
+}
+.student-cv__grid--6{
+  grid-template-columns: repeat(6, auto);
+}
+
+.student-cv__grid-title{
+grid-row: 1/2;
+}
+
+.student-cv__grid-content{
+  grid-row: 2/3;
+}
