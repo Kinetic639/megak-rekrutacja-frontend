@@ -60,7 +60,8 @@ export const filtersSlice = createSlice({
         }
       }
       state.queryString = query;
-    }
+    },
+    clearAllFilters: () => initialState,
   },
 });
 
@@ -68,5 +69,5 @@ export const selectFilters = (state: RootState) => state.filters.filters;
 export const selectQueryString = (state: RootState) => state.filters.queryString;
 
 
-export const { setFilters, setQuery } = filtersSlice.actions;
+export const { setFilters, setQuery, clearAllFilters } = filtersSlice.actions;
 export default filtersSlice.reducer;

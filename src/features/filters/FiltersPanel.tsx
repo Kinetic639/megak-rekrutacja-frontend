@@ -1,6 +1,6 @@
 import { SyntheticEvent, useCallback, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../types/hooks';
-import { selectFilters, setFilters, setQuery } from '../../store/filtersSlice';
+import { selectFilters, setFilters, setQuery, clearAllFilters } from '../../store/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
@@ -24,9 +24,6 @@ export const FiltersPanel = () => {
   const elementsRef = useRef<(HTMLButtonElement | HTMLInputElement)[]>([]);
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
-
-  console.log(filters);
-
 
   const setFilter = useCallback((e: SyntheticEvent) => {
     if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.currentTarget instanceof HTMLInputElement)) {
@@ -113,7 +110,7 @@ export const FiltersPanel = () => {
       <article className="filtersPanel">
         <section className='filtersPanel__head'>
           <h2 className='filtersPanel__title'>Filtrowanie</h2>
-          <button className='filtersPanel__option-btn'>Wyczyść wszystkie</button>
+          <button className='filtersPanel__option-btn' onClick={() => dispatch(clearAllFilters())}>Wyczyść wszystkie</button>
         </section>
 
         <Filter subTitle='Ocena przejścia kursu' listComponents={ratingsContents('courseCompletion')} />
