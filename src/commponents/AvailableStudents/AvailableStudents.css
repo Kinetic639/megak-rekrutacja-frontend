@@ -33,11 +33,12 @@
 }
 
 .accordion-button::after {
-    background-image: url("/public/collapse-icon/Group 29.svg");
+    background-image: url("/public/collapse-icon/Group 29.png");
+
 }
 
 .accordion-button:not(.collapsed)::after {
-    background-image: url("/public/collapse-icon/Group 29.svg");
+    background-image: url("/public/collapse-icon/Group 29.png");
 }
 
 .accordion-button:focus {
