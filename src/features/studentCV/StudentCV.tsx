@@ -71,28 +71,28 @@ export const StudentCV = () => {
 
             <section>
               <h3 className='student-cv__section-title'>Edukacja</h3>
-              <p>
+              <p className='student-cv__text'>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Kursy</h3>
-              <p>
+              <p className='student-cv__text'>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Doświadczenie zawodowe</h3>
-              <p>
+              <p className='student-cv__text'>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Portfolio</h3>
-              <ul>
+              <ul className='student-cv__list'>
                 <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
               </ul>
 
@@ -100,7 +100,7 @@ export const StudentCV = () => {
 
             <section>
               <h3 className='student-cv__section-title'>Projekt w zespole Scrumowym</h3>
-              <ul>
+              <ul className='student-cv__list'>
                 <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
                 <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
               </ul>
@@ -108,7 +108,7 @@ export const StudentCV = () => {
 
             <section>
               <h3 className='student-cv__section-title'>Projekt na zaliczenie</h3>
-              <ul>
+              <ul className='student-cv__list'>
                 <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
                 <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
               </ul>
