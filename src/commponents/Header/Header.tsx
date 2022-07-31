@@ -16,7 +16,7 @@ const Header = () => {
   const name = ' Kaskader Rewolucjonista';
 
   return (
-    <Container fluid className={`navbar-color`}>
+    <Container fluid className={`navbar-color p-0`}>
       <Navbar
         collapseOnSelect
         bg="dark"

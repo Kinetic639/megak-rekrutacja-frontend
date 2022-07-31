@@ -1,3 +1,6 @@
+.wrapper {
+    position:relative;
+}
 .custom-container {
     max-width: 75%;
     min-width: 840px;
@@ -5,6 +8,10 @@
     padding: 10px;
 }
 
+.custom-container-second {
+    max-width: 75%;
+    min-width: 840px;
+}
 
 .accordion-item {
     border-radius: 0px !important;
@@ -45,6 +52,7 @@
 
 .accordion-body-color {
     background-color: #222324;
+
 }
 
 .row-main {
@@ -74,7 +82,69 @@ col-second {
 
 }
 
-.test {
-    color: white !important;
-    background-color: #e7eaee !important;
+.navigation {
+    background-color: #292A2B;
+}
+
+.nav-tabs {
+    --bs-nav-tabs-border-width: unset;
+    --bs-nav-tabs-border-radius: 0;
+}
+
+.nav-items {
+    background-color: #292A2B;
+    color: red;
+}
+
+.nav-tabs .nav-link {
+    color: #99999a;
+    padding: 20px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #f7f7f7;
+    background-color: #292A2B;
+    box-shadow: rgb(213, 37, 37) 0px 4px;
+    padding: 20px;
+
+}
+
+.icon {
+    width: 15px;
+    height: 15px;
+    padding: 4px;
+    position: absolute;
+    box-sizing:border-box;
+    top:50%;
+    left:12px;
+    transform: translateY(-50%);
+    background-color: #1e1e20;
+    background-image: url("/public/search-icon/magnifier.png");
+    background-repeat: no-repeat;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+.form-control {
+    padding-left: 33px;
+    color: #f7f7f7 !important;
+    width: 365px;
+    height: 38px;
+    border: none;
+    border-radius: unset;
+}
+
+.form-control:focus {
+    border: none;
+    box-shadow: none;
+
+}
+
+.custom-button {
+    border-radius: unset;
+    font-size: 16px;
+
 }
