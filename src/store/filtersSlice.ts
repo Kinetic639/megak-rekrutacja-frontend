@@ -41,8 +41,15 @@ export const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action: PayloadAction<setFiltersType<activeFiltersI>>) => {
-      if (state.filters[action.payload.filter].includes(action.payload.value)) return;
-      const newValue = Array.isArray(state.filters[action.payload.filter]) ? [...state.filters[action.payload.filter] as string[], action.payload.value] : action.payload.value;
+      const currValues = state.filters[action.payload.filter];
+      let newValue: string | string[];
+      // if (state.filters[action.payload.filter].includes(action.payload.value)) return;
+      if (currValues.includes(action.payload.value)) {
+        newValue = Array.isArray(currValues) ? currValues.filter(item => item != action.payload.value) : '';
+      } else {
+        newValue = Array.isArray(state.filters[action.payload.filter]) ? [...state.filters[action.payload.filter] as string[], action.payload.value] : action.payload.value;
+      }
+
       state.filters[action.payload.filter] = newValue;
     },
     setQuery: (state) => {

@@ -1,12 +1,10 @@
 import { SyntheticEvent, useCallback, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../types/hooks';
-import { useGetStudentsQuery } from '../../store/apiSlice';
-import { selectFilters, selectQueryString, setFilters, setQuery } from '../../store/filtersSlice';
+import { selectFilters, setFilters, setQuery } from '../../store/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from './Filter';
 import { Input, InputI } from './Input';
 import './FiltersPanel.css';
-import { useEffectOnce } from '../../hooks/useEffectOnce';
 
 export interface activeFiltersI {
   courseCompletion: string[],
@@ -27,6 +25,9 @@ export const FiltersPanel = () => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
 
+  console.log(filters);
+
+
   const setFilter = useCallback((e: SyntheticEvent) => {
     if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.currentTarget instanceof HTMLInputElement)) {
       return;
@@ -41,10 +42,9 @@ export const FiltersPanel = () => {
   const initUIFilterOptionsActiveStatus = () => {
     elementsRef.current.forEach(elem => {
       if (!elem) return;
-
+      elem.classList.remove('filtersPanel__option-btn--active')
       const attr = elem.dataset?.filter;
       const currFilterValue = filters[`${attr}`];
-      console.log(attr, currFilterValue);
 
       if (elem instanceof HTMLButtonElement && Array.isArray(currFilterValue) && currFilterValue.length && currFilterValue.find(item => item === `${elem.dataset.value}`)) {
         elem.classList.add('filtersPanel__option-btn--active')
@@ -100,8 +100,6 @@ export const FiltersPanel = () => {
       const dataProp = { [`data-filter`]: `${filterName}` };
       return <Input ref={(e: any) => elementsRef.current.push(e)} labelText={item.labelText} placeholder={item.placeholder} name={item.name} type={item.type} key={`${item.name}${index}`} dataProp={dataProp} callback={setFilter} />
     }), []);
-
-  //useEffectOnce(initUIFilterOptionsActiveStatus);
 
   useEffect(() => {
     initUIFilterOptionsActiveStatus();
