@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { activeFiltersI } from '../features/filters/FiltersPanel';
+import { activeFiltersI } from '../features/filtersPanel/FiltersPanel';
 import type { RootState } from './store';
 
 
@@ -43,7 +43,6 @@ export const filtersSlice = createSlice({
     setFilters: (state, action: PayloadAction<setFiltersType<activeFiltersI>>) => {
       const currValues = state.filters[action.payload.filter];
       let newValue: string | string[];
-      // if (state.filters[action.payload.filter].includes(action.payload.value)) return;
       if (currValues.includes(action.payload.value)) {
         newValue = Array.isArray(currValues) ? currValues.filter(item => item != action.payload.value) : '';
       } else {

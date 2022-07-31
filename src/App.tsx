@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiltersPanel } from './features/filters/FiltersPanel';
+import { FiltersPanel } from './features/filtersPanel/FiltersPanel';
 import './App.css';
 
 function App() {
