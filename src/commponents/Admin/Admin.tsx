@@ -94,7 +94,7 @@ export const Admin = () => {
         setShowStudentsTable(true);
         setMessage(
           <ModalMessage
-            message={`Zaktualizowano: ${data.studentUpdated.length} studentów, Dodano: ${data.studentsAdded.length} studentów, Zignorowano: ${data.studentsIgnored.length} studentów`}
+            message={`Zaktualizowano: ${data.studentsUpdated.length} studentów, Dodano: ${data.studentsAdded.length} studentów, Zignorowano: ${data.studentsIgnored.length} studentów`}
             setShowModal={setShowModal}
           />,
         );
