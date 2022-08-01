@@ -5,7 +5,7 @@ import './App.css';
 import './button.css';
 import { UserLoginSite } from './views/UserLoginSite';
 import { AvailableStudentsSite } from './views/AvailableStudentsSite';
-import { Admin } from './commponents/Admin/Admin';
+import { Admin } from './components/Admin/Admin';
 
 function App() {
   return (
