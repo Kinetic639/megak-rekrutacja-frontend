@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  ReactComponentElement,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import './Admin.css';
 import { AddHr } from './AddHr';
 import { AdminUserTable } from './AdminUserTable';
@@ -7,6 +14,7 @@ import Papa, { ParseResult } from 'papaparse';
 import { AdminHrTable } from './AdminHrTable';
 import './Table.css';
 import { apiUrl } from '../../config/api';
+import { ModalMessage } from '../../views/ModalMessage';
 
 export interface CsvRow {
   email: string;
@@ -35,11 +43,15 @@ export interface HrRow {
 
 export type HrData = HrRow[] | [];
 
+type Message = ReactComponentElement<typeof ModalMessage>;
+
 export const Admin = () => {
   const [showAddWindow, setShowAddWindow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showStudentsTable, setShowStudentsTable] = useState(true);
   const [csvData, setCsvData] = useState<ParsedData>([]);
   const [hrsData, setHrsData] = useState<HrData>([]);
+  const [message, setMessage] = useState<Message | null>(null);
   const [newHr, setNewHr] = useState<HrRow>({
     email: '',
     firstName: '',
@@ -48,20 +60,47 @@ export const Admin = () => {
     maxReservedStudents: 0,
   });
 
+  useEffect(() => {
+    getTablesData();
+  }, []);
+
+  const getTablesData = async (): Promise<void> => {
+    try {
+      const data = await fetch(`${apiUrl}/admin/students`, {
+        method: 'GET',
+      });
+      const students: ParsedData = await data.json();
+      setCsvData(students);
+    } catch (error) {}
+  };
+
   const handleLoadCSV = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     if (!e.target.files) return;
 
-    const formData = new FormData();
-    formData.append('file_asset', e.target.files[0]);
-    const response = await fetch(`${apiUrl}/user/create/students`, {
-      method: 'POST',
-      body: formData,
-    });
+    try {
+      const formData = new FormData();
+      formData.append('file_asset', e.target.files[0]);
+      const response = await fetch(`${apiUrl}/user/create/students`, {
+        method: 'POST',
+        body: formData,
+      });
 
-    // setCsvData(parsedData);
-    // setShowStudentsTable(true);
+      const data = await response.json();
+
+      if (response.status === 201) {
+        getTablesData();
+        setShowStudentsTable(true);
+        setMessage(
+          <ModalMessage
+            message={`Zaktualizowano: ${data.studentUpdated.length} studentów, Dodano: ${data.studentsAdded.length} studentów, Zignorowano: ${data.studentsIgnored.length} studentów`}
+            setShowModal={setShowModal}
+          />,
+        );
+        setShowModal(true);
+      }
+    } catch (error) {}
   };
 
   const handleHrAddSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -80,6 +119,7 @@ export const Admin = () => {
 
   return (
     <div className="admin">
+      {showModal ? message : null}
       {showAddWindow ? (
         <AddHr
           setShowAddWindow={setShowAddWindow}

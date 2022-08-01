@@ -33,9 +33,7 @@ export const AdminUserRow = ({
       <td className="table-cell table-row__team-project-degree">
         {teamProjectDegree}/5
       </td>
-      <td className="table-cell table-row__github-urls">
-        {bonusProjectUrls.join(' ')}
-      </td>
+      <td className="table-cell table-row__github-urls">{bonusProjectUrls}</td>
     </tr>
   );
 };
