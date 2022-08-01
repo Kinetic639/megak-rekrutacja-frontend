@@ -10,9 +10,12 @@ import './Admin.css';
 import { AddHr } from './AddHr';
 import { AdminUserTable } from './AdminUserTable';
 import { AdminButtons } from './AdminButtons';
-import Papa, { ParseResult } from 'papaparse';
 import { AdminHrTable } from './AdminHrTable';
 import './Table.css';
+import { useAppDispatch } from '../../redux/hooks/hooks';
+import { importStudentsFromFileAsync } from '../../redux/features/studentsImportSlice';
+import { FormState } from 'react-hook-form';
+import { Form } from 'react-bootstrap';
 import { apiUrl } from '../../config/api';
 import { ModalMessage } from '../../views/ModalMessage';
 
@@ -31,8 +34,6 @@ export interface ParsedRow extends WithoutBonusProjectUrlsAsString {
   bonusProjectUrls: string[];
 }
 
-export type ParsedData = ParsedRow[] | [];
-
 export interface HrRow {
   email: string;
   firstName: string;
@@ -46,10 +47,10 @@ export type HrData = HrRow[] | [];
 type Message = ReactComponentElement<typeof ModalMessage>;
 
 export const Admin = () => {
+  const dispatch = useAppDispatch();
   const [showAddWindow, setShowAddWindow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showStudentsTable, setShowStudentsTable] = useState(true);
-  const [csvData, setCsvData] = useState<ParsedData>([]);
   const [hrsData, setHrsData] = useState<HrData>([]);
   const [message, setMessage] = useState<Message | null>(null);
   const [newHr, setNewHr] = useState<HrRow>({
@@ -59,6 +60,7 @@ export const Admin = () => {
     company: '',
     maxReservedStudents: 0,
   });
+
 
   useEffect(() => {
     getTablesData();
@@ -77,6 +79,14 @@ export const Admin = () => {
   const handleLoadCSV = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (!e.target.files) return;
+
+    const formData = new FormData();
+    formData.append('file_asset', e.target.files[0]);
+    if (e.target.files[0]) {
+      dispatch(importStudentsFromFileAsync(formData));
+    }
+    e.target.value = "";
+  };
 
     try {
       const formData = new FormData();
