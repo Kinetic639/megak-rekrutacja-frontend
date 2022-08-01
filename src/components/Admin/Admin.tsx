@@ -3,9 +3,12 @@ import './Admin.css';
 import { AddHr } from './AddHr';
 import { AdminUserTable } from './AdminUserTable';
 import { AdminButtons } from './AdminButtons';
-import Papa, { ParseResult } from 'papaparse';
 import { AdminHrTable } from './AdminHrTable';
 import './Table.css';
+import { useAppDispatch } from '../../redux/hooks/hooks';
+import { importStudentsFromFileAsync } from '../../redux/features/studentsImportSlice';
+import { FormState } from 'react-hook-form';
+import { Form } from 'react-bootstrap';
 
 export interface CsvRow {
   email: string;
@@ -22,8 +25,6 @@ export interface ParsedRow extends WithoutBonusProjectUrlsAsString {
   bonusProjectUrls: string[];
 }
 
-export type ParsedData = ParsedRow[] | [];
-
 export interface HrRow {
   email: string;
   firstName: string;
@@ -35,9 +36,9 @@ export interface HrRow {
 export type HrData = HrRow[] | [];
 
 export const Admin = () => {
+  const dispatch = useAppDispatch();
   const [showAddWindow, setShowAddWindow] = useState(false);
   const [showStudentsTable, setShowStudentsTable] = useState(true);
-  const [csvData, setCsvData] = useState<ParsedData>([]);
   const [hrsData, setHrsData] = useState<HrData>([]);
   const [newHr, setNewHr] = useState<HrRow>({
     email: '',
@@ -47,34 +48,15 @@ export const Admin = () => {
     maxReservedStudents: 0,
   });
 
-  const handleLoadCSV = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleLoadCSV = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     if (!e.target.files) return;
-
-    Papa.parse(e.target.files[0], {
-      header: true,
-      complete: async (results: ParseResult<CsvRow>) => {
-        const parsedData: ParsedData = results.data.map((result) =>
-          (({
-            email,
-            courseCompletion,
-            courseEngagement,
-            projectDegree,
-            teamProjectDegree,
-          }) => ({
-            email,
-            courseCompletion,
-            courseEngagement,
-            projectDegree,
-            teamProjectDegree,
-            bonusProjectUrls: result.bonusProjectUrls.split(','),
-          }))(result),
-        );
-        setCsvData(parsedData);
-        setShowStudentsTable(true);
-      },
-    });
+    const formData = new FormData();
+    formData.append('file_asset', e.target.files[0]);
+    if (e.target.files[0]) {
+      dispatch(importStudentsFromFileAsync(formData));
+    }
+    e.target.value = "";
   };
 
   const handleHrAddSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -90,7 +72,6 @@ export const Admin = () => {
     setShowAddWindow(false);
     setShowStudentsTable(false);
   };
-
   return (
     <div className="admin">
       {showAddWindow ? (
@@ -107,11 +88,7 @@ export const Admin = () => {
         setShowStudentsTable={setShowStudentsTable}
         showStudentsTable={showStudentsTable}
       />
-      {showStudentsTable ? (
-        <AdminUserTable csvData={csvData} />
-      ) : (
-        <AdminHrTable hrs={hrsData} />
-      )}
+      {showStudentsTable ? <AdminUserTable /> : <AdminHrTable hrs={hrsData} />}
       {showAddWindow ? <div className="background-blur" /> : null}
     </div>
   );

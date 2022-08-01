@@ -11,16 +11,16 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+    "strictPropertyInitialization": false,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "experimentalDecorators": true,
     "isolatedModules": true,
     "noEmit": true,
-    "strictPropertyInitialization": false,
     "jsx": "react-jsx"
   },
   "include": [

@@ -42,7 +42,7 @@ export const UserLogin = () => {
       }
       if (dataLoginRes.user.id) {
         setResError('Login successful.');
-        nav('/admin');
+        // nav('/admin');
       }
     } finally {
       setLoading(false);
