@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 
 import filtersReducer from '../features/filtersSlice';
+import studentsImportReducer from '../features/studentsImportSlice';
 import { apiSlice } from '../features/apiSlice';
 
 const rootReducer = combineReducers({
   filters: filtersReducer,
+  studentsImport: studentsImportReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
