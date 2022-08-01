@@ -31,3 +31,16 @@ body {
   overflow: hidden;
   z-index: 98;
 }
+
+.modal-center {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--popout-color);
+  z-index: 99;
+  width: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
