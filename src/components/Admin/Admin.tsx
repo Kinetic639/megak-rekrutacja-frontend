@@ -66,7 +66,7 @@ export const Admin = () => {
 
   const getTablesData = async (): Promise<void> => {
     try {
-      const data = await fetch(`${apiUrl}/admin/students`, {
+      const data = await fetch(`${apiUrl}/user/list/basic`, {
         method: 'GET',
       });
       const students: ParsedData = await data.json();
@@ -76,13 +76,12 @@ export const Admin = () => {
 
   const handleLoadCSV = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     if (!e.target.files) return;
 
     try {
       const formData = new FormData();
       formData.append('file_asset', e.target.files[0]);
-      const response = await fetch(`${apiUrl}/user/create/students`, {
+      const response = await fetch(`${apiUrl}/admin/create/students`, {
         method: 'POST',
         body: formData,
       });

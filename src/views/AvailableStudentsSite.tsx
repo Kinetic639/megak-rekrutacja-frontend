@@ -1,5 +1,5 @@
 import React from 'react';
-import { AvailableStudents } from '../commponents/AvailableStudents/AvailableStudents';
+import { AvailableStudents } from '../components/AvailableStudents/AvailableStudents';
 
 const AvailableStudentsSite = () => {
   return (
