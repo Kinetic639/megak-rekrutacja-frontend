@@ -58,6 +58,11 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({ closeCallback = () =
 
   };
 
+  const handleShowResults = () => {
+    dispatch(setQuery());
+    closeCallback();
+  }
+
   const ratingsContents = useCallback((filterName: string) => new Array(5).fill(filterName).map((item, index, arr) => {
     return (
       <button className='filtersPanel__option-btn' key={`${item}${index}`} ref={(e: any) => elementsRef.current.push(e)} data-filter={item} data-value={`${arr.length - index}`} onClick={setFilter}>
@@ -138,7 +143,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({ closeCallback = () =
 
         <section className='filtersPanel__bottom'>
           <button className='filtersPanel__cancel-btn' onClick={closeCallback}>Anuluj</button>
-          <button className='filtersPanel__show-results-btn' onClick={() => dispatch(setQuery())}>Pokaż wyniki</button>
+          <button className='filtersPanel__show-results-btn' onClick={handleShowResults}>Pokaż wyniki</button>
         </section>
       </article>
 
