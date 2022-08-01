@@ -24,7 +24,10 @@ export const AddHr = ({
   };
 
   return (
-    <form className="admin__add-hr" onSubmit={(e) => handleHrAddSubmit(e)}>
+    <form
+      className="admin__add-hr modal-center"
+      onSubmit={(e) => handleHrAddSubmit(e)}
+    >
       <h2 className="add-hr__title">Dodaj rekrutera</h2>
       <label htmlFor="hr-email" className="label">
         Email
