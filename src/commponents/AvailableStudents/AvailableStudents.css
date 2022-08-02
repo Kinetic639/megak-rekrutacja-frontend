@@ -101,7 +101,6 @@
     background-color: #292A2B;
     box-shadow: rgb(213, 37, 37) 0px 4px;
     padding: 20px;
-
 }
 
 .icon {
@@ -139,8 +138,6 @@
 .form-control:focus {
     border: none;
     box-shadow: rgb(244, 244, 245) 0px 4px 4px;
-
-
 }
 
 .custom-button {
@@ -161,4 +158,23 @@
     margin-top: unset;
     margin-right: unset;
     margin-left: unset;
+}
+
+.custom-button {
+    margin-right: 3rem !important;
+    transform: translateY(-50%) !important;
+    right: 0 !important;
+    top: 50% !important;
+    position: absolute !important;
+}
+
+@media screen and (max-width: 665px) {
+    .custom-button {
+        margin-right: 5px !important;
+        transform: unset !important;
+        right: unset !important;
+        top: unset !important;
+        position: unset !important;
+        margin-left: 15px !important;
+    }
 }

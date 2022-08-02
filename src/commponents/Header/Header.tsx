@@ -27,7 +27,7 @@ const Header = () => {
         <Container className={`navbar-color container-header-second`}>
           <Navbar.Brand href="#home" className={`navbar-color`}>
             <img
-              src="https://platforma.megak.pl/public/ui/logo.png"
+              src="https://static1.s123-cdn-static-a.com/uploads/5191798/400_609bb5e2d9a39.png"
               width="89"
               height="55"
               className="d-inline-block align-top navbar-color"

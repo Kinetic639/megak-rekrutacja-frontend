@@ -63,10 +63,7 @@ const AvailableStudents = () => {
           <Accordion.Item eventKey="0">
             <Accordion.Header>
               Niesamowity Zawodnik Jujitsu
-              <Button
-                className={`position-absolute top-50 end-0 translate-middle-y me-5 custom-button`}
-                variant="danger"
-              >
+              <Button className={`custom-button`} variant="danger">
                 Zarezwewuj rozmowę
               </Button>
             </Accordion.Header>
