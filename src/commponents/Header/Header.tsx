@@ -22,6 +22,7 @@ const Header = () => {
         bg="dark"
         variant="dark"
         className={`navbar-color`}
+        expand="md"
       >
         <Container className={`navbar-color container-header-second`}>
           <Navbar.Brand href="#home" className={`navbar-color`}>

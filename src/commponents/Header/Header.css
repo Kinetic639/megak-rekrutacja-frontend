@@ -20,3 +20,10 @@
 .dropdown-item:hover {
     background-color: rgb(255, 0, 212);
 }
+
+@media screen and (max-width: 768px) {
+    .dropdown-menu.show {
+        margin: unset !important;
+    }
+}
+

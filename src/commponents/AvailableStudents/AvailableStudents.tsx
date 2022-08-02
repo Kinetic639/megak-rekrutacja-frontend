@@ -2,14 +2,13 @@ import React from 'react';
 import {
   Accordion,
   Button,
-  ButtonGroup,
   Card,
   CardGroup,
   Col,
   Container,
   Form,
-  Image,
   Nav,
+  Navbar,
   Row,
 } from 'react-bootstrap';
 
