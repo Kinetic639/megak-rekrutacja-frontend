@@ -59,7 +59,7 @@ const UserLogin = () => {
       setLoading(false);
     }
   };
-  // @TODO  Here need to add commponent dashboard-main-site navigate with params and then render correct site
+  // @TODO  Here need to add commponent dashboard-main-site navigate with params and then render correct site, change avaible-studnets for hr
   useEffect(() => {
     if (userRole === 'student') {
       navigate('/student');
