@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Image,
+  Row,
+  Spinner,
+} from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import './UserLogin.css';
 import { apiUrl } from '../../config/api';
+import { useNavigate } from 'react-router';
 
 interface FormLoginType {
   email: string;
@@ -11,6 +20,7 @@ interface FormLoginType {
 }
 
 const UserLogin = () => {
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -18,6 +28,10 @@ const UserLogin = () => {
   } = useForm<FormLoginType>();
   const [loading, setLoading] = useState(false);
   const [resError, setResError] = useState('');
+  const [userRole, setUserRole] = useState('');
+  const [areCredentialsValid, setAreCredentialsValid] = useState<
+    boolean | undefined
+  >();
   const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
     setLoading(true);
 
@@ -34,15 +48,29 @@ const UserLogin = () => {
       });
       const dataLoginRes = await res.json();
       console.log(dataLoginRes);
-
+      setUserRole(dataLoginRes.user.userType);
       if (dataLoginRes.message !== 'Login successful') {
         setResError(dataLoginRes.message);
+        setAreCredentialsValid(false);
+      } else {
+        setAreCredentialsValid(true);
       }
     } finally {
       setLoading(false);
     }
   };
-
+  // @TODO  Here need to add commponent dashboard-main-site navigate with params and then render correct site
+  useEffect(() => {
+    if (userRole === 'student') {
+      navigate('/student');
+    }
+    if (userRole === 'admin') {
+      navigate('/admin');
+    }
+    if (userRole === 'hr') {
+      navigate('/available-students');
+    }
+  }, [areCredentialsValid]);
   return (
     <>
       <Container
@@ -114,8 +142,21 @@ const UserLogin = () => {
                 id="buttonLogin"
                 variant="danger"
                 type="submit"
+                disabled={loading}
               >
-                Zaloguj
+                {loading && (
+                  <Spinner
+                    as="span"
+                    variant="danger"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className={'me-2 ms-0'}
+                    id={'loading-spinner'}
+                  />
+                )}
+                {loading ? 'Logowanie...' : 'Zaloguj'}
               </Button>
               <p className={'mt-1 text-light'}>
                 <span>Nie masz konta?</span>{' '}
