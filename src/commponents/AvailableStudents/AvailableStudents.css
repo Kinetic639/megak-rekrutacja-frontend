@@ -122,7 +122,7 @@
     opacity: 1;
 }
 
-.form-control {
+#form-control-search-hr {
     padding-left: 33px;
     color: #f7f7f7 !important;
     width: 365px;
@@ -130,12 +130,13 @@
     border: none;
     border-radius: unset;
 }
+
 @media screen and (max-width: 530px) {
-    .form-control {
+    #form-control-search-hr {
         max-width: 250px !important;
     }
 }
-.form-control:focus {
+#form-control-search-hr:focus {
     border: none;
     box-shadow: rgb(244, 244, 245) 0px 4px 4px;
 }

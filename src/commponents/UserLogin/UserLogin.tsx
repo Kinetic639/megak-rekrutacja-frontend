@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Image,
+  Row,
+  Spinner,
+} from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import './UserLogin.css';
 import { apiUrl } from '../../config/api';
+import { useNavigate } from 'react-router';
 
 interface FormLoginType {
   email: string;
@@ -11,6 +20,7 @@ interface FormLoginType {
 }
 
 const UserLogin = () => {
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -18,6 +28,10 @@ const UserLogin = () => {
   } = useForm<FormLoginType>();
   const [loading, setLoading] = useState(false);
   const [resError, setResError] = useState('');
+  const [userRole, setUserRole] = useState('');
+  const [areCredentialsValid, setAreCredentialsValid] = useState<
+    boolean | undefined
+  >();
   const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
     setLoading(true);
 
@@ -34,24 +48,41 @@ const UserLogin = () => {
       });
       const dataLoginRes = await res.json();
       console.log(dataLoginRes);
-
+      setUserRole(dataLoginRes.user.userType);
       if (dataLoginRes.message !== 'Login successful') {
         setResError(dataLoginRes.message);
+        setAreCredentialsValid(false);
+      } else {
+        setAreCredentialsValid(true);
       }
     } finally {
       setLoading(false);
     }
   };
-
+  // @TODO  Here need to add commponent dashboard-main-site navigate with params and then render correct site, change avaible-studnets for hr
+  useEffect(() => {
+    if (userRole === 'student') {
+      navigate('/student');
+    }
+    if (userRole === 'admin') {
+      navigate('/admin');
+    }
+    if (userRole === 'hr') {
+      navigate('/available-students');
+    }
+  }, [areCredentialsValid]);
   return (
     <>
       <Container
         className={`position-absolute top-50 start-50 translate-middle container-user-login`}
       >
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Image
-            className={`mx-auto d-block mb-5`}
-            src={'https://platforma.megak.pl/public/ui/logo.png'}
+          <img
+            src="https://static1.s123-cdn-static-a.com/uploads/5191798/400_609bb5e2d9a39.png"
+            width="124px"
+            height="76px"
+            className="mx-auto d-block mb-5"
+            alt="MegaK Logo"
           />
 
           <Form.Group
@@ -94,6 +125,7 @@ const UserLogin = () => {
                   required: `To pole nie może być puste!`,
                 })}
               />
+
               {errors.password && (
                 <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
@@ -103,19 +135,37 @@ const UserLogin = () => {
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
           </Form.Group>
-          <p className={'mb-4 text-light'}>
-            Nie pamiętasz hasła? <a href={'/'}>Zresetuj</a>{' '}
-          </p>
+
           <Form.Group as={Row} className="mb-3">
+            <p className={'mb-4 text-light text-end'}>Zapomniałeś hasła?</p>
             <Col sm={{ span: 12 }}>
               <Button
-                className={`float-end`}
+                className={`float-end `}
                 id="buttonLogin"
                 variant="danger"
                 type="submit"
+                disabled={loading}
               >
-                Zaloguj
+                {loading && (
+                  <Spinner
+                    as="span"
+                    variant="danger"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className={'me-2 ms-0'}
+                    id={'loading-spinner'}
+                  />
+                )}
+                {loading ? 'Logowanie...' : 'Zaloguj'}
               </Button>
+              <p className={'mt-1 text-light'}>
+                <span>Nie masz konta?</span>{' '}
+                <a id={'register-a'} href={'/'}>
+                  Zresetuj się
+                </a>
+              </p>
             </Col>
           </Form.Group>
         </Form>

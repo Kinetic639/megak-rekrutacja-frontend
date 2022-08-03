@@ -42,6 +42,7 @@ const AvailableStudents = () => {
             <div className={`wrapper`}>
               <div className={`icon`}></div>
               <Form.Control
+                id="form-control-search-hr"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
