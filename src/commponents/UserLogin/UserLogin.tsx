@@ -134,8 +134,9 @@ const UserLogin = () => {
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
           </Form.Group>
-          <p className={'mb-4 text-light text-end'}>Zapomniałeś hasła?</p>
+
           <Form.Group as={Row} className="mb-3">
+            <p className={'mb-4 text-light text-end'}>Zapomniałeś hasła?</p>
             <Col sm={{ span: 12 }}>
               <Button
                 className={`float-end `}
