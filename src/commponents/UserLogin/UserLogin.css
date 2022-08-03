@@ -26,6 +26,15 @@
     border-radius: 0 !important;
 }
 
+#register-a {
+    color: #f7f7f7;
+    font-weight: bold;
+}
+
+#register-a:hover {
+    color: #c90b0b;
+}
+
 .errorP {
     color: #942424;
     margin: 0;

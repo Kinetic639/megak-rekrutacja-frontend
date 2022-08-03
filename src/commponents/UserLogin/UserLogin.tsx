@@ -46,12 +46,15 @@ const UserLogin = () => {
   return (
     <>
       <Container
-        className={`position-absolute top-50 start-50 translate-middle container`}
+        className={`position-absolute top-50 start-50 translate-middle container-user-login`}
       >
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Image
-            className={`mx-auto d-block mb-5`}
-            src={'https://platforma.megak.pl/public/ui/logo.png'}
+          <img
+            src="https://static1.s123-cdn-static-a.com/uploads/5191798/400_609bb5e2d9a39.png"
+            width="124px"
+            height="76px"
+            className="mx-auto d-block mb-5"
+            alt="MegaK Logo"
           />
 
           <Form.Group
@@ -98,26 +101,28 @@ const UserLogin = () => {
                 <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
               {resError !== '' && (
-                <p
-                  className={`errorP mt-1`}
-                >{`${resError}`}</p>
+                <p className={`errorP mt-1`}>{`${resError}`}</p>
               )}
               {/*TODO Error label if password from database don't mach or other.*/}
             </Col>
           </Form.Group>
-          <p className={'mb-4 text-light'}>
-            Nie pamiętasz hasła? <a href={'/'}>Zresetuj</a>{' '}
-          </p>
+          <p className={'mb-4 text-light text-end'}>Zapomniałeś hasła?</p>
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 12 }}>
               <Button
-                className={`float-end`}
+                className={`float-end `}
                 id="buttonLogin"
                 variant="danger"
                 type="submit"
               >
                 Zaloguj
               </Button>
+              <p className={'mt-1 text-light'}>
+                <span>Nie masz konta?</span>{' '}
+                <a id={'register-a'} href={'/'}>
+                  Zresetuj się
+                </a>
+              </p>
             </Col>
           </Form.Group>
         </Form>
