@@ -27,14 +27,19 @@ interface Props {
 
 const AvailableStudentsSearch = (props: Props) => {
   const [search, setSearch] = useState('');
-  if (props.userListResHr === null) {
-    return <h1>Brak pozycji do wyświetlenia</h1>;
-  }
-  const filteredBySearch = props.userListResHr.filter(
-    (filterData) =>
+
+  const filteredBySearch = props.userListResHr.filter((filterData) => {
+    filterData.firstName === null
+      ? (filterData.firstName = 'BRAK')
+      : filterData.firstName;
+    filterData.lastName === null
+      ? (filterData.lastName = 'BRAK')
+      : filterData.lastName;
+    return (
       filterData.firstName.toLowerCase().includes(search.toLowerCase()) ||
-      filterData.lastName.toLowerCase().includes(search.toLowerCase()),
-  );
+      filterData.lastName.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   const currentStudentsList = filteredBySearch.slice(
     props.indexOfFirstStudentsList,
