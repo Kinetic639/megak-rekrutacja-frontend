@@ -30,7 +30,7 @@ const AvailableStudentsSearch = (props: Props) => {
 
   const filteredBySearch = props.userListResHr.filter((filterData) => {
     filterData.firstName === null
-      ? (filterData.firstName = 'BRAK')
+      ? (filterData.firstName = '')
       : filterData.firstName;
     filterData.lastName === null
       ? (filterData.lastName = 'BRAK')
