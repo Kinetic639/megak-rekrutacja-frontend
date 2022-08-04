@@ -31,10 +31,10 @@ const AvailableStudentsTableElements = (props: Props) => {
       ? (data.expectedSalary = 'BRAK')
       : data.expectedSalary;
     data.expectedTypeWork === 'default'
-      ? (data.expectedTypeWork = 'OBOJĘTNE')
+      ? (data.expectedTypeWork = 'BRAK')
       : data.expectedTypeWork;
     data.expectedContractType === 'default'
-      ? (data.expectedContractType = 'OBOJĘTNY')
+      ? (data.expectedContractType = 'BRAK')
       : data.expectedContractType;
     return (
       <Accordion key={data.id}>

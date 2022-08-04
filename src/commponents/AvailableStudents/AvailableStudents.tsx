@@ -36,7 +36,7 @@ const AvailableStudents = () => {
         const res = await fetch(`${apiUrl}/user/list/basic`);
         const data: UserListResponseHr[] = await res.json();
         setResDataUserList(data);
-        console.log(data);
+        //console.log(data);
       } finally {
         setLoading(false);
       }
@@ -49,8 +49,7 @@ const AvailableStudents = () => {
         <AvailableStudentsNavigation />
       </Container>
       <Container className={`custom-container mt-1`}>
-        <AvailableStudentsSearch />
-        <AvailableStudentsTableElements userListResHr={resDataUserList} />
+        <AvailableStudentsSearch userListResHr={resDataUserList} />
       </Container>
     </>
   );
