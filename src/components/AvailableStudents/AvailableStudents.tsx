@@ -49,10 +49,10 @@ const AvailableStudents = () => {
       }
     })();
   }, []);
-  console.log('testujemy');
+  console.log(resDataUserList);
   return (
     <>
-      {loading ? (
+      {resDataUserList.length === 0 ? (
         <></>
       ) : (
         <>
