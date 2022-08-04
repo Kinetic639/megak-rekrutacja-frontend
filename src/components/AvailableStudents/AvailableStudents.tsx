@@ -49,7 +49,7 @@ const AvailableStudents = () => {
       }
     })();
   }, []);
-  console.log('testujemy');
+
   return (
     <>
       <Container className={`mt-5 mb-1 custom-container-second p-0`}>
