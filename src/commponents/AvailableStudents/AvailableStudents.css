@@ -117,7 +117,7 @@
     background-repeat: no-repeat;
 }
 
-.form-control::placeholder {
+#form-control-search-hr::placeholder {
     color: #6c757d;
     opacity: 1;
 }
@@ -129,6 +129,7 @@
     height: 38px;
     border: none;
     border-radius: unset;
+    background-color: #1e1e20;
 }
 
 @media screen and (max-width: 530px) {
@@ -184,4 +185,13 @@
     .nav {
         flex-wrap: unset;
     }
+}
+
+.custom-p {
+    height: 4px;
+    background-color: #1e1e21;
+}
+
+.custom-nav-search {
+    background-color: #292A2B;
 }

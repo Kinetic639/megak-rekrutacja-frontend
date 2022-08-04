@@ -4,12 +4,7 @@ import { Form, Nav } from 'react-bootstrap';
 const AvailableStudentsSearch = () => {
   return (
     <>
-      <Nav
-        style={{
-          backgroundColor: '#292A2B',
-        }}
-        className={`mt-2`}
-      >
+      <Nav className={`mt-2 custom-nav-search`}>
         <Form className="d-flex">
           <div className={`wrapper`}>
             <div className={`icon`}></div>
@@ -18,20 +13,11 @@ const AvailableStudentsSearch = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              style={{
-                backgroundColor: '#1e1e20',
-              }}
             />
           </div>
         </Form>
       </Nav>
-      <p
-        style={{
-          height: '4px',
-          backgroundColor: '#1e1e21',
-        }}
-        className={'mt-3'}
-      />
+      <p className={'mt-3 custom-p'} />
     </>
   );
 };
