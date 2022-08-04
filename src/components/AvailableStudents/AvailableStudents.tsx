@@ -52,7 +52,7 @@ const AvailableStudents = () => {
   //console.log(resDataUserList);
   return (
     <>
-      {resDataUserList.length === 0 ? (
+      {loading ? (
         <></>
       ) : (
         <>
