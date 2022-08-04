@@ -2,7 +2,6 @@ import React, {
   ChangeEvent,
   FormEvent,
   ReactComponentElement,
-  ReactElement,
   useEffect,
   useState,
 } from 'react';
@@ -12,12 +11,13 @@ import { AdminUserTable } from './AdminUserTable';
 import { AdminButtons } from './AdminButtons';
 import { AdminHrTable } from './AdminHrTable';
 import './Table.css';
-import { useAppDispatch } from '../../redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { importStudentsFromFileAsync } from '../../redux/features/studentsImportSlice';
 import { FormState } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 import { apiUrl } from '../../config/api';
 import { ModalMessage } from '../../views/ModalMessage';
+import { log } from 'util';
 
 export interface CsvRow {
   email: string;
@@ -43,11 +43,14 @@ export interface HrRow {
 }
 
 export type HrData = HrRow[] | [];
+export type ParsedData = ParsedRow[] | [];
 
 type Message = ReactComponentElement<typeof ModalMessage>;
 
 export const Admin = () => {
+  const importedStudentsState = useAppSelector((store) => store.studentsImport);
   const dispatch = useAppDispatch();
+  const [csvData, setCsvData] = useState<ParsedData>([]);
   const [showAddWindow, setShowAddWindow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showStudentsTable, setShowStudentsTable] = useState(true);
@@ -60,7 +63,6 @@ export const Admin = () => {
     company: '',
     maxReservedStudents: 0,
   });
-
 
   useEffect(() => {
     getTablesData();
@@ -83,33 +85,22 @@ export const Admin = () => {
     const formData = new FormData();
     formData.append('file_asset', e.target.files[0]);
     if (e.target.files[0]) {
-      dispatch(importStudentsFromFileAsync(formData));
-    }
-    e.target.value = "";
-  };
-
-    try {
-      const formData = new FormData();
-      formData.append('file_asset', e.target.files[0]);
-      const response = await fetch(`${apiUrl}/admin/create/students`, {
-        method: 'POST',
-        body: formData,
+      await dispatch(importStudentsFromFileAsync(formData)).then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          console.log(importedStudentsState.status);
+          getTablesData();
+          setShowStudentsTable(true);
+          setMessage(
+            <ModalMessage
+              message={`Zaktualizowano: ${importedStudentsState.results.studentsUpdated.length} studentów, Dodano: ${importedStudentsState.results.studentsAdded.length} studentów, Zignorowano: ${importedStudentsState.results.studentsIgnored.length} studentów`}
+              setShowModal={setShowModal}
+            />,
+          );
+          setShowModal(true);
+        }
       });
-
-      const data = await response.json();
-
-      if (response.status === 201) {
-        getTablesData();
-        setShowStudentsTable(true);
-        setMessage(
-          <ModalMessage
-            message={`Zaktualizowano: ${data.studentsUpdated.length} studentów, Dodano: ${data.studentsAdded.length} studentów, Zignorowano: ${data.studentsIgnored.length} studentów`}
-            setShowModal={setShowModal}
-          />,
-        );
-        setShowModal(true);
-      }
-    } catch (error) {}
+    }
+    e.target.value = '';
   };
 
   const handleHrAddSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -143,11 +134,7 @@ export const Admin = () => {
         setShowStudentsTable={setShowStudentsTable}
         showStudentsTable={showStudentsTable}
       />
-      {showStudentsTable ? (
-        <AdminUserTable csvData={csvData} />
-      ) : (
-        <AdminHrTable hrs={hrsData} />
-      )}
+      {showStudentsTable ? <AdminUserTable /> : <AdminHrTable hrs={hrsData} />}
       {showAddWindow ? <div className="background-blur" /> : null}
     </div>
   );
