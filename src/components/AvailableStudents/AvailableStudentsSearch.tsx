@@ -27,9 +27,7 @@ interface Props {
 
 const AvailableStudentsSearch = (props: Props) => {
   const [search, setSearch] = useState('');
-  if (props.userListResHr === null) {
-    return <h1>Brak pozycji do wyświetlenia</h1>;
-  }
+
   const filteredBySearch = props.userListResHr.filter(
     (filterData) =>
       filterData.firstName.toLowerCase().includes(search.toLowerCase()) ||

@@ -49,7 +49,7 @@ const AvailableStudents = () => {
       }
     })();
   }, []);
-  console.log(resDataUserList);
+  //console.log(resDataUserList);
   return (
     <>
       {resDataUserList.length === 0 ? (
