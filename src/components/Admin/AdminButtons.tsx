@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import './AdminButtons.css';
-import {LogOut} from "../LogOut/LogOut";
+import { LogOut } from '../LogOut/LogOut';
 
 interface Props {
   setShowAddWindow: (boolean: boolean) => void;
@@ -21,45 +21,51 @@ export const AdminButtons = ({
         className="buttons-change-view button"
         onClick={() => setShowStudentsTable(!showStudentsTable)}
       >
-        Zmień widok tabelki
+        {showStudentsTable ? 'Widok Rekruterów' : 'Widok Kursantów'}
       </button>
-      <button
-        className="buttons-register-hr__button button"
-        onClick={() => setShowAddWindow(true)}
-      >
-        Zarejestruj Rekrutera
-      </button>
-      <label
-        htmlFor="buttons-csv__button"
-        className="buttons-csv__label button"
-      >
-        Załaduj plik CSV
-        <input
-          id="buttons-csv__button"
-          className="buttons-csv__button"
-          type="file"
-          accept="text/csv"
-          style={{ display: 'none' }}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleLoadCSV(e)}
-        />
-      </label>
-      <span className="buttons-csv__help">?</span>
-      <div className="csv-help">
-        <div className="csv-help__info">
-          Plik CSV powinien zawierać następujące nazwy kolumn:
-          <ul>
-            <li>email</li>
-            <li>courseCompletion</li>
-            <li>courseEngagment</li>
-            <li>projectDegree</li>
-            <li>teamProjectDegree</li>
-            <li>bonusProjectUrls</li>
-          </ul>
-          Kolumna - bonusProjectUrls - powinna zawierać linki w tej samej
-          komórce, oddzielone przecinkiem.
+      {!showStudentsTable && (
+        <button
+          className="buttons-register-hr__button button"
+          onClick={() => setShowAddWindow(true)}
+        >
+          Zarejestruj Rekrutera
+        </button>
+      )}
+      {showStudentsTable && (
+        <div>
+          <label
+            htmlFor="buttons-csv__button"
+            className="buttons-csv__label button"
+          >
+            Załaduj plik CSV
+            <input
+              id="buttons-csv__button"
+              className="buttons-csv__button"
+              type="file"
+              accept="text/csv"
+              style={{ display: 'none' }}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleLoadCSV(e)}
+            />
+          </label>
+          <span className="buttons-csv__help">?</span>
+          <div className="csv-help">
+            <div className="csv-help__info">
+              Plik CSV powinien zawierać następujące nazwy kolumn:
+              <ul>
+                <li>email</li>
+                <li>courseCompletion</li>
+                <li>courseEngagment</li>
+                <li>projectDegree</li>
+                <li>teamProjectDegree</li>
+                <li>bonusProjectUrls</li>
+              </ul>
+              Kolumna - bonusProjectUrls - powinna zawierać linki w tej samej
+              komórce, oddzielone przecinkiem.
+            </div>
+          </div>
         </div>
-      </div>
-        <LogOut/>
+      )}
+      <LogOut />
     </div>
   );
 };
