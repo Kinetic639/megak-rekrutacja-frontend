@@ -21,15 +21,26 @@ interface UserListResponseHr {
 
 interface Props {
   userListResHr: UserListResponseHr[];
+  indexOfLastStudentsList: number;
+  indexOfFirstStudentsList: number;
 }
 
 const AvailableStudentsSearch = (props: Props) => {
   const [search, setSearch] = useState('');
+  if (props.userListResHr === null) {
+    return <h1>Brak pozycji do wyświetlenia</h1>;
+  }
   const filteredBySearch = props.userListResHr.filter(
     (filterData) =>
       filterData.firstName.toLowerCase().includes(search.toLowerCase()) ||
       filterData.lastName.toLowerCase().includes(search.toLowerCase()),
   );
+
+  const currentStudentsList = filteredBySearch.slice(
+    props.indexOfFirstStudentsList,
+    props.indexOfLastStudentsList,
+  );
+
   return (
     <>
       <Nav className={`mt-2 custom-nav-search`}>
@@ -48,7 +59,7 @@ const AvailableStudentsSearch = (props: Props) => {
         </Form>
       </Nav>
       <p className={'mt-3 custom-p'} />
-      <AvailableStudentsTableElements userListResHr={filteredBySearch} />
+      <AvailableStudentsTableElements userListResHr={currentStudentsList} />
     </>
   );
 };
