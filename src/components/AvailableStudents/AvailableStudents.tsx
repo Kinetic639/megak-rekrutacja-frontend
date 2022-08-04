@@ -29,6 +29,13 @@ const AvailableStudents = () => {
   const [resDataUserList, setResDataUserList] = useState<UserListResponseHr[]>(
     [],
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [studentsListPerPage, setStudentsListPerPage] = useState(3);
+
+  const indexOfLastStudentsList = currentPage * studentsListPerPage;
+  const indexOfFirstStudentsList =
+    indexOfLastStudentsList - studentsListPerPage;
+
   useEffect(() => {
     setLoading(true);
     (async () => {
@@ -49,7 +56,11 @@ const AvailableStudents = () => {
         <AvailableStudentsNavigation />
       </Container>
       <Container className={`custom-container mt-1`}>
-        <AvailableStudentsSearch userListResHr={resDataUserList} />
+        <AvailableStudentsSearch
+          userListResHr={resDataUserList}
+          indexOfLastStudentsList={indexOfLastStudentsList}
+          indexOfFirstStudentsList={indexOfFirstStudentsList}
+        />
       </Container>
     </>
   );
