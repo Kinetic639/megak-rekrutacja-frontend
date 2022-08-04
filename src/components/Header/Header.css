@@ -1,0 +1,28 @@
+.container-header-second {
+  max-width: 76.2%;
+}
+
+.navbar-color {
+  background-color: #1e1e1f !important;
+}
+
+#collasible-nav-dropdown {
+  background-color: #1e1e1f !important;
+}
+
+.dropdown-menu {
+  background-color: #1e1e1f !important;
+  border-radius: unset !important;
+  margin-top: 0.9rem !important;
+  width: 100%;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(255, 0, 212);
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-menu.show {
+    margin: unset !important;
+  }
+}

@@ -2,8 +2,8 @@ import { SyntheticEvent, useCallback, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { selectFilters, setFilters } from '../../redux/features/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
-import { Filter } from './Filter';
-import { Input, InputI } from './Input';
+import { Filter } from '../filtersPanel/Filter';
+import { Input, InputI } from '../filtersPanel/Input';
 import './FiltersPanel.css';
 
 export interface activeFiltersI {
