@@ -49,19 +49,25 @@ const AvailableStudents = () => {
       }
     })();
   }, []);
-
+  console.log('testujemy');
   return (
     <>
-      <Container className={`mt-5 mb-1 custom-container-second p-0`}>
-        <AvailableStudentsNavigation />
-      </Container>
-      <Container className={`custom-container mt-1`}>
-        <AvailableStudentsSearch
-          userListResHr={resDataUserList}
-          indexOfLastStudentsList={indexOfLastStudentsList}
-          indexOfFirstStudentsList={indexOfFirstStudentsList}
-        />
-      </Container>
+      {loading ? (
+        <></>
+      ) : (
+        <>
+          <Container className={`mt-5 mb-1 custom-container-second p-0`}>
+            <AvailableStudentsNavigation />
+          </Container>
+          <Container className={`custom-container mt-1`}>
+            <AvailableStudentsSearch
+              userListResHr={resDataUserList}
+              indexOfLastStudentsList={indexOfLastStudentsList}
+              indexOfFirstStudentsList={indexOfFirstStudentsList}
+            />
+          </Container>
+        </>
+      )}
     </>
   );
 };
