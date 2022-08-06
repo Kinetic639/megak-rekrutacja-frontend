@@ -6,18 +6,24 @@ import './button.css';
 import { UserLoginSite } from './views/UserLoginSite';
 import { AvailableStudentsSite } from './views/AvailableStudentsSite';
 import { Admin } from './components/Admin/Admin';
+import { DashboardContainer } from './views/DashboardContainer/DashboardContainer';
+import { useAppSelector } from './redux/hooks/hooks';
 
 function App() {
+  const userState = useAppSelector((state) => state.user);
+  const currUser = userState.user;
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/auth/login" />} />
-        <Route path={'/auth/login'} element={<UserLoginSite />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
         <Route
-          path={'/available-students'}
-          element={<AvailableStudentsSite />}
+          path={'/login'}
+          element={
+            currUser ? <Navigate replace to="/dashboard" /> : <UserLoginSite />
+          }
         />
-        <Route path={'/admin'} element={<Admin />} />
+
+        <Route path={'/dashboard'} element={<DashboardContainer />} />
       </Routes>
     </>
   );

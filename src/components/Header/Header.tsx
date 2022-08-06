@@ -2,8 +2,21 @@ import React from 'react';
 import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const nav = useNavigate();
+
+  const logOut = async () => {
+    const res = await fetch('http://localhost:3001/auth/logout', {
+      credentials: 'include',
+    });
+    const resJson = await res.json();
+    if (resJson.message === 'Logout successful') {
+      nav('/auth/login');
+    }
+  };
+
   const avatar = (
     <img
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GXJmEd1lp6TBZONJN90qkvfVYy_ZDb6nww&usqp=CAU"
@@ -35,9 +48,16 @@ const Header = () => {
             />
           </Navbar.Brand>
 
-          <Nav>
+          <Nav className="nav-main">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GXJmEd1lp6TBZONJN90qkvfVYy_ZDb6nww&usqp=CAU"
+              width="40"
+              height="36"
+              className="avatar"
+              alt="MegaK Logo"
+            />
             <NavDropdown
-              title={[avatar, name]}
+              title={name}
               id="collasible-nav-dropdown"
               className={`text-white fs-4`}
             >
@@ -49,7 +69,9 @@ const Header = () => {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item className={`text-white fs-5`}>
-                Wyloguj
+                <button className="button" onClick={logOut}>
+                  Wyloguj
+                </button>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

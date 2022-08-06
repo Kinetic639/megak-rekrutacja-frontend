@@ -20,6 +20,7 @@ interface FormLoginType {
 }
 
 const UserLogin = () => {
+  console.log(new Date().toString());
   const navigate = useNavigate();
   const {
     register,

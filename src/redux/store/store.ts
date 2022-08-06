@@ -3,9 +3,11 @@ import { combineReducers } from 'redux';
 
 import filtersReducer from '../features/filtersSlice';
 import studentsImportReducer from '../features/studentsImportSlice';
+import userReducer from '../features/userSlice';
 import { apiSlice } from '../features/apiSlice';
 
 const rootReducer = combineReducers({
+  user: userReducer,
   filters: filtersReducer,
   studentsImport: studentsImportReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,

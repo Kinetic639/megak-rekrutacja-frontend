@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from 'react';
 import './AdminButtons.css';
-import { LogOut } from '../LogOut/LogOut';
 
 interface Props {
   setShowAddWindow: (boolean: boolean) => void;
@@ -65,7 +64,6 @@ export const AdminButtons = ({
           </div>
         </div>
       )}
-      <LogOut />
     </div>
   );
 };

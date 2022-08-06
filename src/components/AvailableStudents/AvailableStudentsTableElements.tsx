@@ -41,9 +41,9 @@ const AvailableStudentsTableElements = (props: Props) => {
         <Accordion.Item eventKey={String(index)}>
           <Accordion.Header>
             {data.firstName} {data.lastName}
-            <Button className={`custom-button`} variant="danger">
-              Zarezwewuj rozmowę
-            </Button>
+            {/*<Button className={`custom-button`} variant="danger">*/}
+            {/*  Zarezwewuj rozmowę*/}
+            {/*</Button>*/}
           </Accordion.Header>
           <Accordion.Body>
             <CardGroup>

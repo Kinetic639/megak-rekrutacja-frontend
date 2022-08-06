@@ -26,7 +26,7 @@ const initialState: studentImportSliceState = {
 };
 
 export const studentImportSlice = createSlice({
-  name: 'children',
+  name: 'studentsImport',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
