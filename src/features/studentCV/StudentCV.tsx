@@ -1,6 +1,58 @@
-import './studentCV.css'
+import { Rating } from '../../components/Rating';
+import { LoadingPlaceholder } from '../../components/LoadingPlaceholder';
+import { useGetStudentQuery } from '../../store/apiSlice'
+import './studentCV.css';
 
-export const StudentCV = () => {
+interface StudentCVProps {
+  id: string;
+}
+
+export interface StudentData {
+  studentFirstName: string;
+  studentLastName: string;
+  email: string;
+  bio: string | null;
+  tel: string | null;
+  githubUsername: string | null;
+  courseCompletion: number;
+  projectDegree: number;
+  teamProjectDegree: number;
+  courseEngagement: number;
+  expectedTypeWork: string;
+  targetWorkCity: string | null;
+  expectedContractType: string;
+  expectedSalary: string | null;
+  canTakeApprenticeship: boolean;
+  monthsOfCommercialExp: number;
+  education: string | null;
+  workExperience: string | null;
+  courses: string | null;
+  portfolioUrls: string[];
+  projectUrls: string[];
+  scrumProjectUrls: string[];
+}
+
+type keyType<Type extends StudentData> = keyof Type;
+
+type studentDataProp<Type extends StudentData> = keyType<Type>;
+
+type parseStudentDataKey = studentDataProp<StudentData>
+
+export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
+  const { data, isSuccess } = useGetStudentQuery(`${id}`);
+
+  const parseStudentData = (prop: parseStudentDataKey) => {
+    if (!(typeof data === 'object')) return;
+    if (!data[prop]) return 'Brak informacji';
+    if (prop === 'teamProjectDegree' || prop === 'projectDegree' || prop === 'courseCompletion' || prop === 'courseEngagement') {
+      return <Rating rating={data[prop]} />
+    }
+    if (prop === 'portfolioUrls' || prop === 'projectUrls' || prop === 'scrumProjectUrls') {
+      return data[prop].map(url => <li key={url}><a href={url}>{url}</a></li>)
+    }
+    return data[prop];
+  }
+
   return (
     <>
       <div className="wrapper">
@@ -8,26 +60,32 @@ export const StudentCV = () => {
         <article className="student-cv">
 
           <article className='student-panel'>
-            <section className='student-panel__identity'>
-              <div className='wrapper-img'>
-                <img src="" alt="" />
-              </div>
+            {isSuccess ?
+              <>
+                <section className='student-panel__identity'>
+                  <div className='wrapper-img'>
+                    <img src="" alt="" />
+                  </div>
 
-              <h2>Jan Kowalski</h2>
-              <div>jankowalski</div>
-            </section>
+                  <h2>{`${parseStudentData('studentFirstName')} ${parseStudentData('studentLastName')}`}</h2>
+                  <div>{parseStudentData('githubUsername')}</div>
+                </section>
 
-            <div className='student-panel__contact'>
-              <div className='student-panel__phone'>+48 566 072 227</div>
-              <div className='student-panel__mail'>jankowalski@gmail.com</div>
-            </div>
+                <div className='student-panel__contact'>
+                  <div className='student-panel__phone'>{parseStudentData('tel')}</div>
+                  <div className='student-panel__mail'>{parseStudentData('email')}</div>
+                </div>
 
-            <section className='student-panel__about-student'>
-              <h4 className='student-panel__about-me-title'>O mnie</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-              </p>
-            </section>
+                <section className='student-panel__about-student'>
+                  <h4 className='student-panel__about-me-title'>O mnie</h4>
+                  <p>
+                    {parseStudentData('bio')}
+                  </p>
+                </section>
+              </> :
+              <LoadingPlaceholder />
+            }
+
 
             <div className='student-panel__status-btns'>
               <button className='student-panel__status-btn'>Brak zainteresowania</button>
@@ -40,60 +98,92 @@ export const StudentCV = () => {
             <section>
               <h3 className='student-cv__section-title'>Oceny</h3>
               <div className='student-cv__grid'>
-                <p className='student-cv__grid-title'>Ocena przejścia kursu</p>
-                <div className='student-cv__grid-content'></div>
-                <p className='student-cv__grid-title'>Ocena aktywności i zaangażowania na kursie</p>
-                <div className='student-cv__grid-content'></div>
-                <p className='student-cv__grid-title'>Ocena kodu w projekcie własnym</p>
-                <div className='student-cv__grid-content'></div>
-                <p className='student-cv__grid-title'>Ocena pracy w zespole w Scrum</p>
-                <div className='student-cv__grid-content'></div>
+                {
+                  isSuccess ?
+                    <>
+                      <p className='student-cv__grid-title'>Ocena przejścia kursu</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('courseCompletion')}</div>
+                      <p className='student-cv__grid-title'>Ocena aktywności i zaangażowania na kursie</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('courseEngagement')}</div>
+                      <p className='student-cv__grid-title'>Ocena kodu w projekcie własnym</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('projectDegree')}</div>
+                      <p className='student-cv__grid-title'>Ocena pracy w zespole w Scrum</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('teamProjectDegree')}</div>
+                    </> :
+                    <>
+                      <p className='student-cv__grid-title'>Ocena przejścia kursu</p>
+                      <p className='student-cv__grid-title'>Ocena aktywności i zaangażowania na kursie</p>
+                      <p className='student-cv__grid-title'>Ocena kodu w projekcie własnym</p>
+                      <p className='student-cv__grid-title'>Ocena pracy w zespole w Scrum</p>
+                      <div className='student-cv__grid-content student-cv__grid-content--placeholder'>
+                        <LoadingPlaceholder />
+                      </div>
+                    </>
+                }
+
               </div>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Oczekiwanie w stosunku do zatrudnienia</h3>
               <div className='student-cv__grid student-cv__grid--6'>
-                <p className='student-cv__grid-title'>Preferowane miejsce pracy</p>
-                <div className='student-cv__grid-content'>Biuro</div>
-                <p className='student-cv__grid-title'>Docelowe miasto, gdzie chce pracować kandydat</p>
-                <div className='student-cv__grid-content'>Warszawa</div>
-                <p className='student-cv__grid-title'>Oczekiwany typ kontraktu</p>
-                <div className='student-cv__grid-content'>Umowa o pracę</div>
-                <p className='student-cv__grid-title'>Oczekiwane wynagrodzenie miesięczne netto</p>
-                <div className='student-cv__grid-content'>8 000 zł</div>
-                <p className='student-cv__grid-title'>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</p>
-                <div className='student-cv__grid-content'>TAK</div>
-                <p className='student-cv__grid-title'>Komercyjne doświadczenie w programowaniu</p>
-                <div className='student-cv__grid-content'>6 miesięcy</div>
+                {
+                  isSuccess ?
+                    <>
+                      <p className='student-cv__grid-title'>Preferowane miejsce pracy</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('expectedTypeWork')}</div>
+                      <p className='student-cv__grid-title'>Docelowe miasto, gdzie chce pracować kandydat</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('targetWorkCity')}</div>
+                      <p className='student-cv__grid-title'>Oczekiwany typ kontraktu</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('expectedContractType')}</div>
+                      <p className='student-cv__grid-title'>Oczekiwane wynagrodzenie miesięczne netto</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('expectedSalary')}</div>
+                      <p className='student-cv__grid-title'>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('canTakeApprenticeship')}</div>
+                      <p className='student-cv__grid-title'>Komercyjne doświadczenie w programowaniu</p>
+                      <div className='student-cv__grid-content'>{parseStudentData('monthsOfCommercialExp')}</div>
+                    </> :
+                    <>
+                      <p className='student-cv__grid-title'>Preferowane miejsce pracy</p>
+                      <p className='student-cv__grid-title'>Docelowe miasto, gdzie chce pracować kandydat</p>
+                      <p className='student-cv__grid-title'>Oczekiwany typ kontraktu</p>
+                      <p className='student-cv__grid-title'>Oczekiwane wynagrodzenie miesięczne netto</p>
+                      <p className='student-cv__grid-title'>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</p>
+                      <p className='student-cv__grid-title'>Komercyjne doświadczenie w programowaniu</p>
+                      <div className='student-cv__grid-content student-cv__grid-content--placeholder'>
+                        <LoadingPlaceholder />
+                      </div>
+                    </>
+                }
+
               </div>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Edukacja</h3>
               <p className='student-cv__text'>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {isSuccess ? parseStudentData('education') : <LoadingPlaceholder />}
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Kursy</h3>
               <p className='student-cv__text'>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {isSuccess ? parseStudentData('courses') : <LoadingPlaceholder />}
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Doświadczenie zawodowe</h3>
               <p className='student-cv__text'>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {isSuccess ? parseStudentData('workExperience') : <LoadingPlaceholder />}
               </p>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Portfolio</h3>
               <ul className='student-cv__list'>
-                <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
+                {isSuccess ? parseStudentData('portfolioUrls') : <LoadingPlaceholder />}
               </ul>
 
             </section>
@@ -101,16 +191,14 @@ export const StudentCV = () => {
             <section>
               <h3 className='student-cv__section-title'>Projekt w zespole Scrumowym</h3>
               <ul className='student-cv__list'>
-                <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
-                <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
+                {isSuccess ? parseStudentData('scrumProjectUrls') : <LoadingPlaceholder />}
               </ul>
             </section>
 
             <section>
               <h3 className='student-cv__section-title'>Projekt na zaliczenie</h3>
               <ul className='student-cv__list'>
-                <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
-                <li><a href="">https://Loremipsum/dolor/sit/amet</a></li>
+                {isSuccess ? parseStudentData('projectUrls') : <LoadingPlaceholder />}
               </ul>
             </section>
 

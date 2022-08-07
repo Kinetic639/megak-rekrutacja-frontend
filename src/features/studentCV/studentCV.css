@@ -82,11 +82,20 @@
   appearance: none;
   width: 100%;
   max-width: 200px;
-  height: 30px;
+  line-height: 1rem;
   font-size: 1rem;
+  padding: .4em .2em;
   border: 0;
   color: var(--dirty-white);
   background-color: var(--red);
+  cursor: pointer;
+  transition: color .4s , background-color .4s;
+}
+
+
+.student-panel__status-btn:hover{
+  color: var(--black);
+  background-color: var(--dirty-white);
 }
 
 .student-cv__section-title{
@@ -100,11 +109,14 @@
 .student-cv__grid{
   width: 100%;
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(4, auto);
   grid-template-rows: 50% 50%;
   padding: .6rem 1.3rem;
-  column-gap: 2rem;
-  row-gap: 1.5rem;
+  column-gap: 1.5rem;
+  row-gap: 1rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
 }
 .student-cv__grid--6{
   grid-template-columns: repeat(6, auto);
@@ -121,6 +133,11 @@
   grid-row: 2/3;
   font-weight: bold;
   color: var(--dirty-white);
+  
+}
+
+.student-cv__grid-content--placeholder{
+  grid-column: 1/-1;
 }
 
 .student-cv__text{

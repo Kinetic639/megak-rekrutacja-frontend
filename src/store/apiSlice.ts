@@ -1,13 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { StudentData } from '../features/studentCV/StudentCV';
 
 export const apiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: `https://localhost:3001/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3001/`, mode: "cors" }),
   reducerPath: 'apiSlice',
   endpoints: (build) => ({
     getStudents: build.query<any, string>({
       query: (queryString: string) => `student/students${queryString}`,
     }),
+    getStudent: build.query<StudentData, string>({
+      query: (id: string) => `user/id/${id}`,
+    }),
   }),
 })
 
-export const { useGetStudentsQuery } = apiSlice;
+export const { useGetStudentsQuery, useGetStudentQuery } = apiSlice;

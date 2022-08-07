@@ -1,0 +1,30 @@
+:root{
+  --white: #f7f7f7;
+  --black: #0a0a0a;
+  --dark: #172A35;
+  --dark2:#292A2B;
+  --dark3:#4D4D4D;
+  --red:#E02735;
+}
+
+.rating--wrapper{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.rating__degrees{
+  color: var(--dark3);
+}
+
+.rating__student-degree{
+  color: var(--white);
+  margin-bottom: -2px;
+}
+
+.rating__star--filled{
+fill: var(--red);
+}
+
+.rating__star--unfilled{
+fill: var(--dark3);
+}
