@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
 import './AvailableStudents.css';
 import { apiUrl } from '../../config/api';
-import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
+
 import { AvailableStudentsSearch } from './AvailableStudentsSearch';
 import { AvailableStudentsNavigation } from './AvailableStudentsNavigation';
 
@@ -30,7 +31,7 @@ const AvailableStudents = () => {
     [],
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [studentsListPerPage, setStudentsListPerPage] = useState(3);
+  const [studentsListPerPage, setStudentsListPerPage] = useState(10);
 
   const indexOfLastStudentsList = currentPage * studentsListPerPage;
   const indexOfFirstStudentsList =
@@ -66,6 +67,19 @@ const AvailableStudents = () => {
               indexOfFirstStudentsList={indexOfFirstStudentsList}
             />
           </Container>
+          <Container className={`mt-5 mb-1 custom-container-second p-0`}>
+            <p>Ilość elementów</p>
+          </Container>
+          <Form.Select
+            aria-label="Default select example"
+            style={{
+              width: '80px',
+            }}
+          >
+            <option value="1">5</option>
+            <option value="2">10</option>
+            <option value="3">15</option>
+          </Form.Select>
         </>
       )}
     </>

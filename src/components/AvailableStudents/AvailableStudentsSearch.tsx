@@ -29,6 +29,7 @@ const AvailableStudentsSearch = (props: Props) => {
   const [search, setSearch] = useState('');
 
   const filteredBySearch = props.userListResHr.filter((filterData) => {
+    // @TODO after added register user just delete it
     filterData.firstName === null
       ? (filterData.firstName = '')
       : filterData.firstName;
