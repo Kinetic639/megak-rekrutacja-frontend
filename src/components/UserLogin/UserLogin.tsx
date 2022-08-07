@@ -20,7 +20,6 @@ interface FormLoginType {
 }
 
 const UserLogin = () => {
-  console.log(new Date().toString());
   const navigate = useNavigate();
   const {
     register,
@@ -48,30 +47,19 @@ const UserLogin = () => {
         credentials: 'include',
       });
       const dataLoginRes = await res.json();
-      console.log(dataLoginRes);
       setUserRole(dataLoginRes.user.userType);
       if (dataLoginRes.message !== 'Login successful') {
         setResError(dataLoginRes.message);
         setAreCredentialsValid(false);
       } else {
         setAreCredentialsValid(true);
+        navigate('/dashboard');
       }
     } finally {
       setLoading(false);
     }
   };
-  // @TODO  Here need to add commponent dashboard-main-site navigate with params and then render correct site, change avaible-studnets for hr
-  useEffect(() => {
-    if (userRole === 'student') {
-      navigate('/student');
-    }
-    if (userRole === 'admin') {
-      navigate('/admin');
-    }
-    if (userRole === 'hr') {
-      navigate('/available-students');
-    }
-  }, [areCredentialsValid]);
+
   return (
     <>
       <Container

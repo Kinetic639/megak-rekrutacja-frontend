@@ -1,5 +1,4 @@
 import { Header } from '../../components/Header/Header';
-import { CustomSpinner } from '../../components/common/CustomSpinner/CustomSpinner';
 import './DashboardContainer.css';
 
 export const DashboardContainer = () => {
@@ -14,7 +13,6 @@ export const DashboardContainer = () => {
     <div className="dashboard-wrapper">
       <Header />
       <button onClick={showCookies}>Click</button>
-      <CustomSpinner />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const Header = () => {
     });
     const resJson = await res.json();
     if (resJson.message === 'Logout successful') {
-      nav('/auth/login');
+      nav('/login');
     }
   };
 
