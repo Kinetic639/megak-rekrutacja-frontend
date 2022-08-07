@@ -7,6 +7,7 @@ export const importStudentsFromFileAsync = createAsyncThunk(
     const resp = await fetch(`http://localhost:3001/admin/create/students`, {
       method: 'POST',
       body: payload,
+      credentials: 'include',
     });
     const data = await resp.json();
     return data;
