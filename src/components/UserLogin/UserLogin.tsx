@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Image,
-  Row,
-  Spinner,
-} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import './UserLogin.css';
@@ -28,7 +20,6 @@ const UserLogin = () => {
   } = useForm<FormLoginType>();
   const [loading, setLoading] = useState(false);
   const [resError, setResError] = useState('');
-  const [userRole, setUserRole] = useState('');
   const [areCredentialsValid, setAreCredentialsValid] = useState<
     boolean | undefined
   >();
@@ -47,7 +38,6 @@ const UserLogin = () => {
         credentials: 'include',
       });
       const dataLoginRes = await res.json();
-      setUserRole(dataLoginRes.user.userType);
       if (dataLoginRes.message !== 'Login successful') {
         setResError(dataLoginRes.message);
         setAreCredentialsValid(false);
