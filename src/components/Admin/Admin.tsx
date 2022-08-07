@@ -63,6 +63,7 @@ export const Admin = () => {
     company: '',
     maxReservedStudents: 0,
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getTablesData();
@@ -103,8 +104,10 @@ export const Admin = () => {
     e.target.value = '';
   };
 
-  const handleHrAddSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleHrAddSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //view with all hr is not necessary at this point
+    //maybe hrsData delete and replace with refresh list after added new hr (if you really want)
     setHrsData((hrsData) => [...hrsData, newHr]);
     setNewHr({
       email: '',
@@ -113,8 +116,29 @@ export const Admin = () => {
       company: '',
       maxReservedStudents: 0,
     });
-    setShowAddWindow(false);
-    setShowStudentsTable(false);
+    try {
+      setLoading(true);
+      const res = await fetch(`${apiUrl}/admin/create/hr`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newHr),
+        credentials: 'include',
+      });
+      const dataLoginRes = await res.json();
+      console.log(dataLoginRes)
+      if (dataLoginRes.statusCode === 201) {
+        setShowAddWindow(false);
+        setShowStudentsTable(false);
+      }
+      if(dataLoginRes.statusCode === 404){
+        //todo show nice & correct message
+      }
+
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -126,6 +150,7 @@ export const Admin = () => {
           newHr={newHr}
           setNewHr={setNewHr}
           handleHrAddSubmit={handleHrAddSubmit}
+          loading={loading}
         />
       ) : null}
       <AdminButtons
