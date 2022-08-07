@@ -1,9 +1,11 @@
 :root{
   --white: #f7f7f7;
+  --white-gray:#CFCFCF;
   --black: #0a0a0a;
   --dark: #172A35;
   --dark2:#292A2B;
   --dark3:#4D4D4D;
+  --dark4:#9E9E9E;
   --red:#E02735;
 }
 
@@ -13,16 +15,22 @@
 }
 
 .rating__degrees{
-  color: var(--dark3);
+  letter-spacing: 1.8px;
+  color: var(--dark4);
+  margin-right: .5rem;
+}
+
+.rating__student-degree, .rating__student-max-degree{
+  font-size: 1rem;
 }
 
 .rating__student-degree{
   color: var(--white);
-  margin-bottom: -2px;
+  margin-right: 5px;
 }
 
 .rating__star--filled{
-fill: var(--red);
+  fill: var(--red);
 }
 
 .rating__star--unfilled{

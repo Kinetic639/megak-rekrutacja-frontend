@@ -1,5 +1,5 @@
-import { Rating } from '../../components/Rating';
-import { LoadingPlaceholder } from '../../components/LoadingPlaceholder';
+import { Rating } from '../../components/rating/Rating';
+import { LoadingPlaceholder } from '../../components/loadingPlaceholder/LoadingPlaceholder';
 import { useGetStudentQuery } from '../../store/apiSlice'
 import './studentCV.css';
 
@@ -39,11 +39,11 @@ type studentDataProp<Type extends StudentData> = keyType<Type>;
 type parseStudentDataKey = studentDataProp<StudentData>
 
 export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
-  const { data, isSuccess } = useGetStudentQuery(`${id}`);
+  const { data, isSuccess } = useGetStudentQuery(id);
 
   const parseStudentData = (prop: parseStudentDataKey) => {
     if (!(typeof data === 'object')) return;
-    if (!data[prop]) return 'Brak informacji';
+    if (!data?.[prop]) return 'Brak informacji';
     if (prop === 'teamProjectDegree' || prop === 'projectDegree' || prop === 'courseCompletion' || prop === 'courseEngagement') {
       return <Rating rating={data[prop]} />
     }

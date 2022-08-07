@@ -9,7 +9,7 @@ export const apiSlice = createApi({
       query: (queryString: string) => `student/students${queryString}`,
     }),
     getStudent: build.query<StudentData, string>({
-      query: (id: string) => `user/id/${id}`,
+      query: (id: string) => `user/student/${id}`,
     }),
   }),
 })
