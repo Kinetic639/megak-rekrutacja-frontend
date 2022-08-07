@@ -3,11 +3,7 @@ import { Nav } from 'react-bootstrap';
 
 const AvailableStudentsNavigation = () => {
   return (
-    <Nav
-      className={`navigation`}
-      variant="tabs"
-      defaultActiveKey="/available-students#"
-    >
+    <Nav className={`navigation`} variant="tabs" defaultActiveKey="/dashboard">
       <Nav.Item className={`nav-items`}>
         <Nav.Link href="/available-students#">Dostępni kursanci</Nav.Link>
       </Nav.Item>

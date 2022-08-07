@@ -5,7 +5,6 @@ import { Header } from '../components/Header/Header';
 const AvailableStudentsSite = () => {
   return (
     <>
-      <Header />
       <AvailableStudents />
     </>
   );

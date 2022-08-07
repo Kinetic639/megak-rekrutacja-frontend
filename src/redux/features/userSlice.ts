@@ -2,17 +2,16 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createUsersResponse } from 'types';
 import { User } from '../../../../megak-rekrutacja-backend/src/user/user.entity';
 
-// export const importStudentsFromFileAsync = createAsyncThunk(
-//   'user/importStudentsFromFileAsync',
-//   async (payload: FormData) => {
-//     const resp = await fetch(`http://localhost:3001/admin/create/students`, {
-//       method: 'POST',
-//       body: payload,
-//     });
-//     const data = await resp.json();
-//     return data;
-//   },
-// );
+export const validateCurrUserAsync = createAsyncThunk(
+  'user/importStudentsFromFileAsync',
+  async () => {
+    const res = await fetch('http://localhost:3001/auth/check-user', {
+      credentials: 'include',
+    });
+    const data = await res.json();
+    return data;
+  },
+);
 
 interface studentImportSliceState {
   user: User | null;
@@ -31,18 +30,17 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // builder;
-    // .addCase(importStudentsFromFileAsync.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.results = initialState.results;
-    // })
-    // .addCase(importStudentsFromFileAsync.fulfilled, (state, action) => {
-    //   state.status = 'succeeded';
-    //   state.results = action.payload;
-    // })
-    // .addCase(importStudentsFromFileAsync.rejected, (state) => {
-    //   state.status = 'failed';
-    // });
+    builder
+      .addCase(validateCurrUserAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(validateCurrUserAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload.user;
+      })
+      .addCase(validateCurrUserAsync.rejected, (state) => {
+        state.status = 'failed';
+      });
   },
 });
 

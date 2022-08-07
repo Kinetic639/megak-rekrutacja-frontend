@@ -3,9 +3,14 @@ import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+import { validateCurrUserAsync } from '../../redux/features/userSlice';
+import { CustomSpinner } from '../common/CustomSpinner/CustomSpinner';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const nav = useNavigate();
+  const currUser = useAppSelector((state) => state.user.user);
 
   const logOut = async () => {
     const res = await fetch('http://localhost:3001/auth/logout', {
@@ -13,9 +18,14 @@ const Header = () => {
     });
     const resJson = await res.json();
     if (resJson.message === 'Logout successful') {
+      await dispatch(validateCurrUserAsync());
       nav('/login');
     }
   };
+
+  if (!currUser) {
+    return <CustomSpinner />;
+  }
 
   const avatar = (
     <img
@@ -26,7 +36,8 @@ const Header = () => {
       alt="MegaK Logo"
     />
   );
-  const name = ' Kaskader Rewolucjonista';
+
+  const name = `${currUser.firstName} ${currUser.lastName}`;
 
   return (
     <Container fluid className={`navbar-color p-0`}>

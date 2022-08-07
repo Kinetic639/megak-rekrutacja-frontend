@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 
 import './App.css';
 import './button.css';
 import { UserLoginSite } from './views/UserLoginSite';
-import { AvailableStudentsSite } from './views/AvailableStudentsSite';
-import { Admin } from './components/Admin/Admin';
 import { DashboardContainer } from './views/DashboardContainer/DashboardContainer';
-import { useAppSelector } from './redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from './redux/hooks/hooks';
+import { validateCurrUserAsync } from './redux/features/userSlice';
+import { CustomSpinner } from './components/common/CustomSpinner/CustomSpinner';
 
 function App() {
+  const dispatch = useAppDispatch();
   const userState = useAppSelector((state) => state.user);
   const currUser = userState.user;
+  useEffect(() => {
+    dispatch(validateCurrUserAsync());
+  }, []);
+
+  if (userState.status === 'loading') {
+    return <CustomSpinner />;
+  }
   return (
     <>
       <Routes>
@@ -23,7 +31,12 @@ function App() {
           }
         />
 
-        <Route path={'/dashboard'} element={<DashboardContainer />} />
+        <Route
+          path={'/dashboard'}
+          element={
+            currUser ? <DashboardContainer /> : <Navigate replace to="/login" />
+          }
+        />
       </Routes>
     </>
   );

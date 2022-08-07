@@ -1,18 +1,30 @@
 import { Header } from '../../components/Header/Header';
 import './DashboardContainer.css';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+import { validateCurrUserAsync } from '../../redux/features/userSlice';
+import { CustomSpinner } from '../../components/common/CustomSpinner/CustomSpinner';
+import React from 'react';
+import { Admin } from '../../components/Admin/Admin';
+import { AvailableStudentsSite } from '../AvailableStudentsSite';
 
 export const DashboardContainer = () => {
-  const showCookies = async () => {
-    const res = await fetch('http://localhost:3001/auth/check-user', {
-      credentials: 'include',
-    });
-    const data = await res.json();
-    console.log(data);
-  };
+  const dispatch = useAppDispatch();
+  const userState = useAppSelector((state) => state.user);
+  const currUser = userState.user;
+
+  if (!currUser) {
+    return <CustomSpinner />;
+  }
+  const currUserRole = currUser.userType;
+
   return (
     <div className="dashboard-wrapper">
       <Header />
-      <button onClick={showCookies}>Click</button>
+      <main>
+        {currUserRole === 'admin' && <Admin />}
+        {currUserRole === 'hr' && <AvailableStudentsSite />}
+        {currUserRole === 'student' && <>student</>}
+      </main>
     </div>
   );
 };

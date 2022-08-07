@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import './UserLogin.css';
 import { apiUrl } from '../../config/api';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../redux/hooks/hooks';
+import { validateCurrUserAsync } from '../../redux/features/userSlice';
 
 interface FormLoginType {
   email: string;
@@ -12,6 +14,7 @@ interface FormLoginType {
 }
 
 const UserLogin = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -38,11 +41,12 @@ const UserLogin = () => {
         credentials: 'include',
       });
       const dataLoginRes = await res.json();
-      if (dataLoginRes.message !== 'Login successful') {
+      if (dataLoginRes.statusCode !== 200) {
         setResError(dataLoginRes.message);
         setAreCredentialsValid(false);
       } else {
         setAreCredentialsValid(true);
+        await dispatch(validateCurrUserAsync());
         navigate('/dashboard');
       }
     } finally {
