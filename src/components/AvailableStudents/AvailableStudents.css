@@ -144,7 +144,7 @@
 }
 #form-control-search-hr:focus {
     border: none;
-    box-shadow: rgb(244, 244, 245) 0px 4px 4px;
+    box-shadow: rgb(213, 37, 37) 0px 2px;
 }
 
 .custom-button {
