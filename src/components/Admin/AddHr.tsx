@@ -7,6 +7,7 @@ interface Props {
   newHr: HrRow;
   setNewHr: (row: HrRow) => void;
   handleHrAddSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
 }
 
 export const AddHr = ({
@@ -14,6 +15,7 @@ export const AddHr = ({
   setNewHr,
   newHr,
   handleHrAddSubmit,
+  loading,
 }: Props) => {
   const changeHrValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -89,8 +91,8 @@ export const AddHr = ({
         >
           Anuluj
         </button>
-        <button type="submit" className="button">
-          Dodaj
+        <button type="submit" className="button" disabled={loading}>
+          {loading ? 'Łączenie' : 'Dodaj'}
         </button>
       </div>
     </form>
