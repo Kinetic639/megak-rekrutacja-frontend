@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Accordion, Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
+import { apiUrl } from '../../config/api';
 
 interface UserListResponseHr {
   id: string;
@@ -23,6 +24,20 @@ interface Props {
 }
 
 const AvailableStudentsTableElements = (props: Props) => {
+  const reservedUserHandler = async (studentId: string) => {
+    const res = await fetch(`${apiUrl}/student/deactivation`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: studentId,
+        active: 0,
+      }),
+    });
+    const dataDeactivationRes = await res.json();
+    console.log(dataDeactivationRes);
+  };
   const elementList = props.userListResHr.map((data, index) => {
     data.targetWorkCity === null
       ? (data.targetWorkCity = 'BRAK')
@@ -42,7 +57,12 @@ const AvailableStudentsTableElements = (props: Props) => {
         <Accordion.Item eventKey={String(index)}>
           <Accordion.Header>
             {data.firstName} {data.lastName}
-            <Button className={`custom-button`} as={'div'} variant="danger">
+            <Button
+              className={`custom-button`}
+              as={'div'}
+              variant="danger"
+              onClick={() => reservedUserHandler(data.id)}
+            >
               Zarezwewuj rozmowę
             </Button>
           </Accordion.Header>
