@@ -1,44 +1,60 @@
-import React from 'react';
-import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {
+  Container,
+  Image,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Spinner,
+} from 'react-bootstrap';
 
 import './Header.css';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
-import { validateCurrUserAsync } from '../../redux/features/userSlice';
-import { CustomSpinner } from '../common/CustomSpinner/CustomSpinner';
 
+interface ResGitHub {
+  name?: string;
+  avatar_url?: string;
+}
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const nav = useNavigate();
-  const currUser = useAppSelector((state) => state.user.user);
-
-  const logOut = async () => {
-    const res = await fetch('http://localhost:3001/auth/logout', {
-      credentials: 'include',
-    });
-    const resJson = await res.json();
-    if (resJson.message === 'Logout successful') {
-      await dispatch(validateCurrUserAsync());
-      nav('/login');
-    }
-  };
-
-  if (!currUser) {
-    return <CustomSpinner />;
-  }
+  const [loading, setLoading] = useState(true);
+  const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
+  const gitHubUsername = useAppSelector(
+    (state) => state.user.user.githubUsername,
+  );
+  useEffect(() => {
+    setLoading(true);
+    (async () => {
+      try {
+        const res = await fetch(
+          `https://api.github.com/users/${gitHubUsername}`,
+        );
+        const resDataGitHub = await res.json();
+        setResDataGitHub(resDataGitHub);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const avatar = (
     <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GXJmEd1lp6TBZONJN90qkvfVYy_ZDb6nww&usqp=CAU"
+      src={
+        resDataGitHub?.avatar_url === undefined
+          ? 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8='
+          : resDataGitHub.avatar_url
+      }
       width="40"
-      height="36"
-      className="d-inline-block align-top navbar-color"
-      alt="MegaK Logo"
+      height="40"
+      className="d-inline-block align-top navbar-color avatar"
+      alt={
+        resDataGitHub?.name === undefined
+          ? 'avatar-domyślny'
+          : 'avatar' + resDataGitHub.avatar_url
+      }
       key={'user-avatar-key'}
     />
   );
 
-  const name = `${currUser.firstName} ${currUser.lastName}`;
+  const name = ' Kaskader Rewolucjonista';
 
   return (
     <Container fluid className={`navbar-color p-0`}>
@@ -59,24 +75,27 @@ const Header = () => {
               alt="MegaK Logo"
             />
           </Navbar.Brand>
-
-          <Nav className="nav-main">
-            <NavDropdown
-              title={[avatar, name]}
-              id="collasible-nav-dropdown"
-              className={`text-white fs-4`}
-            >
-              <NavDropdown.Item
-                className={`text-white fs-5`}
-                href="#action/3.1"
+          <Nav>
+            {loading ? (
+              <Spinner animation="border" variant="danger" />
+            ) : (
+              <NavDropdown
+                title={[avatar, name]}
+                id="collasible-nav-dropdown"
+                className={`text-white fs-4`}
               >
-                Konto
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item className={`text-white fs-5`} onClick={logOut}>
-                Wyloguj
-              </NavDropdown.Item>
-            </NavDropdown>
+                <NavDropdown.Item
+                  className={`text-white fs-5`}
+                  href="#action/3.1"
+                >
+                  Konto
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item className={`text-white fs-5`}>
+                  Wyloguj
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Container>
       </Navbar>
