@@ -8,6 +8,7 @@ interface Props {
   numberOfStudents: number;
   studentsListPerPage: number;
   currentPage: number;
+  search: string;
 }
 
 interface FormLoginType {
@@ -20,6 +21,10 @@ const PaginationStudents = (props: Props) => {
   useEffect(() => {
     props.setStudentsListPerPage(watchSelectedValue);
   }, [watchSelectedValue]);
+
+  useEffect(() => {
+    props.setCurrentPage(1);
+  }, [props.search]);
 
   return (
     <Container className={`mt-4 custom-container-third`}>
@@ -51,7 +56,7 @@ const PaginationStudents = (props: Props) => {
             {props.currentPage * watchSelectedValue - (watchSelectedValue - 1)}-
             {props.numberOfStudents <= props.currentPage * watchSelectedValue
               ? props.numberOfStudents
-              : props.currentPage * watchSelectedValue}
+              : props.currentPage * watchSelectedValue}{' '}
             z {props.numberOfStudents}
           </p>
         </Col>
