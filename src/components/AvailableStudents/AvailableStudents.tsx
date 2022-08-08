@@ -90,7 +90,7 @@ const AvailableStudents = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             setStudentsListPerPage={setStudentsListPerPage}
-            numberOfStudents={currentStudentsList.length}
+            numberOfStudents={filteredBySearch.length}
           />
         </>
       )}
