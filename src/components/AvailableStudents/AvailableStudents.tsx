@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 import './AvailableStudents.css';
 import { apiUrl } from '../../config/api';
@@ -73,7 +73,11 @@ const AvailableStudents = () => {
   return (
     <>
       {loading ? (
-        <></>
+        <Spinner
+          animation="border"
+          variant="danger"
+          className={'position-absolute top-50 start-50'}
+        />
       ) : (
         <>
           <Container className={`mt-5 mb-1 custom-container-second p-0`}>
