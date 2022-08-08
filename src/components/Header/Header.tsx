@@ -1,20 +1,55 @@
-import React from 'react';
-import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {
+  Container,
+  Image,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Spinner,
+} from 'react-bootstrap';
 
 import './Header.css';
-import { Link } from 'react-router-dom';
 
+interface ResGitHub {
+  name?: string;
+  avatar_url?: string;
+}
 const Header = () => {
+  const [loading, setLoading] = useState(true);
+  const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
+
+  useEffect(() => {
+    setLoading(true);
+    (async () => {
+      try {
+        const res = await fetch(`https://api.github.com/users/FrostKiller666`);
+        const resDataGitHub = await res.json();
+        setResDataGitHub(resDataGitHub);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
   const avatar = (
     <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GXJmEd1lp6TBZONJN90qkvfVYy_ZDb6nww&usqp=CAU"
+      src={
+        resDataGitHub?.avatar_url === undefined
+          ? 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8='
+          : resDataGitHub.avatar_url
+      }
       width="40"
-      height="36"
-      className="d-inline-block align-top navbar-color"
-      alt="MegaK Logo"
+      height="40"
+      className="d-inline-block align-top navbar-color avatar"
+      alt={
+        resDataGitHub?.name === undefined
+          ? 'avatar-domyślny'
+          : 'avatar' + resDataGitHub.avatar_url
+      }
       key={'user-avatar-key'}
     />
   );
+
   const name = ' Kaskader Rewolucjonista';
 
   return (
@@ -37,22 +72,26 @@ const Header = () => {
             />
           </Navbar.Brand>
           <Nav>
-            <NavDropdown
-              title={[avatar, name]}
-              id="collasible-nav-dropdown"
-              className={`text-white fs-4`}
-            >
-              <NavDropdown.Item
-                className={`text-white fs-5`}
-                href="#action/3.1"
+            {loading ? (
+              <Spinner animation="border" variant="danger" />
+            ) : (
+              <NavDropdown
+                title={[avatar, name]}
+                id="collasible-nav-dropdown"
+                className={`text-white fs-4`}
               >
-                Konto
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item className={`text-white fs-5`}>
-                Wyloguj
-              </NavDropdown.Item>
-            </NavDropdown>
+                <NavDropdown.Item
+                  className={`text-white fs-5`}
+                  href="#action/3.1"
+                >
+                  Konto
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item className={`text-white fs-5`}>
+                  Wyloguj
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Container>
       </Navbar>
