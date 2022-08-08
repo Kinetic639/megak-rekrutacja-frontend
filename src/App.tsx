@@ -16,6 +16,7 @@ function App() {
           element={<AvailableStudentsSite />}
         />
         <Route path={'/user/change-password'} element={<FormPasswordSite />} />
+        <Route path={'/activate'} element={<FormPasswordSite />} />
       </Routes>
     </>
   );

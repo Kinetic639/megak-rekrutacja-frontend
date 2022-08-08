@@ -10,7 +10,11 @@ interface FormRegisterType {
   rePassword: string;
 }
 
-const FormPassword = () => {
+interface Props {
+  token: string | null;
+}
+
+const FormPassword = (props: Props) => {
   const {
     register,
     formState: { errors },
@@ -27,7 +31,7 @@ const FormPassword = () => {
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch(`${apiUrl}/user/change-password`, {
+      const res = await fetch(`${apiUrl}/user/change-password?${props.token}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
