@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const avatar = (

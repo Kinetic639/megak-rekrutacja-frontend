@@ -18,7 +18,8 @@
 }
 
 .dropdown-item:hover {
-    background-color: rgb(255, 0, 212);
+    background-color: #1e1e1f;
+    box-shadow: rgb(213, 37, 37) 0px 4px;
 }
 
 @media screen and (max-width: 768px) {
