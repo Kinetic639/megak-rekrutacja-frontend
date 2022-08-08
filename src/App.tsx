@@ -8,6 +8,8 @@ import { DashboardContainer } from './views/DashboardContainer/DashboardContaine
 import { useAppDispatch, useAppSelector } from './redux/hooks/hooks';
 import { validateCurrUserAsync } from './redux/features/userSlice';
 import { CustomSpinner } from './components/common/CustomSpinner/CustomSpinner';
+import { AvailableStudentsSite } from './views/AvailableStudentsSite';
+import { FormPasswordSite } from './views/FormPasswordSite';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -37,6 +39,8 @@ function App() {
             currUser ? <DashboardContainer /> : <Navigate replace to="/login" />
           }
         />
+        <Route path={'/user/change-password'} element={<FormPasswordSite />} />
+        <Route path={'/activate'} element={<FormPasswordSite />} />
       </Routes>
     </>
   );
