@@ -49,7 +49,10 @@ const PaginationStudents = (props: Props) => {
         <Col className={`ps-0 ms-0`}>
           <p className={`col-custom-padding-count-element `}>
             {props.currentPage * watchSelectedValue - (watchSelectedValue - 1)}-
-            {props.currentPage * watchSelectedValue} z {props.numberOfStudents}
+            {props.numberOfStudents <= props.currentPage * watchSelectedValue
+              ? props.numberOfStudents
+              : props.currentPage * watchSelectedValue}
+            z {props.numberOfStudents}
           </p>
         </Col>
         <Col className={`ps-0 pe-2`}>
