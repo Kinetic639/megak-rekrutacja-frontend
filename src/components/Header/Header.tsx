@@ -34,6 +34,7 @@ const Header = () => {
       height="36"
       className="d-inline-block align-top navbar-color"
       alt="MegaK Logo"
+      key={'user-avatar-key'}
     />
   );
 
@@ -60,15 +61,9 @@ const Header = () => {
           </Navbar.Brand>
 
           <Nav className="nav-main">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GXJmEd1lp6TBZONJN90qkvfVYy_ZDb6nww&usqp=CAU"
-              width="40"
-              height="36"
-              className="avatar"
-              alt="MegaK Logo"
-            />
+
             <NavDropdown
-              title={name}
+              title={[avatar, name]}
               id="collasible-nav-dropdown"
               className={`text-white fs-4`}
             >

@@ -36,14 +36,15 @@ const AvailableStudentsTableElements = (props: Props) => {
     data.expectedContractType === 'default'
       ? (data.expectedContractType = 'BRAK')
       : data.expectedContractType;
+
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
           <Accordion.Header>
             {data.firstName} {data.lastName}
-            {/*<Button className={`custom-button`} variant="danger">*/}
-            {/*  Zarezwewuj rozmowę*/}
-            {/*</Button>*/}
+            <Button className={`custom-button`} as={'div'} variant="danger">
+              Zarezwewuj rozmowę
+            </Button>
           </Accordion.Header>
           <Accordion.Body>
             <CardGroup>

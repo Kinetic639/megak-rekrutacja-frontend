@@ -11,6 +11,11 @@
     max-width: 75%;
 }
 
+.custom-container-third {
+    max-width: 75%;
+
+}
+
 .accordion-item {
     border-radius: 0px !important;
     border-color: rgb(38, 38, 38);
@@ -168,6 +173,7 @@
     right: 0 !important;
     top: 50% !important;
     position: absolute !important;
+
 }
 
 @media screen and (max-width: 665px) {
@@ -194,4 +200,76 @@
 
 .custom-nav-search {
     background-color: #292A2B;
+}
+
+#back-custom-button {
+    width: 26px;
+    height: 26px;
+    background-image: url("/public/back-next-icon/Wróć.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: unset;
+    border: unset;
+    background-color: #CFCFCF;
+}
+#back-custom-button:focus{
+    box-shadow: 0px 0px 2px 2px rgba(159, 16, 16, 1);
+}
+#next-custom-button {
+    width: 26px;
+    height: 26px;
+    background-image: url("/public/back-next-icon/Dalej.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: unset;
+    border: unset;
+    background-color: #CFCFCF;
+}
+#next-custom-button:focus{
+    box-shadow: 0px 0px 2px 2px rgba(159, 16, 16, 1);
+}
+.col-custom-p {
+    font: normal normal normal 16px/27px Catamaran;
+    width: 108px;
+    height: 27px;
+    color: #F7F7F7;
+}
+
+.col-custom-select {
+    width: 31px;
+    height: 24px;
+    font-size: 12px;
+    font-family: Catamaram;
+}
+
+.col-custom-padding-count-element {
+    width: 70px;
+    height: 27px;
+    font: normal normal normal 14px/27px Catamaran;
+    color: #F7F7F7;
+    text-align: center;
+}
+
+.col-custom-button-next-back {
+    width: 26px;
+    height: 26px;
+}
+.col-custom-select-element {
+    background-color: white;
+    width: 31px;
+    height: 24px;
+    font-size: 12px;
+    font-family: Catamaram;
+
+}
+#row-custom-padding-elements {
+    margin-right: -12px;
+}
+
+#custom-select-pagination-page {
+    padding: 0;
+    border-radius: 0;
+    background-position: right center;
+    background-size: 12px 10px;
+
 }
