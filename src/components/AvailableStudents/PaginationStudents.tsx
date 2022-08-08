@@ -64,7 +64,9 @@ const PaginationStudents = (props: Props) => {
           <Button
             id={`next-custom-button`}
             className={`col-custom-button-next-back`}
-            disabled={props.numberOfStudents <= watchSelectedValue}
+            disabled={
+              props.numberOfStudents <= props.currentPage * watchSelectedValue
+            }
             onClick={() => props.setCurrentPage((prevState) => prevState + 1)}
           ></Button>
         </Col>
