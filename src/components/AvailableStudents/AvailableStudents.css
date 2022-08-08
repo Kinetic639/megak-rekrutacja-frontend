@@ -273,3 +273,7 @@
     background-size: 12px 10px;
 
 }
+
+.accordion-button:focus {
+
+}

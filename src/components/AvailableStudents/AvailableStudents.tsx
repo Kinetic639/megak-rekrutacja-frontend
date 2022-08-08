@@ -34,6 +34,7 @@ const AvailableStudents = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [studentsListPerPage, setStudentsListPerPage] = useState(10);
   const [search, setSearch] = useState('');
+  const [changeStudentStatus, setChangeStudentStatus] = useState(false);
 
   const filteredBySearch = resDataUserList.filter((filterData) => {
     filterData.firstName === null
@@ -68,7 +69,7 @@ const AvailableStudents = () => {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [changeStudentStatus]);
 
   return (
     <>
@@ -87,6 +88,7 @@ const AvailableStudents = () => {
             <AvailableStudentsSearch setSearch={setSearch} />
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
+              setChangeStudentStatus={setChangeStudentStatus}
             />
           </Container>
           <PaginationStudents

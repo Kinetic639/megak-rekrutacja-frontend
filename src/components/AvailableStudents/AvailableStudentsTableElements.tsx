@@ -21,6 +21,7 @@ interface UserListResponseHr {
 
 interface Props {
   userListResHr: UserListResponseHr[];
+  setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AvailableStudentsTableElements = (props: Props) => {
@@ -36,6 +37,7 @@ const AvailableStudentsTableElements = (props: Props) => {
       }),
     });
     const dataDeactivationRes = await res.json();
+    props.setChangeStudentStatus(true);
     console.log(dataDeactivationRes);
   };
   const elementList = props.userListResHr.map((data, index) => {

@@ -17,16 +17,14 @@ interface ResGitHub {
 const Header = () => {
   const [loading, setLoading] = useState(true);
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
-  const gitHubUsername = useAppSelector(
-    (state) => state.user.user.githubUsername,
-  );
+  // const gitHubUsername = useAppSelector(
+  //   (state) => state.user.user.githubUsername,
+  // );
   useEffect(() => {
     setLoading(true);
     (async () => {
       try {
-        const res = await fetch(
-          `https://api.github.com/users/${gitHubUsername}`,
-        );
+        const res = await fetch(`https://api.github.com/users/FrostKiller666`);
         const resDataGitHub = await res.json();
         setResDataGitHub(resDataGitHub);
       } finally {
