@@ -2,6 +2,7 @@
   --black:#222224;
   --black2:#292A2B;
   --dark:#4d4d4d;
+  --dark4:#9E9E9E;
   --white-gray:#CFCFCF;
   --dirty-white:#F7F7F7;
   --red:#e02735;
@@ -152,4 +153,15 @@
 
 .student-cv__list>li{
   margin-bottom: .67em;
+}
+
+.btn-prev-site{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  appearance: none;
+  color:var(--dirty-white);
+  border: none;
+  margin-right: 1rem;
+  background-color: transparent;
 }

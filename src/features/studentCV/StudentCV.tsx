@@ -2,6 +2,7 @@ import { Rating } from '../../components/rating/Rating';
 import { LoadingPlaceholder } from '../../components/loadingPlaceholder/LoadingPlaceholder';
 import { useGetStudentQuery } from '../../store/apiSlice'
 import './studentCV.css';
+import ChevronLeft from '../../assets/svg/ChevronLeft';
 
 interface StudentCVProps {
   id: string;
@@ -56,7 +57,7 @@ export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
   return (
     <>
       <div className="wrapper">
-        <button>Wróć</button>
+        <button className='btn-prev-site'><ChevronLeft />Wróć</button>
         <article className="student-cv">
 
           <article className='student-panel'>
