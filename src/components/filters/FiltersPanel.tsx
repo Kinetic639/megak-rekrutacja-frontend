@@ -4,7 +4,7 @@ import { selectFilters, setFilters } from '../../redux/features/filtersSlice';
 import { StarIcon } from '../../assets/svg/StarIcon';
 import { Filter } from '../filtersPanel/Filter';
 import { Input, InputI } from '../filtersPanel/Input';
-import './FiltersPanel.css';
+import './Filter.css';
 
 export interface activeFiltersI {
   courseCompletion: string[];

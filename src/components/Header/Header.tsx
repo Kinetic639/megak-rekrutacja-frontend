@@ -61,7 +61,6 @@ const Header = () => {
           </Navbar.Brand>
 
           <Nav className="nav-main">
-
             <NavDropdown
               title={[avatar, name]}
               id="collasible-nav-dropdown"
@@ -74,10 +73,8 @@ const Header = () => {
                 Konto
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item className={`text-white fs-5`}>
-                <button className="button" onClick={logOut}>
-                  Wyloguj
-                </button>
+              <NavDropdown.Item className={`text-white fs-5`} onClick={logOut}>
+                Wyloguj
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

@@ -6,6 +6,10 @@ import { CustomSpinner } from '../../components/common/CustomSpinner/CustomSpinn
 import React from 'react';
 import { Admin } from '../../components/Admin/Admin';
 import { AvailableStudentsSite } from '../AvailableStudentsSite';
+import { FiltersPanel } from '../../components/filters/FiltersPanel';
+
+import '../../components/filtersPanel/FiltersPanel.css';
+import { Filter } from '../../components/filtersPanel/Filter';
 
 export const DashboardContainer = () => {
   const dispatch = useAppDispatch();
