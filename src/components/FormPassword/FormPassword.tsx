@@ -7,7 +7,7 @@ import './FromPassword.css';
 
 interface FormRegisterType {
   password: string;
-  RePassword: string;
+  rePassword: string;
 }
 
 const FormPassword = () => {
@@ -105,13 +105,13 @@ const FormPassword = () => {
               <Form.Control
                 type="password"
                 placeholder="Powtórz Hasło"
-                {...register('RePassword', {
+                {...register('rePassword', {
                   validate: (value) =>
                     value === password.current || 'Hasło jest nieprawidłowe',
                 })}
               />
-              {errors.RePassword && (
-                <p className={`errorP`}>{errors.RePassword.message}</p>
+              {errors.rePassword && (
+                <p className={`errorP`}>{errors.rePassword.message}</p>
               )}
             </Col>
           </Form.Group>
