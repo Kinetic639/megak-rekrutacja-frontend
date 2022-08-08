@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 import './AvailableStudents.css';
 import { apiUrl } from '../../config/api';
-import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
+
 import { AvailableStudentsSearch } from './AvailableStudentsSearch';
 import { AvailableStudentsNavigation } from './AvailableStudentsNavigation';
+import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
+import { PaginationStudents } from './PaginationStudents';
 
 interface UserListResponseHr {
   id: string;
@@ -30,11 +32,30 @@ const AvailableStudents = () => {
     [],
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [studentsListPerPage, setStudentsListPerPage] = useState(3);
+  const [studentsListPerPage, setStudentsListPerPage] = useState(10);
+  const [search, setSearch] = useState('');
+
+  const filteredBySearch = resDataUserList.filter((filterData) => {
+    filterData.firstName === null
+      ? (filterData.firstName = '')
+      : filterData.firstName;
+    filterData.lastName === null
+      ? (filterData.lastName = 'BRAK')
+      : filterData.lastName;
+    return (
+      filterData.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      filterData.lastName.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   const indexOfLastStudentsList = currentPage * studentsListPerPage;
   const indexOfFirstStudentsList =
     indexOfLastStudentsList - studentsListPerPage;
+
+  const currentStudentsList = filteredBySearch.slice(
+    indexOfFirstStudentsList,
+    indexOfLastStudentsList,
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -43,13 +64,12 @@ const AvailableStudents = () => {
         const res = await fetch(`${apiUrl}/user/list/basic`);
         const data: UserListResponseHr[] = await res.json();
         setResDataUserList(data);
-        //console.log(data);
       } finally {
         setLoading(false);
       }
     })();
   }, []);
-  //console.log(resDataUserList);
+
   return (
     <>
       {loading ? (
@@ -60,12 +80,18 @@ const AvailableStudents = () => {
             <AvailableStudentsNavigation />
           </Container>
           <Container className={`custom-container mt-1`}>
-            <AvailableStudentsSearch
-              userListResHr={resDataUserList}
-              indexOfLastStudentsList={indexOfLastStudentsList}
-              indexOfFirstStudentsList={indexOfFirstStudentsList}
+            <AvailableStudentsSearch setSearch={setSearch} />
+            <AvailableStudentsTableElements
+              userListResHr={currentStudentsList}
             />
           </Container>
+          <PaginationStudents
+            studentsListPerPage={studentsListPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            setStudentsListPerPage={setStudentsListPerPage}
+            numberOfStudents={currentStudentsList.length}
+          />
         </>
       )}
     </>

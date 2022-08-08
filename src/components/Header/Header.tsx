@@ -11,6 +11,7 @@ const Header = () => {
       height="36"
       className="d-inline-block align-top navbar-color"
       alt="MegaK Logo"
+      key={'user-avatar-key'}
     />
   );
   const name = ' Kaskader Rewolucjonista';
@@ -34,7 +35,6 @@ const Header = () => {
               alt="MegaK Logo"
             />
           </Navbar.Brand>
-
           <Nav>
             <NavDropdown
               title={[avatar, name]}
