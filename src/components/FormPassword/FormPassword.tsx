@@ -31,7 +31,7 @@ const FormPassword = (props: Props) => {
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch(`${apiUrl}/user/change-password?${props.token}`, {
+      const res = await fetch(`${apiUrl}/auth/activate?token=${props.token}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -54,18 +54,22 @@ const FormPassword = (props: Props) => {
 
   return (
     <>
-      <Container fluid={'sm'} className={``}>
+      <Container
+        fluid
+        className={`position-absolute top-50 start-50 translate-middle container-form-password`}
+      >
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <h2 className={'mt-4'}>Ustaw Nowe Hasło: </h2>
+          <h2 className={'mt-3 mb-4 text-white'}>Ustaw Nowe Hasło: </h2>
           <Form.Group
             as={Row}
             className="mb-3"
             controlId="formHorizontalPassword"
           >
-            <Form.Label>Hasło:</Form.Label>
+            <Form.Label className={`text-white`}>Hasło:</Form.Label>
             <Col sm={12}>
               <Form.Control
                 type="password"
+                className={`input-password`}
                 placeholder="Hasło"
                 {...register('password', {
                   required: 'To pole nie może być puste!',
@@ -94,7 +98,7 @@ const FormPassword = (props: Props) => {
                 })}
               />
               {errors.password && (
-                <p className={`errorP`}>{errors.password.message}</p>
+                <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
             </Col>
           </Form.Group>
@@ -104,9 +108,10 @@ const FormPassword = (props: Props) => {
             className="mb-3"
             controlId="formHorizontalPassword"
           >
-            <Form.Label>Powtórz Hasło:</Form.Label>
+            <Form.Label className={`text-white`}>Powtórz Hasło:</Form.Label>
             <Col sm={12}>
               <Form.Control
+                className={`input-password`}
                 type="password"
                 placeholder="Powtórz Hasło"
                 {...register('rePassword', {
@@ -115,14 +120,19 @@ const FormPassword = (props: Props) => {
                 })}
               />
               {errors.rePassword && (
-                <p className={`errorP`}>{errors.rePassword.message}</p>
+                <p className={`errorP mt-1`}>{errors.rePassword.message}</p>
               )}
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
+          <Form.Group as={Row} className=" mb-3 mt-4">
             <Col sm={{ span: 12 }}>
-              <Button className={''} type="submit">
+              <Button
+                className={''}
+                variant="danger"
+                id={'button-change-password'}
+                type="submit"
+              >
                 Zmień Hasło
               </Button>
             </Col>
