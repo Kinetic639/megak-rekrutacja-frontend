@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 import { apiUrl } from '../../config/api';
 import './FromPassword.css';
+import { LoadingSuccess } from '../common/LoadingSuccess/LoadingSuccess';
 
 interface FormRegisterType {
   password: string;
@@ -42,16 +43,19 @@ const FormPassword = (props: Props) => {
       });
 
       const dataFormRes = await res.json();
-      // @TODO Need to set service after good or bad register
-      // if (dataFormRes !== 'Komunikat z BE') {
-      //   setResError(dataFormRes.message);
-      // }
-      // setSuccess(dataFormRes.message);
+      if (dataFormRes !== 'Konto aktywowane poprawnie') {
+        setResError(dataFormRes.message);
+      }
+      if (dataFormRes === 'Konto aktywowane poprawnie') {
+        setSuccess(dataFormRes.message);
+      }
     } finally {
       setLoading(false);
     }
   };
-
+  if (success !== '') {
+    return <LoadingSuccess message={success} navigate={'/'} />;
+  }
   return (
     <>
       <Container
@@ -121,6 +125,9 @@ const FormPassword = (props: Props) => {
               />
               {errors.rePassword && (
                 <p className={`errorP mt-1`}>{errors.rePassword.message}</p>
+              )}
+              {resError !== '' && (
+                <p className={`errorP mt-1`}>{`${resError}`}</p>
               )}
             </Col>
           </Form.Group>
