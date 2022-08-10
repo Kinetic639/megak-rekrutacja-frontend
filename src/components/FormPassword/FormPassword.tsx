@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 import { apiUrl } from '../../config/api';
 import './FromPassword.css';
@@ -139,8 +139,21 @@ const FormPassword = (props: Props) => {
                 variant="danger"
                 id={'button-change-password'}
                 type="submit"
+                disabled={loading}
               >
-                Zmień Hasło
+                {loading && (
+                  <Spinner
+                    as="span"
+                    variant="danger"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className={'me-2 ms-0'}
+                    id={'loading-spinner'}
+                  />
+                )}
+                {loading ? 'Zmiana Hasła...' : 'Zmień Hasło'}
               </Button>
             </Col>
           </Form.Group>
