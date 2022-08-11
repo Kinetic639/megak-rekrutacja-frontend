@@ -173,7 +173,36 @@
     right: 0 !important;
     top: 50% !important;
     position: absolute !important;
+}
 
+.custom-button-2 {
+    margin-right: 3rem !important;
+    transform: translateY(-50%) !important;
+    right: 0 !important;
+    top: 50% !important;
+    position: absolute !important;
+    border-radius: unset;
+    font-size: 14px;
+}
+
+.custom-button-3 {
+    margin-right: 3rem !important;
+    transform: translateY(-50%) !important;
+    right: 7.5rem !important;
+    top: 50% !important;
+    position: absolute !important;
+    border-radius: unset;
+    font-size: 14px;
+}
+
+.custom-button-4 {
+    margin-right: 3rem !important;
+    transform: translateY(-50%) !important;
+    right: 18.3rem !important;
+    top: 50% !important;
+    position: absolute !important;
+    border-radius: unset;
+    font-size: 14px;
 }
 
 @media screen and (max-width: 665px) {

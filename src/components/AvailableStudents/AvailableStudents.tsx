@@ -24,9 +24,13 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  githubUsername: string;
+}
+interface Props {
+  conversationSite: boolean;
 }
 
-const AvailableStudents = () => {
+const AvailableStudents = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [resDataUserList, setResDataUserList] = useState<UserListResponseHr[]>(
     [],
@@ -57,19 +61,33 @@ const AvailableStudents = () => {
     indexOfFirstStudentsList,
     indexOfLastStudentsList,
   );
-
-  useEffect(() => {
-    setLoading(true);
-    (async () => {
-      try {
-        const res = await fetch(`${apiUrl}/user/list/basic`);
-        const data: UserListResponseHr[] = await res.json();
-        setResDataUserList(data);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [changeStudentStatus]);
+  if (props.conversationSite) {
+    useEffect(() => {
+      setLoading(true);
+      (async () => {
+        try {
+          const res = await fetch(`${apiUrl}/user/list/reserved`);
+          const data: UserListResponseHr[] = await res.json();
+          setResDataUserList(data);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [changeStudentStatus]);
+  } else {
+    useEffect(() => {
+      setLoading(true);
+      (async () => {
+        try {
+          const res = await fetch(`${apiUrl}/user/list/basic`);
+          const data: UserListResponseHr[] = await res.json();
+          setResDataUserList(data);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [changeStudentStatus]);
+  }
 
   return (
     <>
@@ -82,13 +100,16 @@ const AvailableStudents = () => {
       ) : (
         <>
           <Container className={`mt-5 mb-1 custom-container-second p-0`}>
-            <AvailableStudentsNavigation />
+            <AvailableStudentsNavigation
+              conversationSite={props.conversationSite}
+            />
           </Container>
           <Container className={`custom-container mt-1`}>
             <AvailableStudentsSearch setSearch={setSearch} />
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
               setChangeStudentStatus={setChangeStudentStatus}
+              conversationSite={props.conversationSite}
             />
           </Container>
           <PaginationStudents

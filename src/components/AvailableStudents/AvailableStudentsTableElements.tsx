@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
 import { apiUrl } from '../../config/api';
 
@@ -17,14 +17,22 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  githubUsername: string;
 }
 
 interface Props {
   userListResHr: UserListResponseHr[];
   setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  conversationSite: boolean;
 }
-
+interface ResGitHub {
+  name?: string;
+  avatar_url?: string;
+}
 const AvailableStudentsTableElements = (props: Props) => {
+  const [loading, setLoading] = useState(true);
+  const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
+
   const reservedUserHandler = async (studentId: string) => {
     const res = await fetch(`${apiUrl}/student/deactivation`, {
       method: 'PATCH',
@@ -54,20 +62,90 @@ const AvailableStudentsTableElements = (props: Props) => {
       ? (data.expectedContractType = 'BRAK')
       : data.expectedContractType;
 
+    if (props.conversationSite) {
+      useEffect(() => {
+        setLoading(true);
+        (async () => {
+          try {
+            const res = await fetch(
+              `https://api.github.com/users/FrostKiller666`,
+            );
+            const resDataGitHub = await res.json();
+            setResDataGitHub(resDataGitHub);
+          } finally {
+            setLoading(false);
+          }
+        })();
+      }, []);
+    }
+    const avatar = (
+      <img
+        src={
+          resDataGitHub?.avatar_url === undefined
+            ? 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8='
+            : resDataGitHub.avatar_url
+        }
+        width="30"
+        height="30"
+        className="d-inline-block align-top navbar-color avatar"
+        alt={
+          resDataGitHub?.name === undefined
+            ? 'avatar-domyślny'
+            : 'avatar' + resDataGitHub.avatar_url
+        }
+        key={'user-avatar-key'}
+      />
+    );
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
-          <Accordion.Header>
-            {data.firstName} {data.lastName}
-            <Button
-              className={`custom-button`}
-              as={'div'}
-              variant="danger"
-              onClick={() => reservedUserHandler(data.id)}
-            >
-              Zarezwewuj rozmowę
-            </Button>
-          </Accordion.Header>
+          {props.conversationSite ? (
+            <>
+              <Accordion.Header>
+                <div>
+                  <p>Rezerwacja do:</p>
+                  <p>11.09.2022r.</p>
+                </div>
+                <div>{avatar}</div>
+                <div>
+                  {data.firstName} {data.lastName}
+                </div>
+                <Button
+                  className={`custom-button-2`}
+                  as={'div'}
+                  variant="danger"
+                >
+                  Zatrudniony
+                </Button>
+                <Button
+                  className={`custom-button-3`}
+                  as={'div'}
+                  variant="danger"
+                >
+                  Brak zainteresowania
+                </Button>
+                <Button
+                  className={`custom-button-4`}
+                  as={'div'}
+                  variant="danger"
+                >
+                  Pokaż CV
+                </Button>
+              </Accordion.Header>
+            </>
+          ) : (
+            <Accordion.Header>
+              {data.firstName} {data.lastName}
+              <Button
+                className={`custom-button`}
+                as={'div'}
+                variant="danger"
+                onClick={() => reservedUserHandler(data.id)}
+              >
+                Zarezwewuj rozmowę
+              </Button>
+            </Accordion.Header>
+          )}
           <Accordion.Body>
             <CardGroup>
               <Card>
@@ -221,7 +299,7 @@ const AvailableStudentsTableElements = (props: Props) => {
               </Card>
             </CardGroup>
           </Accordion.Body>
-          <p />
+          {props.conversationSite ? <></> : <p />}
         </Accordion.Item>
       </Accordion>
     );

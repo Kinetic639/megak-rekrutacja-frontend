@@ -6,7 +6,7 @@ const AvailableStudentsSite = () => {
   return (
     <>
       <Header />
-      <AvailableStudents />
+      <AvailableStudents conversationSite={false} />
     </>
   );
 };

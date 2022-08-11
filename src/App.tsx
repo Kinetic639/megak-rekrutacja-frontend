@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router';
 import './App.css';
 import { UserLoginSite } from './views/UserLoginSite';
 import { AvailableStudentsSite } from './views/AvailableStudentsSite';
+import { ConversationStudentsSite } from './views/ConversationStudentsSite';
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
         <Route
           path={'/available-students'}
           element={<AvailableStudentsSite />}
+        />
+        <Route
+          path={'/conversation-students'}
+          element={<ConversationStudentsSite />}
         />
       </Routes>
     </>
