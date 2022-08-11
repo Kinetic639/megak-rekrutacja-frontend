@@ -36,3 +36,8 @@
     display: inline;
     content: "🛡️ ";
 }
+
+#loading-spinner {
+    background-color: red;
+    border-inline-color: white;
+}

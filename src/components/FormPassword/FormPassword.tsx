@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 import { apiUrl } from '../../config/api';
 import './FromPassword.css';
+import { LoadingSuccess } from '../common/LoadingSuccess/LoadingSuccess';
 
 interface FormRegisterType {
   password: string;
@@ -31,7 +32,7 @@ const FormPassword = (props: Props) => {
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch(`${apiUrl}/user/change-password?${props.token}`, {
+      const res = await fetch(`${apiUrl}/auth/activate?token=${props.token}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -42,30 +43,37 @@ const FormPassword = (props: Props) => {
       });
 
       const dataFormRes = await res.json();
-      // @TODO Need to set service after good or bad register
-      // if (dataFormRes !== 'Komunikat z BE') {
-      //   setResError(dataFormRes.message);
-      // }
-      // setSuccess(dataFormRes.message);
+      if (dataFormRes !== 'Konto aktywowane poprawnie') {
+        setResError(dataFormRes.message);
+      }
+      if (dataFormRes === 'Konto aktywowane poprawnie') {
+        setSuccess(dataFormRes.message);
+      }
     } finally {
       setLoading(false);
     }
   };
-
+  if (success !== '') {
+    return <LoadingSuccess message={success} navigate={'/'} />;
+  }
   return (
     <>
-      <Container fluid={'sm'} className={``}>
+      <Container
+        fluid
+        className={`position-absolute top-50 start-50 translate-middle container-form-password`}
+      >
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <h2 className={'mt-4'}>Ustaw Nowe Hasło: </h2>
+          <h2 className={'mt-3 mb-4 text-white'}>Ustaw Nowe Hasło: </h2>
           <Form.Group
             as={Row}
             className="mb-3"
             controlId="formHorizontalPassword"
           >
-            <Form.Label>Hasło:</Form.Label>
+            <Form.Label className={`text-white`}>Hasło:</Form.Label>
             <Col sm={12}>
               <Form.Control
                 type="password"
+                className={`input-password`}
                 placeholder="Hasło"
                 {...register('password', {
                   required: 'To pole nie może być puste!',
@@ -94,7 +102,7 @@ const FormPassword = (props: Props) => {
                 })}
               />
               {errors.password && (
-                <p className={`errorP`}>{errors.password.message}</p>
+                <p className={`errorP mt-1`}>{errors.password.message}</p>
               )}
             </Col>
           </Form.Group>
@@ -104,9 +112,10 @@ const FormPassword = (props: Props) => {
             className="mb-3"
             controlId="formHorizontalPassword"
           >
-            <Form.Label>Powtórz Hasło:</Form.Label>
+            <Form.Label className={`text-white`}>Powtórz Hasło:</Form.Label>
             <Col sm={12}>
               <Form.Control
+                className={`input-password`}
                 type="password"
                 placeholder="Powtórz Hasło"
                 {...register('rePassword', {
@@ -115,15 +124,36 @@ const FormPassword = (props: Props) => {
                 })}
               />
               {errors.rePassword && (
-                <p className={`errorP`}>{errors.rePassword.message}</p>
+                <p className={`errorP mt-1`}>{errors.rePassword.message}</p>
+              )}
+              {resError !== '' && (
+                <p className={`errorP mt-1`}>{`${resError}`}</p>
               )}
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
+          <Form.Group as={Row} className=" mb-3 mt-4">
             <Col sm={{ span: 12 }}>
-              <Button className={''} type="submit">
-                Zmień Hasło
+              <Button
+                className={''}
+                variant="danger"
+                id={'button-change-password'}
+                type="submit"
+                disabled={loading}
+              >
+                {loading && (
+                  <Spinner
+                    as="span"
+                    variant="danger"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className={'me-2 ms-0'}
+                    id={'loading-spinner'}
+                  />
+                )}
+                {loading ? 'Zmiana Hasła...' : 'Zmień Hasło'}
               </Button>
             </Col>
           </Form.Group>
