@@ -45,6 +45,10 @@
   margin-left: 10px;
 }
 
+.accordion-button:not(.collapsed)::after {
+  margin-left: 10px;
+}
+
 .accordion-button:focus {
   box-shadow: none;
   border-width: unset;
@@ -176,14 +180,6 @@
   margin-right: unset;
   margin-left: unset;
 }
-
-/*.custom-button {*/
-/*  margin-right: 3rem !important;*/
-/*  transform: translateY(-50%) !important;*/
-/*  right: 0 !important;*/
-/*  top: 50% !important;*/
-/*  position: absolute !important;*/
-/*}*/
 
 .custom-p {
   height: 4px;
