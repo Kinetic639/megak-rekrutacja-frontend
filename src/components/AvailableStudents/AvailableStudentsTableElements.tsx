@@ -61,14 +61,7 @@ const AvailableStudentsTableElements = (props: Props) => {
             </div>
             <div className="spacer"></div>
             <div>
-              <Button
-                className={`custom-button`}
-                as={'div'}
-                variant="danger"
-                onClick={() => reservedUserHandler(data.id)}
-              >
-                Zobacz CV
-              </Button>
+
               <Button
                 className={`custom-button`}
                 as={'div'}
