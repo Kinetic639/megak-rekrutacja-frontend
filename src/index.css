@@ -43,14 +43,23 @@ body {
 }
 
 .modal-center {
-  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: var(--popout-color);
-  z-index: 99;
-  width: 30%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
   color: white;
+}
+.button {
+  padding: 10px;
+  background-color: var(--button-color);
+  border-radius: 3px;
+  transition: 0.2s ease;
+  margin: 0 10px;
+  color: white;
+  border: none;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--button-color-hover);
 }

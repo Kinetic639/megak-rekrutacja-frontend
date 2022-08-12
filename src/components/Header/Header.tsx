@@ -9,23 +9,26 @@ import {
 } from 'react-bootstrap';
 
 import './Header.css';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+import { validateCurrUserAsync } from '../../redux/features/userSlice';
+import { useNavigate } from 'react-router';
 
 interface ResGitHub {
   name?: string;
   avatar_url?: string;
 }
 const Header = () => {
+  const nav = useNavigate();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
-  const gitHubUsername = useAppSelector(
-    (state) => state.user.user.githubUsername,
-  );
+  const gitHubUser = useAppSelector((state) => state.user.user);
   useEffect(() => {
     setLoading(true);
     (async () => {
       try {
         const res = await fetch(
-          `https://api.github.com/users/${gitHubUsername}`,
+          `https://api.github.com/users/${gitHubUser?.githubUsername}`,
         );
         const resDataGitHub = await res.json();
         setResDataGitHub(resDataGitHub);
@@ -54,7 +57,18 @@ const Header = () => {
     />
   );
 
-  const name = ' Kaskader Rewolucjonista';
+  const name = ` ${gitHubUser?.firstName} ${gitHubUser?.lastName}`;
+
+  const logOut = async () => {
+    const res = await fetch('http://localhost:3001/auth/logout', {
+      credentials: 'include',
+    });
+    const resJson = await res.json();
+    if (resJson.message === 'Wylogowano') {
+      await dispatch(validateCurrUserAsync());
+      nav('/login');
+    }
+  };
 
   return (
     <Container fluid className={`navbar-color p-0`}>
@@ -91,7 +105,10 @@ const Header = () => {
                   Konto
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className={`text-white fs-5`}>
+                <NavDropdown.Item
+                  className={`text-white fs-5`}
+                  onClick={logOut}
+                >
                   Wyloguj
                 </NavDropdown.Item>
               </NavDropdown>

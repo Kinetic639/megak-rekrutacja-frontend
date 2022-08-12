@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FormEvent } from 'react';
+import { SingleHrElement } from 'types';
 import './AddHr.css';
-import { HrRow } from './Admin';
-
 interface Props {
   setShowAddWindow: (boolean: boolean) => void;
-  newHr: HrRow;
-  setNewHr: (row: HrRow) => void;
+  newHr: SingleHrElement;
+  setNewHr: (row: SingleHrElement) => void;
   handleHrAddSubmit: (e: FormEvent<HTMLFormElement>) => void;
   loading: boolean;
 }
@@ -51,12 +50,12 @@ export const AddHr = ({
           required={true}
         />
       </label>
-      <label htmlFor="hr-second-name" className="label">
+      <label htmlFor="hr-last-name" className="label">
         Nazwisko
         <input
           type="text"
-          name="secondName"
-          id="hr-second-name"
+          name="lastName"
+          id="hr-last-name"
           onChange={changeHrValue}
           required={true}
         />

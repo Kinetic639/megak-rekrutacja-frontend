@@ -28,6 +28,7 @@ interface UserListResponseHr {
 
 const AvailableStudents = () => {
   const [loading, setLoading] = useState(false);
+  const [changeStudentStatus, setChangeStudentStatus] = useState(false);
   const [resDataUserList, setResDataUserList] = useState<UserListResponseHr[]>(
     [],
   );
@@ -59,6 +60,7 @@ const AvailableStudents = () => {
 
   useEffect(() => {
     setLoading(true);
+    setChangeStudentStatus(false);
     (async () => {
       try {
         const res = await fetch(`${apiUrl}/user/list/basic`);
@@ -68,7 +70,7 @@ const AvailableStudents = () => {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [changeStudentStatus]);
 
   return (
     <>
@@ -80,15 +82,16 @@ const AvailableStudents = () => {
         />
       ) : (
         <>
-          <Container className={`mt-5 mb-1 custom-container-second p-0`}>
+          <div className="list-container">
             <AvailableStudentsNavigation />
-          </Container>
-          <Container className={`custom-container mt-1`}>
+          </div>
+          <div className="list-container">
             <AvailableStudentsSearch setSearch={setSearch} />
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
+              setChangeStudentStatus={setChangeStudentStatus}
             />
-          </Container>
+          </div>
           <PaginationStudents
             studentsListPerPage={studentsListPerPage}
             currentPage={currentPage}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Nav } from 'react-bootstrap';
+import { Button, Form, Nav } from 'react-bootstrap';
+import { FiFilter } from 'react-icons/fi';
 
 interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -22,6 +23,10 @@ const AvailableStudentsSearch = (props: Props) => {
             />
           </div>
         </Form>
+        <Button variant="dark" className="btn-filter">
+          <FiFilter className="icon-filter" />
+          Filtrowanie
+        </Button>
       </Nav>
       <p className={'mt-3 custom-p'} />
     </>
