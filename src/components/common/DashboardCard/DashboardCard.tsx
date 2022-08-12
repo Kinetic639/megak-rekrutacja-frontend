@@ -6,5 +6,5 @@ interface DashboardCardProps {
 }
 
 export const DashboardCard = (props: DashboardCardProps) => (
-  <div className="dashboard-card">{props.children}</div>
+  <div className="dashboard-card ">{props.children}</div>
 );

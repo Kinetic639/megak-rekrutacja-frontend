@@ -11,7 +11,7 @@ export const HrDashboard = () => {
     setCurrTable(table);
   };
   return (
-    <DashboardContainer>
+    <DashboardContainer >
       <DashboardCard>
         <AvailableStudents />
       </DashboardCard>

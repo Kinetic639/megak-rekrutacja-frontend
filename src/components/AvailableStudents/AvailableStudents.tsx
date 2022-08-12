@@ -82,7 +82,7 @@ const AvailableStudents = () => {
         />
       ) : (
         <>
-          <div className="list-container">
+          <div className="list-container pt-0 ps-0">
             <AvailableStudentsNavigation />
           </div>
           <div className="list-container">

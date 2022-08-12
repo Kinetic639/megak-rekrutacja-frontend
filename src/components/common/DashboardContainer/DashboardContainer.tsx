@@ -6,5 +6,5 @@ interface DashboardContainerProps {
 }
 
 export const DashboardContainer = (props: DashboardContainerProps) => (
-  <div className="dashboard-container">{props.children}</div>
+  <div className="dashboard-container ">{props.children}</div>
 );

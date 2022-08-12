@@ -1,5 +1,7 @@
 .container-header-second {
-    max-width: 76.2%;
+    max-width: 1430px;
+    width: 80%;
+    padding: 0;
 }
 
 .navbar-color {
@@ -13,7 +15,7 @@
 .dropdown-menu {
     background-color: #1E1E1F !important;
     border-radius: unset !important;
-    margin-top: 0.9rem !important;
+    margin-top: 0.8rem !important;
     width: 100%;
 }
 
