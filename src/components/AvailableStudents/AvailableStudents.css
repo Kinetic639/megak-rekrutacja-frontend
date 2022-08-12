@@ -37,7 +37,9 @@
 .accordion-button::after {
   background-image: url('/public/collapse-icon/Group 29.png');
 }
-
+.accordion-button:not(.collapsed) {
+  color: #f7f7f7;
+}
 .accordion-button:not(.collapsed)::after {
   background-image: url('/public/collapse-icon/Group 29.png');
   margin-left: 10px;

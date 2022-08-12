@@ -2,15 +2,22 @@ import { BsPaperclip } from 'react-icons/bs';
 import React from 'react';
 
 interface Props {
-  links: string;
+  links: string | null;
 }
 
 export const CvLinksList = ({ links }: Props) => {
+  if (!links) {
+    return (
+      <div className="cv__link cv__link--main  cv__link--main-error">
+        Brak danych
+      </div>
+    );
+  }
   const linksArr: string[] = links.split(',');
   return (
     <>
-      {linksArr.map((link: string) => (
-        <div className="cv__link cv__link--main">
+      {linksArr.map((link: string, index) => (
+        <div key={index} className="cv__link cv__link--main">
           <a
             href={link}
             target="_blank"

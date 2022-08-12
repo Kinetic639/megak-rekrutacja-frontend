@@ -36,6 +36,10 @@
 .cv__link--main {
   padding: 0 26px;
 }
+.cv__link--main-error {
+  color: #4d4d4d;
+  padding: 15px 26px;
+}
 .cv-link__url {
   width: 100%;
   color: #0b8bd4;
