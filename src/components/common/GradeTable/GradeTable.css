@@ -2,29 +2,76 @@
   background-color: #222324;
   display: flex;
   justify-content: space-around;
-  padding: 15px;
   flex-wrap: wrap;
 }
 
 .grades-table__table-element {
+  padding: 15px 10px;
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  margin: 0 5px;
+}
+.grades-table__table-element:not(:last-child) {
+  border-right: 1px solid #292a2b;
 }
 .grades-table__table-element.md {
-  max-width: 160px;
+  padding: 15px 20px;
+  flex: 1;
+}
+.grades-table__table-element.md .grade-row__score {
+  display: flex;
+  flex-direction: row;
 }
 .grades-table__table-element.sm {
-  max-width: 120px;
-  margin: 0;
+  max-width: 155px;
 }
 
-.grade__row,
-.grade__col {
+.grade__score {
+  color: #f7f7f7;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.grade__score--span {
+  color: #4d4d4d;
+}
+
+.grade__row--score {
+  margin: 20px 0 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: row;
+}
+.grade__row--score.lg {
+  margin: 10px 0 10px;
+  flex-direction: column;
+}
+.grade__row--score.lg .grade__score {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.grade__row--title {
+  color: #cfcfcf;
+  min-width: 100%;
+  flex: 1;
+}
+
+.grades-table__table-element.sm .grade__row--title {
+  font-size: 12px;
+}
+.grades-table__table-element.sm .grade__score {
+  font-size: 15px;
+}
+.grades-table__table-element:nth-child(1).sm {
+  max-width: 100px;
+}
+
+.grades-table__table-element:nth-child(3).sm,
+.grades-table__table-element:nth-child(5).sm,
+.grades-table__table-element:nth-child(4).sm,
+.grades-table__table-element:nth-child(7).sm,
+.grades-table__table-element:nth-child(8).sm {
+  max-width: 120px;
 }
 
 .grade__score {
@@ -49,7 +96,6 @@
 }
 
 .grade__row--title {
-  text-align: center;
   color: #cfcfcf;
   min-width: 100%;
   flex: 1;

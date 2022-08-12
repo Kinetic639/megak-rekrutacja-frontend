@@ -62,7 +62,7 @@ export const AdminDashboard = () => {
       />
       <DashboardCard>
         {currTable === 'hr' && <AdminHrTable />}
-        {currTable === 'students' && <AvailableStudents />}
+        {currTable === 'students' && <AvailableStudents availableStudentsVariant={'available-list'}/>}
         {currTable === 'import' && <ImportedStudentsView />}
       </DashboardCard>
     </DashboardContainer>

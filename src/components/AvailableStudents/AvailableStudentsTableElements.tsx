@@ -4,6 +4,8 @@ import { apiUrl } from '../../config/api';
 
 import './AvailableStudents.css';
 import { GradeTable } from '../common/GradeTable/GradeTable';
+import {AccordionHeaderStudents} from "../common/AccordionHeaderStudents/AccordionHeaderStudents";
+import {AccordingHeaderConversation} from "../common/AccordingHeaderConversation/AccordingHeaderConversation";
 
 interface UserListResponseHr {
   id: string;
@@ -25,23 +27,17 @@ interface UserListResponseHr {
 interface Props {
   userListResHr: UserListResponseHr[];
   setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  availableStudentsVariant: string;
+  hrDashboardSwitch?: boolean;
 }
 
 const AvailableStudentsTableElements = ({
   userListResHr,
   setChangeStudentStatus,
+  availableStudentsVariant,
+  hrDashboardSwitch,
 }: Props) => {
-  const reservedUserHandler = async (studentId: string) => {
-    await fetch(`${apiUrl}/hr/reserve/${studentId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    setChangeStudentStatus(true);
-    // const dataDeactivationRes = await res.json();
-    // console.log(dataDeactivationRes);
-  };
+
   const elementList = userListResHr.map((data, index) => {
     data.targetWorkCity === null
       ? (data.targetWorkCity = 'BRAK')
@@ -94,34 +90,22 @@ const AvailableStudentsTableElements = ({
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
-          <Accordion.Header className="accordion-header">
-            <div>
-              {data.firstName} {data.lastName}
-            </div>
-            <div className="spacer"></div>
-            <div>
-              <Button
-                className={`custom-button`}
-                as={'div'}
-                variant="danger"
-                onClick={() => reservedUserHandler(data.id)}
-              >
-                Zobacz CV
-              </Button>
-              <Button
-                className={`custom-button`}
-                as={'div'}
-                variant="danger"
-                onClick={() => reservedUserHandler(data.id)}
-              >
-                Zarezerwuj rozmowę
-              </Button>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <GradeTable tableSize="sm" grades={grades} />
-          </Accordion.Body>
-          <p />
+          {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
+              (<>
+                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id}/>
+                  <Accordion.Body>
+                    <GradeTable tableSize="sm" grades={grades} />
+                  </Accordion.Body>
+                    <p />
+                </>)}
+          {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
+              (<>
+                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} />
+                <Accordion.Body>
+                  <GradeTable tableSize="sm" grades={grades} />
+                </Accordion.Body>
+                <p />
+              </>)}
         </Accordion.Item>
       </Accordion>
     );

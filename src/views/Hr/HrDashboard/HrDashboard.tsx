@@ -13,7 +13,7 @@ export const HrDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardCard>
-        <AvailableStudents />
+        <AvailableStudents availableStudentsVariant={'available-list'}/>
       </DashboardCard>
     </DashboardContainer>
   );
