@@ -20,6 +20,10 @@
 	font-weight: 500;
 }
 
+.star-icon{
+  fill: var(--red);
+}
+
 .backdrop{
   position: fixed;
   top:0;
@@ -85,8 +89,11 @@
 }
 
 .filtersPanel__option-btn:hover, .filtersPanel__option-btn--active{
-  box-shadow: 0 2px 4px var(--red);
-  filter: brightness(1.3);
+  background-color: var(--red);
+}
+
+.filtersPanel__option-btn--active > .star-icon, .filtersPanel__option-btn:hover > .star-icon{
+  fill: var(--white);
 }
 
 
@@ -159,6 +166,3 @@
  transform: scale(1.1);
 }
 
-.star-icon{
-  fill: var(--red);
-}

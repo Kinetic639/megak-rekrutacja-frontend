@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { StudentData } from '../features/studentCV/StudentCV';
+import { StudentData } from '../../components/studentCV/StudentCV';
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3001/`, mode: "cors" }),
@@ -12,6 +12,7 @@ export const apiSlice = createApi({
       query: (id: string) => `user/student/${id}`,
     }),
   }),
-})
+});
 
 export const { useGetStudentsQuery, useGetStudentQuery } = apiSlice;
+

@@ -1,6 +1,6 @@
 import { Rating } from '../../components/rating/Rating';
 import { LoadingPlaceholder } from '../../components/loadingPlaceholder/LoadingPlaceholder';
-import { useGetStudentQuery } from '../../store/apiSlice'
+import { useGetStudentQuery } from '../../redux/features/apiSlice'
 import './studentCV.css';
 import ChevronLeft from '../../assets/svg/ChevronLeft';
 

@@ -1,0 +1,16 @@
+.message {
+    text-align: center;
+    padding-bottom: 10px;
+    border-radius: 3px;
+}
+
+.message__text {
+    padding: 25px;
+}
+
+.message__buttons {
+    display: flex;
+    margin: 15px 0;
+    justify-content: center;
+    flex-basis: 100%;
+}

@@ -1,0 +1,48 @@
+.admin {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+}
+.admin__buttons {
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.buttons-csv__help {
+    color: white;
+    border: 3px solid white;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 10px;
+    margin-right: 10px;
+    transition: 0.2s ease;
+}
+
+.buttons-csv__help:hover {
+    background-color: white;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.csv-help {
+    background-color: var(--popout-color);
+    padding: 5px;
+    border-radius: 2%;
+    position: absolute;
+    bottom: -25vh;
+    right: 0;
+    display: none;
+    color: white;
+}
+
+.buttons-csv__help:hover + .csv-help {
+    display: block;
+}
