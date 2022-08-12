@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from 'react-router';
 import { useAppDispatch, useAppSelector } from './redux/hooks/hooks';
 import { validateCurrUserAsync } from './redux/features/userSlice';
 
-import { StudentCVSite } from './views/StudentCVSite';
 import { UserLoginSite } from './views/UserLoginSite';
 import { DashboardContainer } from './views/DashboardContainer/DashboardContainer';
 import { CustomSpinner } from './components/common/CustomSpinner/CustomSpinner';
@@ -37,13 +36,6 @@ function App() {
           path={'/dashboard'}
           element={
             currUser ? <DashboardContainer /> : <Navigate replace to="/login" />
-          }
-        />
-
-        <Route
-          path={'/cv'}
-          element={
-            currUser ? <StudentCVSite /> : <Navigate replace to="/login" />
           }
         />
       </Routes>

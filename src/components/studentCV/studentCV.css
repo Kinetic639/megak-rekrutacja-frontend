@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
  :root{
   --black:#222224;
   --black2:#292A2B;
@@ -31,7 +37,7 @@
 }
 
 .wrapper{
-  padding:0 12.76vw 0 12.76vw;
+  padding:0 12vw;
   background: var(--black) 0% 0% no-repeat padding-box;
 }
 
@@ -61,6 +67,11 @@
 .wrapper-img{
   width: 150px;
   height: 150px;
+}
+
+.student-panel__student-name{
+  font-size: 1.5rem;
+  text-transform: capitalize;
 }
 
 .student-panel__contact{
@@ -134,7 +145,10 @@
   grid-row: 2/3;
   font-weight: bold;
   color: var(--dirty-white);
-  
+}
+
+.student-cv__grid-content::first-letter{
+  text-transform: uppercase;
 }
 
 .student-cv__grid-content--placeholder{
@@ -144,6 +158,10 @@
 .student-cv__text{
   padding: 1rem 1.3rem 2rem 1.3rem;
   color: var(--dirty-white);
+}
+
+.student-cv__text::first-letter{
+  text-transform: uppercase;
 }
 
 .student-cv__list{
@@ -164,4 +182,15 @@
   border: none;
   margin-right: 1rem;
   background-color: transparent;
+}
+
+.fst-ltr-up{
+}
+
+.fst-ltr-up::first-letter{
+  text-transform: uppercase;
+}
+
+.text-cptl{
+  text-transform: capitalize;
 }

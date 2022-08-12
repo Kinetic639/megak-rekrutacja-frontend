@@ -26,7 +26,7 @@ export const Rating: React.FC<RatingI> = ({ rating }) => {
   return (
     <div className='rating rating--wrapper'>
       <div className='rating__degrees'><span className='rating__student-degree'>{rating}</span>/<span className='rating__student-max-degree'>{starsCount}</span></div>
-      <div>{fillRatingStars()}</div>
+      <div className='rating__stars'>{fillRatingStars()}</div>
     </div>
   )
 }

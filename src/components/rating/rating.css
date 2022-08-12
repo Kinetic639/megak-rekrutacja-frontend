@@ -1,3 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+
 :root{
   --white: #f7f7f7;
   --white-gray:#CFCFCF;
@@ -15,6 +22,8 @@
 }
 
 .rating__degrees{
+  display: flex;
+  align-items: flex-start;
   letter-spacing: 1.8px;
   color: var(--dark4);
   margin-right: .5rem;
@@ -27,6 +36,12 @@
 .rating__student-degree{
   color: var(--white);
   margin-right: 5px;
+}
+
+.rating__stars{
+display: flex;
+flex-wrap: nowrap;
+align-items: flex-start;
 }
 
 .rating__star--filled{

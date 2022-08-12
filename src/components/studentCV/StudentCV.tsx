@@ -9,8 +9,8 @@ interface StudentCVProps {
 }
 
 export interface StudentData {
-  studentFirstName: string;
-  studentLastName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   bio: string | null;
   tel: string | null;
@@ -51,7 +51,8 @@ export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
     if (prop === 'portfolioUrls' || prop === 'projectUrls' || prop === 'scrumProjectUrls') {
       return data[prop].map(url => <li key={url}><a href={url}>{url}</a></li>)
     }
-    return data[prop];
+
+    return `${data[prop]}`;
   }
 
   return (
@@ -68,7 +69,7 @@ export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
                     <img src="" alt="" />
                   </div>
 
-                  <h2>{`${parseStudentData('studentFirstName')} ${parseStudentData('studentLastName')}`}</h2>
+                  <h2 className='student-panel__student-name'>{`${parseStudentData('firstName')} ${parseStudentData('lastName')}`}</h2>
                   <div>{parseStudentData('githubUsername')}</div>
                 </section>
 
@@ -79,7 +80,7 @@ export const StudentCV: React.FC<StudentCVProps> = ({ id }) => {
 
                 <section className='student-panel__about-student'>
                   <h4 className='student-panel__about-me-title'>O mnie</h4>
-                  <p>
+                  <p className='fst-ltr-up'>
                     {parseStudentData('bio')}
                   </p>
                 </section>

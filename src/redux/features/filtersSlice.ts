@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { activeFiltersI } from '../../components/filters/FiltersPanel';
+import { activeFiltersI } from '../../components/filtersPanel/FiltersPanel';
 import type { RootState } from '../store/store';
 
 const initialState: filtersStateI = {
@@ -51,9 +51,9 @@ export const filtersSlice = createSlice({
       } else {
         newValue = Array.isArray(state.filters[action.payload.filter])
           ? [
-              ...(state.filters[action.payload.filter] as string[]),
-              action.payload.value,
-            ]
+            ...(state.filters[action.payload.filter] as string[]),
+            action.payload.value,
+          ]
           : action.payload.value;
       }
 
