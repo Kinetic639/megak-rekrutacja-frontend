@@ -6,6 +6,7 @@ import React from 'react';
 
 import '../../components/filtersPanel/FiltersPanel.css';
 import { AdminDashboard } from '../admin/AdminDashboard/AdminDashboard';
+import { HrDashboard } from '../Hr/HrDashboard/HrDashboard';
 
 export const DashboardWrapper = () => {
   const userState = useAppSelector((state) => state.user);
@@ -21,7 +22,7 @@ export const DashboardWrapper = () => {
       <Header />
       <main className="dashboard-main">
         {currUserRole === 'admin' && <AdminDashboard />}
-        {/*{currUserRole === 'hr' && <AvailableStudentsSite />}*/}
+        {currUserRole === 'hr' && <HrDashboard />}
         {currUserRole === 'student' && <>student</>}
       </main>
     </div>

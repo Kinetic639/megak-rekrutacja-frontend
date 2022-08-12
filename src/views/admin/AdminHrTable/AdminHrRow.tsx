@@ -1,4 +1,6 @@
 import React from 'react';
+import './AdminUserTable.css';
+
 interface Props {
   email: string;
   firstName: string;

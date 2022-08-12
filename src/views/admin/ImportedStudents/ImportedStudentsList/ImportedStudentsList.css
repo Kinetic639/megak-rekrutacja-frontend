@@ -1,0 +1,16 @@
+.students-ignored {
+  color: palevioletred;
+}
+.students-updated {
+  color: lightgoldenrodyellow;
+}
+.students-added {
+  color: lightgreen;
+}
+.list-title {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+.list-title:not(:first-child) {
+  margin-top: 40px;
+}

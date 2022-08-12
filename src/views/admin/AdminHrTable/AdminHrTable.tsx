@@ -35,7 +35,7 @@ export const AdminHrTable = () => {
             </th>
             <th className="table-header-cell table-header__company">Firma</th>
             <th className="table-header-cell table-header__max-reserved-students">
-              Maks. liczba studentów do rozmowy
+              Maks. rezerwacji
             </th>
           </tr>
         </thead>

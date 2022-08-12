@@ -1,0 +1,11 @@
+.admin__users-table {
+}
+
+.hrTable {
+  padding: 20px;
+}
+
+.table-header-cell,
+.table-row__max-reserved-students {
+  text-align: center;
+}

@@ -6,10 +6,11 @@
   padding: 10px;
 }
 .list-container {
-  padding: 20px;
+  padding: 20px 20px 0;
+  border-bottom: 3px solid #222224;
 }
 .accordion-item {
-  border-radius: 0px !important;
+  border-radius: 0 !important;
   border-color: rgb(38, 38, 38);
   --bs-accordion-bg: #1e1e20;
   --bs-accordion-inner-border-radius: 0px;
@@ -18,7 +19,7 @@
 }
 
 .accordion-header {
-  border-radius: 0px !important;
+  border-radius: 0 !important;
   background-color: #292a2b;
 }
 .spacer {
@@ -107,7 +108,7 @@
 .nav-tabs .nav-link.active {
   color: #f7f7f7;
   background-color: #292a2b;
-  box-shadow: rgb(213, 37, 37) 0px 4px;
+  box-shadow: rgb(213, 37, 37) 0 4px;
   padding: 20px;
 }
 
@@ -152,7 +153,7 @@
 
 #form-control-search-hr:focus {
   border: none;
-  box-shadow: rgb(213, 37, 37) 0px 2px;
+  box-shadow: rgb(213, 37, 37) 0 2px;
 }
 
 .custom-button {
@@ -206,7 +207,7 @@
   background-color: #cfcfcf;
 }
 #back-custom-button:focus {
-  box-shadow: 0px 0px 2px 2px rgba(159, 16, 16, 1);
+  box-shadow: 0 0 2px 2px rgba(159, 16, 16, 1);
 }
 #next-custom-button {
   width: 26px;
@@ -219,7 +220,7 @@
   background-color: #cfcfcf;
 }
 #next-custom-button:focus {
-  box-shadow: 0px 0px 2px 2px rgba(159, 16, 16, 1);
+  box-shadow: 0 0 2px 2px rgba(159, 16, 16, 1);
 }
 .col-custom-p {
   font: normal normal normal 16px/27px Catamaran;
@@ -232,7 +233,6 @@
   width: 31px;
   height: 24px;
   font-size: 12px;
-  font-family: Catamaram;
 }
 
 .col-custom-padding-count-element {
@@ -252,7 +252,6 @@
   width: 31px;
   height: 24px;
   font-size: 12px;
-  font-family: Catamaram;
 }
 #row-custom-padding-elements {
   margin-right: -12px;

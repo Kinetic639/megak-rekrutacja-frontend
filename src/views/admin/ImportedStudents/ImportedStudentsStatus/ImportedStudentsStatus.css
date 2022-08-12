@@ -1,0 +1,22 @@
+.status-list {
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.status-list__item {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.students-ignored {
+  color: palevioletred;
+}
+.students-updated {
+  color: lightgoldenrodyellow;
+}
+.students-added {
+  color: lightgreen;
+}
