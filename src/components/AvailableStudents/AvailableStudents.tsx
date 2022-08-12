@@ -12,10 +12,10 @@ import { PaginationStudents } from './PaginationStudents';
 interface UserListResponseHr {
   id: string;
   email: string;
-  courseCompletion: string;
-  courseEngagement: string;
-  projectDegree: string;
-  teamProjectDegree: string;
+  courseCompletion: number;
+  courseEngagement: number;
+  projectDegree: number;
+  teamProjectDegree: number;
   expectedTypeWork: string;
   targetWorkCity: string;
   expectedContractType: string;
@@ -82,7 +82,7 @@ const AvailableStudents = () => {
         />
       ) : (
         <>
-          <div className="list-container">
+          <div className="list-container pt-0 ps-0">
             <AvailableStudentsNavigation />
           </div>
           <div className="list-container">

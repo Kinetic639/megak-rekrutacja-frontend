@@ -1,8 +1,12 @@
 import React from 'react';
-import { DashboardContainer } from '../../../components/common/DashboardContainer/DashboardContainer';
-import { DashboardCard } from '../../../components/common/DashboardCard/DashboardCard';
 import { StudentCV } from '../StudenctCV/StudenctCV';
+import { useAppSelector } from '../../../redux/hooks/hooks';
+import { CustomSpinner } from '../../../components/common/CustomSpinner/CustomSpinner';
 
 export const StudentDashboard = () => {
-  return <StudentCV />;
+  const currUser = useAppSelector((state) => state.user.user);
+  if (!currUser) {
+    return <CustomSpinner />;
+  }
+  return <StudentCV user={currUser} />;
 };

@@ -1,33 +1,35 @@
 .container-header-second {
-    max-width: 76.2%;
+  max-width: 1430px;
+  width: 80%;
+  padding: 0;
 }
 
 .navbar-color {
-    background-color: #1E1E1F !important;
+  background-color: #1e1e1f !important;
 }
 
 #collasible-nav-dropdown {
-    background-color:  #1E1E1F !important;
+  background-color: #1e1e1f !important;
 }
 
 .dropdown-menu {
-    background-color: #1E1E1F !important;
-    border-radius: unset !important;
-    margin-top: 0.9rem !important;
-    width: 100%;
+  background-color: #1e1e1f !important;
+  border-radius: unset !important;
+  margin-top: 0.8rem !important;
+  width: 100%;
 }
 
 .dropdown-item:hover {
-    background-color: #1e1e1f;
-    box-shadow: rgb(213, 37, 37) 0px 4px;
+  background-color: #1e1e1f;
+  box-shadow: rgb(213, 37, 37) 0px 4px;
 }
 
 @media screen and (max-width: 768px) {
-    .dropdown-menu.show {
-        margin: unset !important;
-    }
+  .dropdown-menu.show {
+    margin: unset !important;
+  }
 }
 
 .avatar {
-    border-radius: 50%;
+  border-radius: 50%;
 }

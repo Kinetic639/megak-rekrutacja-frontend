@@ -1,18 +1,25 @@
-import { Col, Container, Row } from 'react-bootstrap';
-import { FaGithub, FaPhoneAlt } from 'react-icons/fa';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { FaGithub, FaPhoneAlt, FaEdit } from 'react-icons/fa';
 import { GrMail } from 'react-icons/gr';
 import './StudenctCV.css';
-import { useAppSelector } from '../../../redux/hooks/hooks';
 import React, { useEffect, useState } from 'react';
 import { CustomSpinner } from '../../../components/common/CustomSpinner/CustomSpinner';
+import { CvSection } from '../../../components/common/CvSection/CvSection';
+import { GradeTable } from '../../../components/common/GradeTable/GradeTable';
+import { CvSectionParagraph } from '../../../components/common/CvSectionParagraph/CvSectionParagraph';
+import { CvLinksList } from '../../../components/common/CvLinksList/CvLinksList';
+import { User } from '../../../../../megak-rekrutacja-backend/src/user/user.entity';
 
 interface ResGitHub {
   name?: string;
   avatar_url?: string;
 }
 
-export const StudentCV = () => {
-  const currUser = useAppSelector((state) => state.user.user);
+interface Props {
+  user: User;
+}
+
+export const StudentCV = ({ user }: Props) => {
   const [loading, setLoading] = useState(true);
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
   useEffect(() => {
@@ -20,7 +27,7 @@ export const StudentCV = () => {
     (async () => {
       try {
         const res = await fetch(
-          `https://api.github.com/users/${currUser?.githubUsername}`,
+          `https://api.github.com/users/${user?.githubUsername}`,
         );
         const resDataGitHub = await res.json();
         setResDataGitHub(resDataGitHub);
@@ -30,9 +37,46 @@ export const StudentCV = () => {
     })();
   }, []);
 
-  if (loading || !currUser) {
+  if (loading || !user) {
     return <CustomSpinner />;
   }
+  const cvGrades = [
+    { name: 'Ocena przejścia kursu', grade: Number(user.courseCompletion) },
+    {
+      name: 'Ocena aktywności i zaangażowania na kursie',
+      grade: Number(user.courseEngagement),
+    },
+    {
+      name: 'Ocena kodu w projekcie własnym',
+      grade: Number(user.projectDegree),
+    },
+    {
+      name: 'Ocena pracy w zespole w Scrum',
+      grade: Number(user.teamProjectDegree),
+    },
+  ];
+  const userExpectations = [
+    { name: 'Preferowane miejsce pracy', grade: user.expectedTypeWork },
+    {
+      name: 'Docelowe miasto, gdzie chce pracować kandydat',
+      grade: user.targetWorkCity,
+    },
+    { name: 'Oczekiwany typ kontraktu', grade: user.expectedContractType },
+    {
+      name: 'Oczekiwane wynagrodzenie miesięczne netto',
+      grade: `${user.expectedSalary} zł`,
+    },
+    {
+      name: 'Zgoda na odbycie bezpłatnych praktyk/stażu na początek',
+      grade: user.canTakeApprenticeship ? 'Tak' : 'Nie',
+    },
+    {
+      name: 'Komercyjne doświadczenie w programowaniu',
+      grade: user.monthsOfCommercialExp
+        ? `${user.monthsOfCommercialExp} miesięcy`
+        : 'Brak',
+    },
+  ];
   return (
     <div className="cv-container d-flex">
       <div className="cv-sidebar__wrapper">
@@ -52,37 +96,74 @@ export const StudentCV = () => {
             key={'user-avatar-key'}
           />
           <div className="cv-sidebar__credentials">
-            <div className="cv-sidebar__names">{`${currUser.firstName} ${currUser.lastName}`}</div>
-            <div className="cv-sidebar__github">
+            <div className="cv-sidebar__names">{`${user.firstName} ${user.lastName}`}</div>
+            <div className="cv__link">
               <a
-                href={`https://github.com/${currUser.githubUsername}`}
+                href={`https://github.com/${user.githubUsername}`}
                 target="_blank"
-                className="cv-sidebar__url"
+                className="cv-link__url"
               >
                 <FaGithub className="cv-sidebar__icon" />
-                {currUser.githubUsername}
+                {user.githubUsername}
               </a>
             </div>
           </div>
           <div className="cv-sidebar__contact">
             <p className="cv-sidebar__p cv-sidebar__phone-number">
               <FaPhoneAlt className="cv-sidebar__icon cv-sidebar__icon--grey" />{' '}
-              {currUser.tel}
+              {user.tel}
             </p>
             <p className="cv-sidebar__p cv-sidebar__email">
               <GrMail className="cv-sidebar__icon cv-sidebar__icon--grey" />{' '}
-              {currUser.email}
+              {user.email}
             </p>
           </div>
           <div className="cv-sidebar__bio">
             <p className="cv-sidebar__p cv-sidebar__bio--title">O mnie</p>
-            <p className="cv-sidebar__p cv-sidebar__bio--content">
-              {currUser.bio}
-            </p>
+            <p className="cv-sidebar__p cv-sidebar__bio--content">{user.bio}</p>
+          </div>
+          <div className="cv-sidebar__buttons-container">
+            <Button className="cv-sidebar__button button custom-button">
+              Zarezerwuj
+            </Button>
+            <Button className="cv-sidebar__button button custom-button">
+              Brak zainteresowania
+            </Button>
+            <Button className="cv-sidebar__button button custom-button">
+              Zatrudniony
+            </Button>
+            <Button className=" cv-sidebar__button button custom-button">
+              <FaEdit className="cv-sidebar__icon " /> Edytuj Dane
+            </Button>
           </div>
         </div>
       </div>
-      <main className="cv-main__wrapper">Main </main>
+      <main className="cv-main__wrapper">
+        <CvSection title="Oceny">
+          <GradeTable showStars grades={cvGrades} />
+        </CvSection>
+        <CvSection title="Oczekiwanie w stosunku do zatrudnienia">
+          <GradeTable grades={userExpectations} />
+        </CvSection>
+        <CvSection title="Edukacja">
+          <CvSectionParagraph>{user.education}</CvSectionParagraph>
+        </CvSection>
+        <CvSection title="Kursy">
+          <CvSectionParagraph>{user.courses}</CvSectionParagraph>
+        </CvSection>
+        <CvSection title="Doświadczenie zawodowe">
+          <CvSectionParagraph>{user.workExperience}</CvSectionParagraph>
+        </CvSection>
+        <CvSection title="Portfolio">
+          <CvLinksList links={user.portfolioUrls} />
+        </CvSection>
+        <CvSection title="Projekt w zespole Scrumowym">
+          <CvLinksList links={user.teamProjectUrls} />
+        </CvSection>
+        <CvSection title="Projekt na zaliczenie">
+          <CvLinksList links={user.bonusProjectUrls} />
+        </CvSection>
+      </main>
     </div>
   );
 };

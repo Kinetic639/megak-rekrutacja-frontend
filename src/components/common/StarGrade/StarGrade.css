@@ -1,0 +1,20 @@
+.stars__container {
+  display: flex;
+  width: fit-content;
+}
+.stars__icon {
+  font-size: 18px;
+}
+.stars__icon.lg {
+  font-size: 24px;
+}
+
+.stars__icon--full {
+  color: #e02735;
+}
+.stars__icon--empty {
+  color: #4d4d4d;
+}
+.stars__icon:nth-child(1) {
+  margin-left: 10px;
+}
