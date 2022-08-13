@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Accordion, Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {LoadingSuccess} from "../LoadingSuccess/LoadingSuccess";
+import {LoadingSuccess} from "../Modals/LoadingSuccess/LoadingSuccess";
 
 interface ResGitHub {
     name?: string;

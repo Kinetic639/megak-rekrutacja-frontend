@@ -23,6 +23,7 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  status: string;
 }
 
 interface Props {
@@ -93,7 +94,7 @@ const AvailableStudentsTableElements = ({
         <Accordion.Item eventKey={String(index)}>
           {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
               (<>
-                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id}/>
+                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status}/>
                   <Accordion.Body>
                     <GradeTable tableSize="sm" grades={grades} />
                   </Accordion.Body>

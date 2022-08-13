@@ -24,6 +24,7 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  status: string;
 }
 
 interface Props {
@@ -76,7 +77,7 @@ const AvailableStudents = (props: Props) => {
           setLoading(false);
         }
       })();
-    }, [hrDashboardSwitch, changeStudentStatus]);
+    }, [changeStudentStatus, hrDashboardSwitch]);
   } else {
     useEffect(() => {
       setLoading(true);
@@ -89,7 +90,7 @@ const AvailableStudents = (props: Props) => {
           setLoading(false);
         }
       })();
-    }, [changeStudentStatus]);
+    }, [changeStudentStatus, hrDashboardSwitch]);
   }
 
 
