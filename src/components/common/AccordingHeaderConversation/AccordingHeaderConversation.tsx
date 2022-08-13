@@ -17,7 +17,6 @@ const AccordingHeaderConversation = (props: Props) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
-    const [show, setShow] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -47,6 +46,7 @@ const AccordingHeaderConversation = (props: Props) => {
                     variant="danger"
                     onClick={(event) => {
                         event.stopPropagation();
+                        navigate('/user-cv')
                     }}
                 >
                     Pokaż CV

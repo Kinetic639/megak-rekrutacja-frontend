@@ -6,6 +6,7 @@ import './AvailableStudents.css';
 import { GradeTable } from '../common/GradeTable/GradeTable';
 import {AccordionHeaderStudents} from "../common/AccordionHeaderStudents/AccordionHeaderStudents";
 import {AccordingHeaderConversation} from "../common/AccordingHeaderConversation/AccordingHeaderConversation";
+import {AccordingHeaderAdmin} from "../common/AccordingHeaderAdmin/AccordingHeaderAdmin";
 
 interface UserListResponseHr {
   id: string;
@@ -106,6 +107,14 @@ const AvailableStudentsTableElements = ({
                 </Accordion.Body>
                 <p />
               </>)}
+          {(availableStudentsVariant === 'admin-list') &&
+          (<>
+            <AccordingHeaderAdmin firstName={data.firstName} lastName={data.lastName} />
+            <Accordion.Body>
+              <GradeTable tableSize="sm" grades={grades} />
+            </Accordion.Body>
+            <p />
+          </>)}
         </Accordion.Item>
       </Accordion>
     );
