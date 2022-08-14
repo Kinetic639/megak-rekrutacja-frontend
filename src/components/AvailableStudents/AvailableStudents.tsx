@@ -26,6 +26,7 @@ interface UserListResponseHr {
   firstName: string;
   lastName: string;
   status: string;
+  githubUsername: string;
 }
 
 interface Props {
