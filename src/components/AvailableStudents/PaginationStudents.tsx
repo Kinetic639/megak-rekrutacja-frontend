@@ -27,7 +27,7 @@ const PaginationStudents = (props: Props) => {
   }, [props.search]);
 
   return (
-    <Container className={`mt-4 custom-container-third`}>
+    <Container className={`custom-container-third`}>
       <Row className={`float-end`} id={`row-custom-padding-elements`}>
         <Col className={`ps-0 pe-2`}>
           <p className={`col-custom-p`}> Ilość elementów</p>

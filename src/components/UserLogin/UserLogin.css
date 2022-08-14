@@ -1,43 +1,43 @@
 .container-user-login {
-    width: 28rem;
-    background-color: #222225;
-    padding: 1.5rem;
-    box-shadow: 0px 0px 15px 10px rgb(98, 18, 18);
-    border-radius: 5px;
+  width: 28rem;
+  background-color: #222225;
+  padding: 1.5rem;
+  /*box-shadow: 0px 0px 15px 10px rgb(98, 18, 18);*/
+  border-radius: 5px;
 }
 
 #formHorizontalEmail {
-    border-radius: 0;
-    background-color: #292a2c;
-    border: none;
+  border-radius: 0;
+  background-color: #292a2c;
+  border: none;
 }
 #formHorizontalEmail:focus {
-    box-shadow: 0 0 0 .25rem rgba(239, 0, 0, 0.16);
+  box-shadow: 0 0 0 0.25rem rgba(239, 0, 0, 0.16);
 }
 #formHorizontalPassword {
-    border-radius: 0;
-    background-color: #292a2c;
-    border: none;
+  border-radius: 0;
+  background-color: #292a2c;
+  border: none;
 }
 #formHorizontalPassword:focus {
-    box-shadow: 0 0 0 .25rem rgba(239, 0, 0, 0.16);
+  box-shadow: 0 0 0 0.25rem rgba(239, 0, 0, 0.16);
 }
 #buttonLogin {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 .errorP {
-    color: #942424;
-    margin: 0;
-    padding-top: 10px;
+  color: #942424;
+  margin: 0;
+  padding-top: 10px;
 }
 
 .errorP::before {
-    display: inline;
-    content: "🛡️ ";
+  display: inline;
+  content: '🛡️ ';
 }
 
 #loading-spinner {
-    background-color: red;
-    border-inline-color: white;
+  background-color: red;
+  border-inline-color: white;
 }

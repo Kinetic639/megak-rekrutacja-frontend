@@ -9,6 +9,7 @@ import { GradeTable } from '../../../components/common/GradeTable/GradeTable';
 import { CvSectionParagraph } from '../../../components/common/CvSectionParagraph/CvSectionParagraph';
 import { CvLinksList } from '../../../components/common/CvLinksList/CvLinksList';
 import { User } from '../../../../../megak-rekrutacja-backend/src/user/user.entity';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks/hooks';
 
 interface ResGitHub {
   name?: string;
@@ -16,10 +17,12 @@ interface ResGitHub {
 }
 
 interface Props {
-  user: User;
+  user?: User | null;
 }
 
-export const StudentCV = ({ user }: Props) => {
+export const StudentCV = ({
+  user = useAppSelector((state) => state.user.user),
+}: Props) => {
   const [loading, setLoading] = useState(true);
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
   useEffect(() => {
@@ -110,31 +113,17 @@ export const StudentCV = ({ user }: Props) => {
           </div>
           <div className="cv-sidebar__contact">
             <p className="cv-sidebar__p cv-sidebar__phone-number">
-              <FaPhoneAlt className="cv-sidebar__icon cv-sidebar__icon--grey" />{' '}
+              <FaPhoneAlt className="cv-sidebar__icon cv-sidebar__icon--grey" />
               {user.tel}
             </p>
             <p className="cv-sidebar__p cv-sidebar__email">
-              <GrMail className="cv-sidebar__icon cv-sidebar__icon--grey" />{' '}
+              <GrMail className="cv-sidebar__icon cv-sidebar__icon--grey" />
               {user.email}
             </p>
           </div>
           <div className="cv-sidebar__bio">
             <p className="cv-sidebar__p cv-sidebar__bio--title">O mnie</p>
             <p className="cv-sidebar__p cv-sidebar__bio--content">{user.bio}</p>
-          </div>
-          <div className="cv-sidebar__buttons-container">
-            <Button className="cv-sidebar__button button custom-button">
-              Zarezerwuj
-            </Button>
-            <Button className="cv-sidebar__button button custom-button">
-              Brak zainteresowania
-            </Button>
-            <Button className="cv-sidebar__button button custom-button">
-              Zatrudniony
-            </Button>
-            <Button className=" cv-sidebar__button button custom-button">
-              <FaEdit className="cv-sidebar__icon " /> Edytuj Dane
-            </Button>
           </div>
         </div>
       </div>

@@ -5,10 +5,7 @@
   background-color: #292a2b;
   padding: 10px;
 }
-.list-container {
-  padding: 20px 20px 0;
-  border-bottom: 3px solid #222224;
-}
+
 .accordion-item {
   border-radius: 0 !important;
   border-color: rgb(38, 38, 38);
@@ -254,7 +251,21 @@
   font-size: 12px;
 }
 #row-custom-padding-elements {
-  margin-right: -12px;
+  position: absolute;
+  top: 55%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.custom-container-third {
+  height: 80px;
+  background-color: #222224;
+  position: relative;
+}
+
+.list-container {
+  padding: 20px 20px 0px;
+  border-bottom: 3px solid #222224;
 }
 
 #custom-select-pagination-page {

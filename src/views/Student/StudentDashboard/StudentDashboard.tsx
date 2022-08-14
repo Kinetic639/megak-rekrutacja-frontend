@@ -8,5 +8,5 @@ export const StudentDashboard = () => {
   if (!currUser) {
     return <CustomSpinner />;
   }
-  return <StudentCV user={currUser} />;
+  return <StudentCV />;
 };

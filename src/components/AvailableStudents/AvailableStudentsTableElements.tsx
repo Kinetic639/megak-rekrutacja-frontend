@@ -4,6 +4,7 @@ import { apiUrl } from '../../config/api';
 
 import './AvailableStudents.css';
 import { GradeTable } from '../common/GradeTable/GradeTable';
+import { ShowCvButton } from '../common/buttons/ShowCvButton/ShowCvButton';
 
 interface UserListResponseHr {
   id: string;
@@ -100,14 +101,7 @@ const AvailableStudentsTableElements = ({
             </div>
             <div className="spacer"></div>
             <div>
-              <Button
-                className={`custom-button`}
-                as={'div'}
-                variant="danger"
-                onClick={() => reservedUserHandler(data.id)}
-              >
-                Zobacz CV
-              </Button>
+              <ShowCvButton userId={data.id} />
               <Button
                 className={`custom-button`}
                 as={'div'}
