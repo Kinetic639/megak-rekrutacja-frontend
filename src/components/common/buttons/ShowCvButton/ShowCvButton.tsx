@@ -38,7 +38,10 @@ export const ShowCvButton = ({ userId }: Props) => {
         as={'div'}
         variant="danger"
         className={`custom-button button `}
-        onClick={handleShowCv}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleShowCv();
+        }}
       >
         {loading ? <Spinner variant="light" animation="border" /> : 'Pokaż CV'}
       </Button>
