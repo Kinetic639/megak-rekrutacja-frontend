@@ -19,6 +19,7 @@ const InformationModal = (props: Props) => {
                 show={props.show}
                 onHide={() => {
                     props.setShow(false);
+                    props.setSearch('');
                 }}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
