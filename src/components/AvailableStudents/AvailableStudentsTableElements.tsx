@@ -4,7 +4,9 @@ import { apiUrl } from '../../config/api';
 
 import './AvailableStudents.css';
 import { GradeTable } from '../common/GradeTable/GradeTable';
-import { ShowCvButton } from '../common/buttons/ShowCvButton/ShowCvButton';
+import {AccordionHeaderStudents} from "../common/AccordionHeaderStudents/AccordionHeaderStudents";
+import {AccordingHeaderConversation} from "../common/AccordingHeaderConversation/AccordingHeaderConversation";
+import {AccordingHeaderAdmin} from "../common/AccordingHeaderAdmin/AccordingHeaderAdmin";
 
 interface UserListResponseHr {
   id: string;
@@ -21,28 +23,28 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  status: string;
+  githubUsername: string;
 }
 
 interface Props {
   userListResHr: UserListResponseHr[];
   setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  availableStudentsVariant: string;
+  hrDashboardSwitch?: boolean;
+  hrID: string;
 }
 
 const AvailableStudentsTableElements = ({
   userListResHr,
   setChangeStudentStatus,
+  availableStudentsVariant,
+  hrDashboardSwitch,
+  hrID,
+  setSearch,
 }: Props) => {
-  const reservedUserHandler = async (studentId: string) => {
-    await fetch(`${apiUrl}/hr/reserve/${studentId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    setChangeStudentStatus(true);
-    // const dataDeactivationRes = await res.json();
-    // console.log(dataDeactivationRes);
-  };
+
   const elementList = userListResHr.map((data, index) => {
     data.targetWorkCity === null
       ? (data.targetWorkCity = 'BRAK')
@@ -95,27 +97,30 @@ const AvailableStudentsTableElements = ({
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
-          <Accordion.Header className="accordion-header">
-            <div>
-              {data.firstName} {data.lastName}
-            </div>
-            <div className="spacer"></div>
-            <div>
-              <ShowCvButton userId={data.id} />
-              <Button
-                className={`custom-button`}
-                as={'div'}
-                variant="danger"
-                onClick={() => reservedUserHandler(data.id)}
-              >
-                Zarezerwuj rozmowę
-              </Button>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <GradeTable tableSize="sm" grades={grades} />
-          </Accordion.Body>
-          <p />
+          {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
+              (<>
+                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
+                  <Accordion.Body>
+                    <GradeTable tableSize="sm" grades={grades} />
+                  </Accordion.Body>
+                    <p />
+                </>)}
+          {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
+              (<>
+                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername}/>
+                <Accordion.Body>
+                  <GradeTable tableSize="sm" grades={grades} />
+                </Accordion.Body>
+                <p />
+              </>)}
+          {(availableStudentsVariant === 'admin-list') &&
+          (<>
+            <AccordingHeaderAdmin firstName={data.firstName} lastName={data.lastName} />
+            <Accordion.Body>
+              <GradeTable tableSize="sm" grades={grades} />
+            </Accordion.Body>
+            <p />
+          </>)}
         </Accordion.Item>
       </Accordion>
     );

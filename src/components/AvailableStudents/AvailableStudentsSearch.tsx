@@ -4,6 +4,7 @@ import { FiFilter } from 'react-icons/fi';
 
 interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  search: string;
 }
 
 const AvailableStudentsSearch = (props: Props) => {
@@ -18,7 +19,7 @@ const AvailableStudentsSearch = (props: Props) => {
               type="text"
               placeholder="Search"
               aria-label="Search"
-              defaultValue=""
+              value={`${props.search}`}
               onChange={(event) => props.setSearch(event.target.value)}
             />
           </div>

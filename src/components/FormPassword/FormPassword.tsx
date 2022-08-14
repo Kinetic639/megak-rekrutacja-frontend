@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 import { apiUrl } from '../../config/api';
 import './FromPassword.css';
-import { LoadingSuccess } from '../common/LoadingSuccess/LoadingSuccess';
+import { LoadingSuccess } from '../common/Modals/LoadingSuccess/LoadingSuccess';
 
 interface FormRegisterType {
   password: string;
@@ -54,7 +54,7 @@ const FormPassword = (props: Props) => {
     }
   };
   if (success !== '') {
-    return <LoadingSuccess message={success} navigate={'/'} />;
+    return <LoadingSuccess message={success} navigate={'/login'} />;
   }
   return (
     <>

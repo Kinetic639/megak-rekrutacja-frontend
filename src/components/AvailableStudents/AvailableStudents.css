@@ -6,6 +6,17 @@
   padding: 10px;
 }
 
+.custom-container-third {
+  height: 80px;
+  background-color: #222224;
+  position: relative;
+  max-width: 1430px;
+}
+.list-container {
+  padding: 20px 20px 0;
+  border-bottom: 3px solid #222224;
+}
+
 .accordion-item {
   border-radius: 0 !important;
   border-color: rgb(38, 38, 38);
@@ -34,12 +45,13 @@
 .accordion-button::after {
   background-image: url('/public/collapse-icon/Group 29.png');
 }
-.accordion-button:not(.collapsed) {
-  color: #f7f7f7;
-}
+
 .accordion-button:not(.collapsed)::after {
   background-image: url('/public/collapse-icon/Group 29.png');
   margin-left: 10px;
+}
+.accordion-button:not(.collapsed) {
+  color: #f7f7f7;;
 }
 .accordion-button.collapsed::after {
   margin-left: 10px;
@@ -159,6 +171,14 @@
   font-size: 16px;
 }
 
+.custom-button-disabled {
+  border-radius: unset;
+  margin-left: 20px;
+  font-size: 16px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .card {
   --bs-card-height: 110px;
   --bs-card-inner-border-radius: unset;
@@ -253,19 +273,8 @@
 #row-custom-padding-elements {
   position: absolute;
   top: 55%;
-  right: 10px;
+  right: 0;
   transform: translateY(-50%);
-}
-
-.custom-container-third {
-  height: 80px;
-  background-color: #222224;
-  position: relative;
-}
-
-.list-container {
-  padding: 20px 20px 0px;
-  border-bottom: 3px solid #222224;
 }
 
 #custom-select-pagination-page {

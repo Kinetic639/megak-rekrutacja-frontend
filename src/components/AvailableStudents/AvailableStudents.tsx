@@ -8,6 +8,7 @@ import { AvailableStudentsSearch } from './AvailableStudentsSearch';
 import { AvailableStudentsNavigation } from './AvailableStudentsNavigation';
 import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
 import { PaginationStudents } from './PaginationStudents';
+import { useAppSelector} from "../../redux/hooks/hooks";
 
 interface UserListResponseHr {
   id: string;
@@ -24,9 +25,15 @@ interface UserListResponseHr {
   monthsOfCommercialExp: string;
   firstName: string;
   lastName: string;
+  status: string;
+  githubUsername: string;
 }
 
-const AvailableStudents = () => {
+interface Props {
+  availableStudentsVariant: string;
+}
+
+const AvailableStudents = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [changeStudentStatus, setChangeStudentStatus] = useState(false);
   const [resDataUserList, setResDataUserList] = useState<UserListResponseHr[]>(
@@ -35,6 +42,8 @@ const AvailableStudents = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [studentsListPerPage, setStudentsListPerPage] = useState(10);
   const [search, setSearch] = useState('');
+  const [hrDashboardSwitch, setHrDashboardSwitch] = useState(false);
+  const hrID = useAppSelector((state) => state.user.user!.id);
 
   const filteredBySearch = resDataUserList.filter((filterData) => {
     filterData.firstName === null
@@ -58,19 +67,35 @@ const AvailableStudents = () => {
     indexOfLastStudentsList,
   );
 
-  useEffect(() => {
-    setLoading(true);
-    setChangeStudentStatus(false);
-    (async () => {
-      try {
-        const res = await fetch(`${apiUrl}/user/list/basic`);
-        const data: UserListResponseHr[] = await res.json();
-        setResDataUserList(data);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [changeStudentStatus]);
+  if(hrDashboardSwitch) {
+    useEffect(() => {
+      setLoading(true);
+      setChangeStudentStatus(false);
+      (async () => {
+        try {
+          const res = await fetch(`${apiUrl}/user/list/reserved`);
+          const data: UserListResponseHr[] = await res.json();
+          setResDataUserList(data);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [changeStudentStatus, hrDashboardSwitch]);
+  } else {
+    useEffect(() => {
+      setLoading(true);
+      (async () => {
+        try {
+          const res = await fetch(`${apiUrl}/user/list/basic`);
+          const data: UserListResponseHr[] = await res.json();
+          setResDataUserList(data);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [changeStudentStatus, hrDashboardSwitch]);
+  }
+
 
   return (
     <>
@@ -83,13 +108,17 @@ const AvailableStudents = () => {
       ) : (
         <>
           <div className="list-container pt-0 ps-0">
-            <AvailableStudentsNavigation />
+            <AvailableStudentsNavigation setHrDashboardSwitch={setHrDashboardSwitch} hrDashboardSwitch={hrDashboardSwitch}/>
           </div>
-          <div className="list-container">
-            <AvailableStudentsSearch setSearch={setSearch} />
+          <div className="list-container pb-5">
+            <AvailableStudentsSearch setSearch={setSearch} search={search}/>
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
               setChangeStudentStatus={setChangeStudentStatus}
+              availableStudentsVariant={props.availableStudentsVariant}
+              hrDashboardSwitch={hrDashboardSwitch}
+              hrID={hrID}
+              setSearch={setSearch}
             />
           </div>
           <PaginationStudents
