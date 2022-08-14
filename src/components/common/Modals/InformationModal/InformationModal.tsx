@@ -8,6 +8,8 @@ interface Props {
     message: string;
     setShow: React.Dispatch<React.SetStateAction<boolean>>
     show: boolean;
+    setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const InformationModal = (props: Props) => {
@@ -34,6 +36,8 @@ const InformationModal = (props: Props) => {
                         onClick={(event) => {
                             event.stopPropagation();
                             props.setShow(false)
+                            props.setChangeStudentStatus(true);
+                            props.setSearch('');
                         }}
                     >
                         Dalej

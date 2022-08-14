@@ -29,8 +29,10 @@ interface UserListResponseHr {
 interface Props {
   userListResHr: UserListResponseHr[];
   setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
   availableStudentsVariant: string;
   hrDashboardSwitch?: boolean;
+  hrID: string;
 }
 
 const AvailableStudentsTableElements = ({
@@ -38,6 +40,8 @@ const AvailableStudentsTableElements = ({
   setChangeStudentStatus,
   availableStudentsVariant,
   hrDashboardSwitch,
+  hrID,
+  setSearch,
 }: Props) => {
 
   const elementList = userListResHr.map((data, index) => {
@@ -94,7 +98,7 @@ const AvailableStudentsTableElements = ({
         <Accordion.Item eventKey={String(index)}>
           {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
               (<>
-                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status}/>
+                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
                   <Accordion.Body>
                     <GradeTable tableSize="sm" grades={grades} />
                   </Accordion.Body>

@@ -8,6 +8,7 @@ import { AvailableStudentsSearch } from './AvailableStudentsSearch';
 import { AvailableStudentsNavigation } from './AvailableStudentsNavigation';
 import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
 import { PaginationStudents } from './PaginationStudents';
+import { useAppSelector} from "../../redux/hooks/hooks";
 
 interface UserListResponseHr {
   id: string;
@@ -41,6 +42,7 @@ const AvailableStudents = (props: Props) => {
   const [studentsListPerPage, setStudentsListPerPage] = useState(10);
   const [search, setSearch] = useState('');
   const [hrDashboardSwitch, setHrDashboardSwitch] = useState(false);
+  const hrID = useAppSelector((state) => state.user.user!.id);
 
   const filteredBySearch = resDataUserList.filter((filterData) => {
     filterData.firstName === null
@@ -108,12 +110,14 @@ const AvailableStudents = (props: Props) => {
             <AvailableStudentsNavigation setHrDashboardSwitch={setHrDashboardSwitch} hrDashboardSwitch={hrDashboardSwitch}/>
           </div>
           <div className="list-container">
-            <AvailableStudentsSearch setSearch={setSearch} />
+            <AvailableStudentsSearch setSearch={setSearch} search={search}/>
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
               setChangeStudentStatus={setChangeStudentStatus}
               availableStudentsVariant={props.availableStudentsVariant}
               hrDashboardSwitch={hrDashboardSwitch}
+              hrID={hrID}
+              setSearch={setSearch}
             />
           </div>
           <PaginationStudents

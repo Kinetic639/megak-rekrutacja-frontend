@@ -8,6 +8,9 @@ interface Props {
     lastName: string;
     idStudent: string;
     status: string;
+    hrID: string;
+    setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface DataDeactivationRes{
@@ -24,6 +27,9 @@ const AccordionHeaderStudents = (props: Props) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                hrID: props.hrID
+            }),
         });
         const dataDeactivationRes = await res.json();
         setDataFromRes(dataDeactivationRes);
@@ -50,7 +56,7 @@ const AccordionHeaderStudents = (props: Props) => {
                     {`${props.status === 'available' ? 'Zarezerwuj rozmowę' : 'Osoba zarezerwowana'}`}
                 </Button>
             </div>
-            {show && <InformationModal message={dataFromRes.message} show={show} setShow={setShow}/>}
+            {show && <InformationModal message={dataFromRes.message} show={show} setShow={setShow} setChangeStudentStatus={props.setChangeStudentStatus} setSearch={props.setSearch}/>}
         </Accordion.Header>
     );
 }

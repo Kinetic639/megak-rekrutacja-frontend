@@ -23,6 +23,7 @@ const Header = () => {
   const [loading, setLoading] = useState(true);
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
   const gitHubUser = useAppSelector((state) => state.user.user);
+
   useEffect(() => {
     setLoading(true);
     (async () => {
