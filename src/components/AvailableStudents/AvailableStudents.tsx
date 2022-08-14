@@ -110,7 +110,7 @@ const AvailableStudents = (props: Props) => {
           <div className="list-container pt-0 ps-0">
             <AvailableStudentsNavigation setHrDashboardSwitch={setHrDashboardSwitch} hrDashboardSwitch={hrDashboardSwitch}/>
           </div>
-          <div className="list-container">
+          <div className="list-container pb-5">
             <AvailableStudentsSearch setSearch={setSearch} search={search}/>
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
