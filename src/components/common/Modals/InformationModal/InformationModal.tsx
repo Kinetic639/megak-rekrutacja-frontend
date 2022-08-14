@@ -6,15 +6,18 @@ import Button from "react-bootstrap/Button";
 
 interface Props {
     message: string;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
+    show: boolean;
 }
 
 const InformationModal = (props: Props) => {
-    const [show, setShow] = useState(true);
     return (
         <>
             <Modal
-                show={show}
-                onHide={() => setShow(false)}
+                show={props.show}
+                onHide={() => {
+                    props.setShow(false);
+                }}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -30,7 +33,7 @@ const InformationModal = (props: Props) => {
                         variant="danger"
                         onClick={(event) => {
                             event.stopPropagation();
-                            setShow(false)
+                            props.setShow(false)
                         }}
                     >
                         Dalej

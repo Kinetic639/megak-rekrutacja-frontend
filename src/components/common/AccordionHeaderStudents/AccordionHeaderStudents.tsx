@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Accordion, Button} from "react-bootstrap";
 import {apiUrl} from "../../../config/api";
-import {LoadingSuccess} from "../Modals/LoadingSuccess/LoadingSuccess";
 import {InformationModal} from "../Modals/InformationModal/InformationModal";
 
 interface Props {
@@ -26,9 +25,7 @@ const AccordionHeaderStudents = (props: Props) => {
                 'Content-Type': 'application/json',
             },
         });
-        // setChangeStudentStatus(true);
         const dataDeactivationRes = await res.json();
-
         setDataFromRes(dataDeactivationRes);
     };
 
@@ -43,18 +40,17 @@ const AccordionHeaderStudents = (props: Props) => {
                     className={`${props.status === 'available' ? 'custom-button' : 'custom-button-disabled'}`}
                     as={'div'}
                     variant="danger"
-                    onClick={(event) => {
+                    onClick={async (event) => {
                         event.stopPropagation();
-                        reservedUserHandler(props.idStudent);
+                        await reservedUserHandler(props.idStudent);
                         setShow(true);
                     }}
-                    onDragOver={() => setShow(false)}
+
                 >
-                    Zarezerwuj rozmowę
+                    {`${props.status === 'available' ? 'Zarezerwuj rozmowę' : 'Osoba zarezerwowana'}`}
                 </Button>
             </div>
-            {/* @TODO Create new modal */}
-            {show && <InformationModal message={dataFromRes.message} />}
+            {show && <InformationModal message={dataFromRes.message} show={show} setShow={setShow}/>}
         </Accordion.Header>
     );
 }

@@ -54,7 +54,7 @@ const FormPassword = (props: Props) => {
     }
   };
   if (success !== '') {
-    return <LoadingSuccess message={success} navigate={'/'} />;
+    return <LoadingSuccess message={success} navigate={'/login'} />;
   }
   return (
     <>
