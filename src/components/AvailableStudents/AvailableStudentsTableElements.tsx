@@ -4,9 +4,9 @@ import { apiUrl } from '../../config/api';
 
 import './AvailableStudents.css';
 import { GradeTable } from '../common/GradeTable/GradeTable';
-import {AccordionHeaderStudents} from "../common/AccordionHeaderStudents/AccordionHeaderStudents";
-import {AccordingHeaderConversation} from "../common/AccordingHeaderConversation/AccordingHeaderConversation";
-import {AccordingHeaderAdmin} from "../common/AccordingHeaderAdmin/AccordingHeaderAdmin";
+import { AccordionHeaderStudents } from '../common/AccordionHeaderStudents/AccordionHeaderStudents';
+import { AccordingHeaderConversation } from '../common/AccordingHeaderConversation/AccordingHeaderConversation';
+import { AccordingHeaderAdmin } from '../common/AccordingHeaderAdmin/AccordingHeaderAdmin';
 
 interface UserListResponseHr {
   id: string;
@@ -44,7 +44,6 @@ const AvailableStudentsTableElements = ({
   hrID,
   setSearch,
 }: Props) => {
-
   const elementList = userListResHr.map((data, index) => {
     data.targetWorkCity === null
       ? (data.targetWorkCity = 'BRAK')
@@ -81,7 +80,7 @@ const AvailableStudentsTableElements = ({
         grade:
           Number(data.expectedSalary) === 0
             ? 'Brak danych'
-            : Number(data.expectedSalary),
+            : `${Number(data.expectedSalary)} zł`,
       },
       {
         name: 'Zgoda na odbycie bezpłatnych praktyk/stażu na początek',
@@ -97,30 +96,49 @@ const AvailableStudentsTableElements = ({
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
-          {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
-              (<>
-                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
-                  <Accordion.Body>
-                    <GradeTable tableSize="sm" grades={grades} />
-                  </Accordion.Body>
-                    <p />
-                </>)}
-          {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
-              (<>
-                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername}/>
-                <Accordion.Body>
-                  <GradeTable tableSize="sm" grades={grades} />
-                </Accordion.Body>
-                <p />
-              </>)}
-          {(availableStudentsVariant === 'admin-list') &&
-          (<>
-            <AccordingHeaderAdmin firstName={data.firstName} lastName={data.lastName} />
-            <Accordion.Body>
-              <GradeTable tableSize="sm" grades={grades} />
-            </Accordion.Body>
-            <p />
-          </>)}
+          {availableStudentsVariant === 'available-list' && !hrDashboardSwitch && (
+            <>
+              <AccordionHeaderStudents
+                firstName={data.firstName}
+                lastName={data.lastName}
+                idStudent={data.id}
+                status={data.status}
+                hrID={hrID}
+                setChangeStudentStatus={setChangeStudentStatus}
+                setSearch={setSearch}
+              />
+              <Accordion.Body>
+                <GradeTable tableSize="sm" grades={grades} />
+              </Accordion.Body>
+              <p />
+            </>
+          )}
+          {availableStudentsVariant === 'available-list' && hrDashboardSwitch && (
+            <>
+              <AccordingHeaderConversation
+                firstName={data.firstName}
+                lastName={data.lastName}
+                idStudent={data.id}
+                githubUsername={data.githubUsername}
+              />
+              <Accordion.Body>
+                <GradeTable tableSize="sm" grades={grades} />
+              </Accordion.Body>
+              <p />
+            </>
+          )}
+          {availableStudentsVariant === 'admin-list' && (
+            <>
+              <AccordingHeaderAdmin
+                firstName={data.firstName}
+                lastName={data.lastName}
+              />
+              <Accordion.Body>
+                <GradeTable tableSize="sm" grades={grades} />
+              </Accordion.Body>
+              <p />
+            </>
+          )}
         </Accordion.Item>
       </Accordion>
     );
