@@ -37,7 +37,7 @@ export const ShowCvButton = ({ userId }: Props) => {
       <Button
         as={'div'}
         variant="danger"
-        className={`custom-button button `}
+        className={`custom-button btn btn-danger`}
         onClick={async (e) => {
           e.stopPropagation();
           await handleShowCv();
