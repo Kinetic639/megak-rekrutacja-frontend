@@ -3,11 +3,13 @@
   justify-content: center;
   font-size: 1.4rem;
   margin-bottom: 20px;
+  color: #f7f7f7;
 }
 
 .status-list__item {
   background-color: transparent;
   border: none;
+  color: #f7f7f7;
 }
 
 .students-ignored {

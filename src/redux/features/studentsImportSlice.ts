@@ -4,12 +4,16 @@ import { createUsersResponse } from 'types';
 export const importStudentsFromFileAsync = createAsyncThunk(
   'students/importStudentsFromFileAsync',
   async (payload: FormData) => {
+    console.log('działą');
     const resp = await fetch(`http://localhost:3001/admin/create/students`, {
       method: 'POST',
       body: payload,
       credentials: 'include',
     });
     const data = await resp.json();
+
+    //@TODO poprawić obsługę zwracanych błędów
+    console.log(data);
     return data;
   },
 );
