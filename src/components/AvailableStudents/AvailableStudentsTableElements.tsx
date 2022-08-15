@@ -107,7 +107,7 @@ const AvailableStudentsTableElements = ({
                 </>)}
           {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
               (<>
-                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername}/>
+                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
                 <Accordion.Body>
                   <GradeTable tableSize="sm" grades={grades} />
                 </Accordion.Body>
