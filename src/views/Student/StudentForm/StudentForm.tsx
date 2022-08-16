@@ -54,8 +54,14 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('firstName', {
                                 required: "To pole nie może być puste!",
-                                maxLength: 100,
-                                minLength: 3
+                                maxLength: {
+                                    value: 100,
+                                    message: "Imię nie może być dłuższe niz 100 znaków."
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: "Imię nie może być krótsze niż 3 znaki"
+                                }
                             })}/>
                             {errors.firstName && (
                                 <p className={`errorP mt-1`}>{errors.firstName.message}</p>
@@ -69,8 +75,14 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('lastName', {
                                 required: "To pole nie może być puste!",
-                                maxLength: 100,
-                                minLength: 3
+                                maxLength: {
+                                    value: 100,
+                                    message: "Nazwisko nie może być dłuższe niz 100 znaków."
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: "Nazwisko nie może być krótsze niż 3 znaki"
+                                }
                             })}/>
                             {errors.lastName && (
                                 <p className={`errorP mt-1`}>{errors.lastName.message}</p>
@@ -84,8 +96,14 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('githubUsername', {
                                     required: "To pole nie może być puste!",
-                                    maxLength: 39,
-                                    minLength: 3
+                                    maxLength: {
+                                        value: 39,
+                                        message: "Nazwa nie może być dłuższa niz 100 znaków."
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: "Nazwa nie może być krótsza niz 3 znaków."
+                                    },
                                 })}/>
                             {errors.githubUsername && (
                                 <p className={`errorP mt-1`}>{errors.githubUsername.message}</p>
@@ -100,8 +118,14 @@ const StudentForm = () => {
                                 type="text"
                                 className={`input-password text-white`}
                                 {...register('targetWorkCity', {
-                                    maxLength: 100,
-                                    minLength: 2
+                                    maxLength: {
+                                        value: 100,
+                                        message: "Nazwa nie może być dłuższa niz 100 znaków."
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: "Nazwa nie może być krótsza niz 3 znaków."
+                                    },
                                 })}/>
                             {errors.targetWorkCity && (
                                 <p className={`errorP mt-1`}>{errors.targetWorkCity.message}</p>
@@ -138,8 +162,14 @@ const StudentForm = () => {
                                 type="number"
                                 className={`input-password text-white`}
                                 {...register('expectedSalary', {
-                                    max: 6,
-                                    min: 0
+                                    max: {
+                                        value: 6,
+                                        message: "Liczba cyfr jest ograniczona do 6"
+                                    },
+                                    min: {
+                                        value: 0,
+                                        message: "Liczba nie może być ujemna"
+                                    },
                                 })}/>
                             {errors.expectedSalary && (
                                 <p className={`errorP mt-1`}>{errors.expectedSalary.message}</p>
@@ -154,8 +184,14 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('monthsOfCommercialExp', {
                                     required: "To pole nie może być puste!",
-                                    min: 0,
-                                    max: 11,
+                                    min: {
+                                        value: 0,
+                                        message: "Liczba nie może być ujemna"
+                                    },
+                                    max: {
+                                        value: 11,
+                                        message: "Liczba cyfr jest ograniczona do 11"
+                                    },
                                 })}/>
                             {errors.monthsOfCommercialExp && (
                                 <p className={`errorP mt-1`}>{errors.monthsOfCommercialExp.message}</p>
@@ -167,8 +203,14 @@ const StudentForm = () => {
                                 type="text"
                                 className={`input-password text-white`}
                                 {...register('tel', {
-                                    maxLength: 14,
-                                    minLength: 9
+                                    maxLength: {
+                                        value: 14,
+                                        message: "Numer telefonu nie może przekraczać 14 cyfr."
+                                    },
+                                    minLength: {
+                                        value: 9,
+                                        message: "Numer telefonu musi mieć minimmalnie 9 cyfr"
+                                    },
                                 })}/>
                             {errors.tel && (
                                 <p className={`errorP mt-1`}>{errors.tel.message}</p>
@@ -183,8 +225,14 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('teamProjectUrls', {
                                     required: "To pole nie może być puste!",
-                                    maxLength: 255,
-                                    minLength: 2
+                                    maxLength: {
+                                        value: 255,
+                                        message: "To pole nie może przekraczać 255 znaków."
+                                    },
+                                    minLength: {
+                                        value: 2,
+                                        message: "To pole nie może być mniejsze niż 2 znaki."
+                                    },
                                 })}/>
                             <Form.Text className="text-muted">
                                 Jeśli chcesz dodać więcej niż jeden link, proszimmy oddzielić go przecinkiem:<br/>
@@ -202,8 +250,14 @@ const StudentForm = () => {
                                 type="text"
                                 className={`input-password text-white`}
                                 {...register('portfolioUrls', {
-                                    maxLength: 45,
-                                    minLength: 2
+                                    maxLength: {
+                                        value: 255,
+                                        message: "To pole nie może przekraczać 255 znaków."
+                                    },
+                                    minLength: {
+                                        value: 2,
+                                        message: "To pole nie może być mniejsze niż 2 znaki."
+                                    },
                                 })}/>
                             <Form.Text className="text-muted">
                                 Jeśli chcesz dodać więcej niż jeden link, proszimmy oddzielić go przecinkiem:<br/>
