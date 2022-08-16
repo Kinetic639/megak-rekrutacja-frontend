@@ -35,8 +35,9 @@ const ResetPasswordEmail = () => {
             if (dataFormRes.message !== 'Email do resetowania hasła wysłany') {
                 if (dataFormRes.message === 'Internal server error') {
                     setResError('Podałeś nieistniejące dane');
+                } else {
+                    setResError(dataFormRes.message);
                 }
-                setResError(dataFormRes.message);
             }
             if (dataFormRes.message === 'Email do resetowania hasła wysłany') {
                 setSuccess(dataFormRes.message);
