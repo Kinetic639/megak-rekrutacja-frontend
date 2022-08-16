@@ -1,20 +1,26 @@
-import React from 'react';
-import { FormPassword } from '../components/FormPassword/FormPassword';
-import { useSearchParams } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {FormPassword} from '../components/FormPassword/FormPassword';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface Props {
-  activateOrReset?: string;
+    activateOrReset?: string;
 }
 
 const FormPasswordSite = (props: Props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
-  return (
-    <>
-      <FormPassword token={token} activateOrReset={props.activateOrReset}/>
-    </>
-  );
+    const token = searchParams.get('token');
+    if (token === null) {
+        useEffect(() => {
+            navigate('/login', {replace: true});
+        }, [])
+    }
+    return (
+        <>
+            <FormPassword token={token} activateOrReset={props.activateOrReset}/>
+        </>
+    );
 };
 
-export { FormPasswordSite };
+export {FormPasswordSite};
