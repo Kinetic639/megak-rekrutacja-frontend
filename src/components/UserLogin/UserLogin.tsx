@@ -7,6 +7,7 @@ import { apiUrl } from '../../config/api';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../redux/hooks/hooks';
 import { validateCurrUserAsync } from '../../redux/features/userSlice';
+import {Link} from "react-router-dom";
 
 interface FormLoginType {
   email: string;
@@ -23,9 +24,6 @@ const UserLogin = () => {
   } = useForm<FormLoginType>();
   const [loading, setLoading] = useState(false);
   const [resError, setResError] = useState('');
-  const [areCredentialsValid, setAreCredentialsValid] = useState<
-    boolean | undefined
-  >();
   const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
     setLoading(true);
 
@@ -43,9 +41,7 @@ const UserLogin = () => {
       const dataLoginRes = await res.json();
       if (dataLoginRes.statusCode !== 200) {
         setResError(dataLoginRes.message);
-        setAreCredentialsValid(false);
       } else {
-        setAreCredentialsValid(true);
         await dispatch(validateCurrUserAsync());
         navigate('/dashboard');
       }
@@ -119,8 +115,7 @@ const UserLogin = () => {
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
-            <p className={'mb-4 text-light text-end'}>Zapomniałeś hasła?</p>
+          <Form.Group as={Row} className="mb-3 mt-5">
             <Col sm={{ span: 12 }}>
               <Button
                 className={`float-end `}
@@ -144,10 +139,8 @@ const UserLogin = () => {
                 {loading ? 'Logowanie...' : 'Zaloguj'}
               </Button>
               <p className={'mt-1 text-light'}>
-                <span>Nie masz konta?</span>{' '}
-                <a id={'register-a'} href={'/'}>
-                  Zresetuj się
-                </a>
+                <span>Zapomniałeś hasła?</span>{' '}
+                <Link id={'register-a'} to={'/auth/send-reset-email'}>Zresetuj</Link>
               </p>
             </Col>
           </Form.Group>

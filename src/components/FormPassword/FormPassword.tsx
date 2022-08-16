@@ -43,10 +43,10 @@ const FormPassword = (props: Props) => {
       });
 
       const dataFormRes = await res.json();
-      if (dataFormRes !== 'Konto aktywowane poprawnie') {
+      if (dataFormRes.message !== 'Konto aktywowane poprawnie') {
         setResError(dataFormRes.message);
       }
-      if (dataFormRes === 'Konto aktywowane poprawnie') {
+      if (dataFormRes.message === 'Konto aktywowane poprawnie') {
         setSuccess(dataFormRes.message);
       }
     } finally {

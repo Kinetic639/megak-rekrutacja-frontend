@@ -299,10 +299,8 @@
   left: 127px !important;
   transform: unset !important;
 }
+
 .popover-custom-button {
   width: 100px;
 }
 
-#popover-basic {
-  transform: translate(1257px, 344px)!important;
-}

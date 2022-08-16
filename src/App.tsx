@@ -7,6 +7,7 @@ import { validateCurrUserAsync } from './redux/features/userSlice';
 import { CustomSpinner } from './components/common/CustomSpinner/CustomSpinner';
 import { FormPasswordSite } from './views/FormPasswordSite';
 import { DashboardWrapper } from './views/DashboardWrapper/DashboardWrapper';
+import {ResetPasswordEmail} from "./components/ResetPassword/ResetPasswordEmail";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ function App() {
         />
         <Route path={'/user/change-password'} element={<FormPasswordSite />} />
         <Route path={'/activate'} element={<FormPasswordSite />} />
+        <Route path={'/auth/send-reset-email'} element={<ResetPasswordEmail />} />
       </Routes>
     </>
   );

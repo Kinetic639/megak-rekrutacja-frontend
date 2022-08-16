@@ -19,7 +19,7 @@ export const ShowCvButton = ({ userId }: Props) => {
 
   const handleClose = () => setShow(false);
   const handleShowCv = async () => {
-    console.log(userId);
+
     if (currUser?.userType === 'hr' || currUser?.userType === 'admin') {
       const res = await fetch(`${apiUrl}/user/find-by/id/${userId}`, {
         credentials: 'include',
@@ -38,9 +38,9 @@ export const ShowCvButton = ({ userId }: Props) => {
         as={'div'}
         variant="danger"
         className={`custom-button button `}
-        onClick={(e) => {
+        onClick={async (e) => {
           e.stopPropagation();
-          handleShowCv();
+          await handleShowCv();
         }}
       >
         {loading ? <Spinner variant="light" animation="border" /> : 'Pokaż CV'}

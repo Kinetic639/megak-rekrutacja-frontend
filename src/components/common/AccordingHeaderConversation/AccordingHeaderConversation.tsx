@@ -31,11 +31,26 @@ const AccordingHeaderConversation = (props: Props) => {
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const [showPopover, setShowPopover] = useState(false);
+    const [showPopover2, setShowPopover2] = useState(false);
     const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
     const [dataFromRes, setDataFromRes] = useState<DataDeactivationRes>({message: '', status: false});
 
     const cancelReservedUserHandler = async (studentId: string) => {
         const res = await fetch(`${apiUrl}/hr/cancel/${studentId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                hrID: props.hrID
+            }),
+        });
+        const dataDeactivationRes = await res.json();
+        setDataFromRes(dataDeactivationRes);
+    };
+
+    const hireReservedUserHandler = async (studentId: string) => {
+        const res = await fetch(`${apiUrl}/hr/hire/${studentId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,11 +98,11 @@ const AccordingHeaderConversation = (props: Props) => {
             key={`${props.idStudent}`}
         />
     );
-
-    const popover = (
-        <Popover id="popover-basic">
-            <Popover.Header as="h3">Czy na pewno chcesz odrzucić kursanta z listy "Do
-                rozmowy"</Popover.Header>
+    const popoverReserved = (
+        <Popover id="popover-basic-popoverReserved">
+            <Popover.Header as="h3">
+                Czy na pewno chcesz odrzucić kursanta z listy "Do rozmowy"
+            </Popover.Header>
             <Popover.Body>
                 <div className={'d-flex justify-content-between'}>
                     <Button
@@ -105,8 +120,40 @@ const AccordingHeaderConversation = (props: Props) => {
                         onClick={async (event) => {
                             event.stopPropagation();
                             setShowPopover(false)
-                            await cancelReservedUserHandler(props.idStudent);
                             setShow(true);
+                            await cancelReservedUserHandler(props.idStudent);
+                        }}>
+                        Tak
+                    </Button>
+                </div>
+            </Popover.Body>
+        </Popover>
+    );
+
+    const popoverHired = (
+        <Popover id="popover-basic-popoverHired">
+            <Popover.Header as="h3">
+                Czy na pewno chcesz zatrudnić kursanta ?
+            </Popover.Header>
+            <Popover.Body>
+                <div className={'d-flex justify-content-between'}>
+                    <Button
+                        className={`custom-button ms-0 popover-custom-button `}
+                        variant="secondary"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            setShowPopover2(false)
+                        }}>
+                        Nie
+                    </Button>
+                    <Button
+                        className={`custom-button ms-0 popover-custom-button `}
+                        variant="danger"
+                        onClick={async (event) => {
+                            event.stopPropagation();
+                            setShowPopover2(false)
+                            setShow(true);
+                            await hireReservedUserHandler(props.idStudent);
                         }}>
                         Tak
                     </Button>
@@ -132,30 +179,34 @@ const AccordingHeaderConversation = (props: Props) => {
             <div className="spacer"></div>
             <div>
                 <ShowCvButton userId={props.idStudent}/>
-                <OverlayTrigger trigger="click" placement="bottom" overlay={popover} rootClose show={showPopover}
+                <OverlayTrigger trigger="click" placement="bottom" overlay={popoverReserved} rootClose show={showPopover}
                                 onToggle={() => setShowPopover(!showPopover)}>
                     <Button
                         className={`custom-button`}
                         as={'div'}
                         variant="danger"
-                        onClick={async (event) => {
+                        onClick={(event) => {
                             event.stopPropagation();
+                            setShowPopover2(false)
                         }}
                     >
                         Brak zainteresowania
                     </Button>
                 </OverlayTrigger>
-                <Button
-                    className={`custom-button`}
-                    as={'div'}
-                    variant="danger"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                    }}
-                >
-                    Zatrudniony
-                </Button>
-
+                <OverlayTrigger trigger="click" placement="bottom" overlay={popoverHired} rootClose show={showPopover2}
+                                onToggle={() => setShowPopover2(!showPopover2)}>
+                    <Button
+                        className={`custom-button`}
+                        as={'div'}
+                        variant="danger"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            setShowPopover(false)
+                        }}
+                    >
+                        Zatrudniony
+                    </Button>
+                </OverlayTrigger>
             </div>
             {show && <InformationModal message={dataFromRes.message} show={show} setShow={setShow}
                                        setChangeStudentStatus={props.setChangeStudentStatus}
