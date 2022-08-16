@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createUsersResponse } from 'types';
 import { User } from '../../../../megak-rekrutacja-backend/src/user/user.entity';
+import { apiUrl } from '../../config/api';
+import { updateStudent } from 'types';
 
 export const validateCurrUserAsync = createAsyncThunk(
   'user/importStudentsFromFileAsync',
@@ -9,6 +10,26 @@ export const validateCurrUserAsync = createAsyncThunk(
       credentials: 'include',
     });
     const data = await res.json();
+    return data;
+  },
+);
+
+export const updateStudentAsync = createAsyncThunk(
+  'updateStudent/updateStudentAsync',
+  async (payload: updateStudent, thunkAPI) => {
+    const resp = await fetch(`${apiUrl}/student/update`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      credentials: 'include',
+    });
+    const data = await resp.json();
+    if (data.statusCode === 201) {
+      // thunkAPI.dispatch(getHrListAsync());
+      console.log(data.statusCode);
+    }
     return data;
   },
 );
