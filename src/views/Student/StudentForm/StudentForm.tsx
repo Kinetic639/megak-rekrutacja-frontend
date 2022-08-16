@@ -163,8 +163,8 @@ const StudentForm = () => {
                                 className={`input-password text-white`}
                                 {...register('expectedSalary', {
                                     max: {
-                                        value: 6,
-                                        message: "Liczba cyfr jest ograniczona do 6"
+                                        value: 999999,
+                                        message: "Liczba jest ograniczona do 999999"
                                     },
                                     min: {
                                         value: 0,
@@ -189,8 +189,8 @@ const StudentForm = () => {
                                         message: "Liczba nie może być ujemna"
                                     },
                                     max: {
-                                        value: 11,
-                                        message: "Liczba cyfr jest ograniczona do 11"
+                                        value: 999,
+                                        message: "Liczba jest ograniczona do 999"
                                     },
                                 })}/>
                             {errors.monthsOfCommercialExp && (
