@@ -9,6 +9,7 @@ import { FormPasswordSite } from './views/FormPasswordSite';
 import { DashboardWrapper } from './views/DashboardWrapper/DashboardWrapper';
 import {ResetPasswordEmail} from "./components/ResetPasswordEmail/ResetPasswordEmail";
 import {StudentForm} from "./views/Student/StudentForm/StudentForm";
+import {ChangePersonDataSite} from "./views/ChangePersonDataSite/ChangePersonDataSite";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ function App() {
         <Route path={'/activate'} element={<FormPasswordSite activateOrReset={'activate'}/>} />
         <Route path={'/reset'} element={<FormPasswordSite activateOrReset={'reset'}/>} />
         <Route path={'/auth/send-reset-email'} element={<ResetPasswordEmail />} />
-        <Route path={'/auth/user-form'} element={<StudentForm />}/>
+        <Route path={'/auth/user-form'} element={<ChangePersonDataSite />}/>
       </Routes>
     </>
   );

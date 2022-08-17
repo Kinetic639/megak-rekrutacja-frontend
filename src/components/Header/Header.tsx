@@ -12,6 +12,7 @@ import './Header.css';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { validateCurrUserAsync } from '../../redux/features/userSlice';
 import { useNavigate } from 'react-router';
+import {Link} from "react-router-dom";
 
 interface ResGitHub {
   name?: string;
@@ -24,21 +25,22 @@ const Header = () => {
   const [resDataGitHub, setResDataGitHub] = useState<ResGitHub>();
   const gitHubUser = useAppSelector((state) => state.user.user);
 
-  useEffect(() => {
-    setLoading(true);
-    (async () => {
-      try {
-        const res = await fetch(
-          `https://api.github.com/users/${gitHubUser?.githubUsername}`,
-        );
-        const resDataGitHub = await res.json();
-        setResDataGitHub(resDataGitHub);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
-
+  if (gitHubUser?.githubUsername !== undefined) {
+    useEffect(() => {
+      setLoading(true);
+      (async () => {
+        try {
+          const res = await fetch(
+              `https://api.github.com/users/${gitHubUser?.githubUsername}`,
+          );
+          const resDataGitHub = await res.json();
+          setResDataGitHub(resDataGitHub);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, []);
+  }
   const avatar = (
     <img
       src={
@@ -81,7 +83,7 @@ const Header = () => {
         expand="md"
       >
         <Container className={`navbar-color container-header-second`}>
-          <Navbar.Brand href="#home" className={`navbar-color`}>
+          <Navbar.Brand as={Link} to={'/dashboard'} className={`navbar-color`}>
             <img
               src="https://static1.s123-cdn-static-a.com/uploads/5191798/400_609bb5e2d9a39.png"
               width="89"
@@ -101,7 +103,7 @@ const Header = () => {
               >
                 <NavDropdown.Item
                   className={`text-white fs-5`}
-                  href="#action/3.1"
+                  href="/auth/user-form"
                 >
                   Konto
                 </NavDropdown.Item>
