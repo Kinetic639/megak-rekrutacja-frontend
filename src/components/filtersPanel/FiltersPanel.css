@@ -1,162 +1,73 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.filterForm__container {
+  background-color: #0a0a0a;
+  padding: 20px;
 }
-
-:root {
-  --white: #f7f7f7;
-  --black: #0a0a0a;
-  --dark: #172a35;
-  --dark2: #292a2b;
-  --red: #e02735;
-}
-
-.star-icon {
-  fill: var(--red);
-}
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--black);
-  opacity: 0.5;
-  z-index: 99;
-}
-
-.filtersPanel {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  max-width: 520px;
-  font-size: 14px;
-  padding: 1em 0.8em;
-  color: var(--white);
-  background-color: var(--black);
-  transform: translate(-50%, -50%);
-  z-index: 100;
-}
-
-.filtersPanel__head {
+.filterForm__header,
+.filterForm__footer {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.filtersPanel__filter {
-  margin-bottom: 1.3rem;
-}
-
-.filtersPanel__title,
-.filtersPanel__subtitle {
-  font-weight: 500;
-}
-
-.filtersPanel__subtitle {
-  margin-bottom: 0.3em;
-}
-
-.filtersPanel__options-list {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-}
-
-.filtersPanel__options-list--column {
-  flex-direction: column;
-}
-
-.filtersPanel__option-btn {
-  appearance: none;
-  padding: 0.3em;
-  border: 0;
-  margin-right: 10px;
-  background-color: var(--dark);
-  color: var(--white);
-  cursor: pointer;
-}
-
-.filtersPanel__option-btn:hover,
-.filtersPanel__option-btn--active {
-  background-color: var(--red);
-}
-
-.filtersPanel__option-btn--active > .star-icon,
-.filtersPanel__option-btn:hover > .star-icon {
-  fill: var(--white);
-}
-
-.filtersPanel__btn-text {
-  margin-right: 0.2em;
-}
-
-.filtersPanel__input {
-  max-width: 95px;
-  appearance: none;
-  padding: 0.3em;
-  border: 0;
-  background-color: var(--dark);
-  color: var(--white);
-}
-
-.filtersPanel__input--radio {
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  margin-right: 0.5em;
-  border: 1px solid var(--dark2);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.filtersPanel__label {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  column-gap: 0.5em;
-  margin-right: 1em;
 }
-
-.filtersPanel__label--reverse {
+/*--------grades------------*/
+.filterForm__grade-container {
   display: flex;
-  flex-direction: row-reverse;
+}
+
+/*-----buttons----------*/
+.filterForm__btn--dark,
+.filterForm__btn--dark:focus {
+  background-color: #212529;
+  padding: 5px 20px;
+}
+
+.filterForm__btn--dark:hover {
+  background-color: #424649;
+}
+
+.filterForm__btn--cancel {
+  padding: 10px 25px;
+}
+.filterForm__footer {
   justify-content: flex-end;
-  margin-bottom: 0.5em;
 }
-
-.filtersPanel__input--radio:checked {
-  background-color: var(--red);
+/*-------------checkbox------------*/
+.filterForm__checkbox-section {
+  margin-top: 20px;
 }
-
-.filtersPanel__bottom {
+.filterForm__checkbox-section--title {
+  margin-bottom: 5px;
+}
+.filterForm__checkbox-section--container {
   display: flex;
-  justify-content: flex-end;
 }
-
-.filtersPanel__cancel-btn,
-.filtersPanel__show-results-btn {
-  appearance: none;
-  padding: 0.3em;
-  border: 0;
-  margin-right: 15px;
-  color: var(--white);
+.filterForm__checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.filterForm__checkbox-container:not(:first-child) {
+  margin-left: 10px;
+}
+.filterForm__checkbox {
+  display: none;
+  visibility: hidden;
+}
+.filterForm__checkbox-label {
   cursor: pointer;
-  transition: transform 0.2s;
+  padding: 3px 10px;
+  font-size: 16px;
+  background-color: #292a2b;
+  color: #e02735;
+  transition: all 0.2s ease-in-out;
 }
-
-.filtersPanel__cancel-btn {
-  background-color: transparent;
+.filterForm__checkbox--icon {
+  margin-left: 5px;
 }
-
-.filtersPanel__show-results-btn {
-  background-color: var(--red);
+.filterForm__checkbox--span {
+  color: #f7f7f7;
 }
-
-.filtersPanel__cancel-btn:hover,
-.filtersPanel__show-results-btn:hover {
-  transform: scale(1.1);
+.filterForm__checkbox:checked + .filterForm__checkbox-label {
+  color: #f7f7f7;
+  background-color: #e02735;
+  transition: all 0.1s ease-in-out;
 }
