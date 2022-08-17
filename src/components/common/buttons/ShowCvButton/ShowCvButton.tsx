@@ -19,7 +19,7 @@ export const ShowCvButton = ({ userId }: Props) => {
 
   const handleClose = () => setShow(false);
   const handleShowCv = async () => {
-    console.log(userId);
+
     if (currUser?.userType === 'hr' || currUser?.userType === 'admin') {
       const res = await fetch(`${apiUrl}/user/find-by/id/${userId}`, {
         credentials: 'include',

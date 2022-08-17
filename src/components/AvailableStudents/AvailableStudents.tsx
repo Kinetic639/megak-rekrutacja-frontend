@@ -27,6 +27,7 @@ interface UserListResponseHr {
   lastName: string;
   status: string;
   githubUsername: string;
+  data?: Date;
 }
 
 interface Props {
@@ -73,7 +74,15 @@ const AvailableStudents = (props: Props) => {
       setChangeStudentStatus(false);
       (async () => {
         try {
-          const res = await fetch(`${apiUrl}/user/list/reserved`);
+          const res = await fetch(`${apiUrl}/user/list/reserved`, {
+            method: 'POST',
+                headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              hrId: hrID
+            }),
+          });
           const data: UserListResponseHr[] = await res.json();
           setResDataUserList(data);
         } finally {
@@ -86,7 +95,15 @@ const AvailableStudents = (props: Props) => {
       setLoading(true);
       (async () => {
         try {
-          const res = await fetch(`${apiUrl}/user/list/basic`);
+          const res = await fetch(`${apiUrl}/user/list/basic`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              hrId: hrID
+            }),
+          });
           const data: UserListResponseHr[] = await res.json();
           setResDataUserList(data);
         } finally {

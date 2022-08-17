@@ -283,3 +283,23 @@
   background-position: right center;
   background-size: 12px 10px;
 }
+
+.popover {
+  border-radius: unset;
+  background-color: #1e1e21;
+  color: black
+}
+
+.popover-header {
+  border-radius: unset;
+}
+
+.popover-arrow {
+  position: absolute;
+  left: 127px !important;
+  transform: unset !important;
+}
+
+.popover-custom-button {
+  width: 100px;
+}

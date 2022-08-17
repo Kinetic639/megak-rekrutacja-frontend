@@ -1,0 +1,46 @@
+.container-form-user {
+    max-width: 85rem;
+    border: solid;
+    border-color: #942424;
+    border-width: 2px;
+    background-color: #222225;
+    padding: 1.5rem;
+    box-shadow: 0px 0px 15px 10px rgb(98, 18, 18);
+    border-radius: 5px;
+}
+.red-line {
+    border: solid;
+    border-color: #942424;
+    border-bottom-width: 2px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.form-check-input:checked {
+    background-color: #150202;
+    border-color: #ec0707;
+}
+
+.form-check-input:focus {
+    border-color: #ec0707;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(187, 0, 0, 0.29);
+}
+
+.form-select {
+    color: white;
+}
+
+#formHorizontalFirstName, #formHorizontalLastName, #formHorizontalGitHub, #formHorizontalTypeWork, #formHorizontalTargetCity,
+#formHorizontalContractType, #formHorizontalSalary, #formHorizontalExp, #formHorizontalNumber, #formHorizontalProject, #formHorizontalPortfolio {
+    border-radius: 0;
+    background-color: #292a2c;
+    border: none;
+}
+
+#formHorizontalFirstName:focus, #formHorizontalLastName:focus, #formHorizontalGitHub:focus, #formHorizontalTypeWork:focus, #formHorizontalTargetCity:focus,
+#formHorizontalContractType:focus, #formHorizontalSalary:focus, #formHorizontalExp:focus, #formHorizontalNumber:focus, #formHorizontalProject:focus, #formHorizontalPortfolio:focus,
+#formTextAreaInformation1:focus, #formTextAreaInformation2:focus, #formTextAreaInformation3:focus, #formTextAreaInformation4:focus {
+    box-shadow: 0 0 0 0.25rem rgba(239, 0, 0, 0.16);
+}

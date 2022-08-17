@@ -13,6 +13,7 @@ interface FormRegisterType {
 
 interface Props {
   token: string | null;
+  activateOrReset?: string;
 }
 
 const FormPassword = (props: Props) => {
@@ -30,28 +31,64 @@ const FormPassword = (props: Props) => {
   password.current = watch('password', '');
 
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${apiUrl}/auth/activate?token=${props.token}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...data,
-        }),
-      });
+    if(props.activateOrReset === 'activate') {
+      setLoading(true);
+      try {
+        const res = await fetch(`${apiUrl}/auth/activate?token=${props.token}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...data,
+          }),
+        });
 
-      const dataFormRes = await res.json();
-      if (dataFormRes !== 'Konto aktywowane poprawnie') {
-        setResError(dataFormRes.message);
+        const dataFormRes = await res.json();
+        if (dataFormRes.message !== 'Konto aktywowane poprawnie') {
+          if (dataFormRes.message === 'Unauthorized') {
+            setResError('Brak autoryazji, skontaktuj się z supportem aby narpawić problem.');
+          } else {
+            setResError(dataFormRes.message);
+          }
+        }
+        if (dataFormRes.message === 'Konto aktywowane poprawnie') {
+          setSuccess(dataFormRes.message);
+        }
+      } finally {
+        setLoading(false);
       }
-      if (dataFormRes === 'Konto aktywowane poprawnie') {
-        setSuccess(dataFormRes.message);
-      }
-    } finally {
-      setLoading(false);
     }
+
+    if(props.activateOrReset === 'reset') {
+      setLoading(true);
+      try {
+        const res = await fetch(`${apiUrl}/auth/reset?token=${props.token}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...data,
+          }),
+        });
+
+        const dataFormRes = await res.json();
+        if (dataFormRes.message !== 'Hasło zresetowane poprawnie') {
+          if (dataFormRes.message === 'Unauthorized') {
+            setResError('Brak autoryazji, skontaktuj się z supportem aby narpawić problem.');
+          } else {
+            setResError(dataFormRes.message);
+          }
+        }
+        if (dataFormRes.message === 'Hasło zresetowane poprawnie') {
+          setSuccess(dataFormRes.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
   };
   if (success !== '') {
     return <LoadingSuccess message={success} navigate={'/login'} />;

@@ -44,6 +44,7 @@ const AvailableStudentsTableElements = ({
   hrID,
   setSearch,
 }: Props) => {
+
   const elementList = userListResHr.map((data, index) => {
     data.targetWorkCity === null
       ? (data.targetWorkCity = 'BRAK')
@@ -96,49 +97,30 @@ const AvailableStudentsTableElements = ({
     return (
       <Accordion key={data.id}>
         <Accordion.Item eventKey={String(index)}>
-          {availableStudentsVariant === 'available-list' && !hrDashboardSwitch && (
-            <>
-              <AccordionHeaderStudents
-                firstName={data.firstName}
-                lastName={data.lastName}
-                idStudent={data.id}
-                status={data.status}
-                hrID={hrID}
-                setChangeStudentStatus={setChangeStudentStatus}
-                setSearch={setSearch}
-              />
-              <Accordion.Body>
-                <GradeTable tableSize="sm" grades={grades} />
-              </Accordion.Body>
-              <p />
-            </>
-          )}
-          {availableStudentsVariant === 'available-list' && hrDashboardSwitch && (
-            <>
-              <AccordingHeaderConversation
-                firstName={data.firstName}
-                lastName={data.lastName}
-                idStudent={data.id}
-                githubUsername={data.githubUsername}
-              />
-              <Accordion.Body>
-                <GradeTable tableSize="sm" grades={grades} />
-              </Accordion.Body>
-              <p />
-            </>
-          )}
-          {availableStudentsVariant === 'admin-list' && (
-            <>
-              <AccordingHeaderAdmin
-                firstName={data.firstName}
-                lastName={data.lastName}
-              />
-              <Accordion.Body>
-                <GradeTable tableSize="sm" grades={grades} />
-              </Accordion.Body>
-              <p />
-            </>
-          )}
+          {(availableStudentsVariant === 'available-list' && !hrDashboardSwitch) &&
+              (<>
+                <AccordionHeaderStudents firstName={data.firstName} lastName={data.lastName} idStudent={data.id} status={data.status} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
+                  <Accordion.Body>
+                    <GradeTable tableSize="sm" grades={grades} />
+                  </Accordion.Body>
+                    <p />
+                </>)}
+          {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
+              (<>
+                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
+                <Accordion.Body>
+                  <GradeTable tableSize="sm" grades={grades} />
+                </Accordion.Body>
+                <p />
+              </>)}
+          {(availableStudentsVariant === 'admin-list') &&
+          (<>
+            <AccordingHeaderAdmin firstName={data.firstName} lastName={data.lastName} />
+            <Accordion.Body>
+              <GradeTable tableSize="sm" grades={grades} />
+            </Accordion.Body>
+            <p />
+          </>)}
         </Accordion.Item>
       </Accordion>
     );
