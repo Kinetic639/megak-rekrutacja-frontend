@@ -39,7 +39,7 @@ const StudentForm = () => {
     const [resError, setResError] = useState('');
     const [success, setSuccess] = useState('');
 
-    const currUser = useAppSelector((state) => state.user.user?.id);
+    const currUser = useAppSelector((state) => state.user.user);
 
     const onSubmit: SubmitHandler<FormRegisterType> = async (data ) => {
         setLoading(true);
@@ -51,7 +51,7 @@ const StudentForm = () => {
                 },
                 body: JSON.stringify({
                     ...data,
-                    id: currUser,
+                    id: currUser?.id,
                 }),
             });
             // @TODO waiting for backend validation
@@ -70,7 +70,7 @@ const StudentForm = () => {
         <>
             <Container
                 fluid
-                className={` container-form-user`}
+                className={` container-form-user mt-5`}
             >
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <h2 className={'mt-3 mb-4 text-white'}>Dane Użytkownika: </h2>
