@@ -53,7 +53,7 @@ const AccordionHeaderStudents = (props: Props) => {
                     }}
 
                 >
-                    {`${props.status === 'available' ? 'Zarezerwuj rozmowę' : 'Osoba zarezerwowana'}`}
+                    {`${props.status === 'available' ? 'Zarezerwuj rozmowę' : 'Osoba zatrudniona'}`}
                 </Button>
             </div>
             {show && <InformationModal message={dataFromRes.message} show={show} setShow={setShow} setChangeStudentStatus={props.setChangeStudentStatus} setSearch={props.setSearch}/>}
