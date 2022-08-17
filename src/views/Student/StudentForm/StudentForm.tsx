@@ -46,35 +46,37 @@ const StudentForm = (props: Props) => {
     const [success, setSuccess] = useState('');
 
     const currUser = useAppSelector((state) => state.user.user);
-    if (currUser?.githubUsername === null) {
-        currUser.githubUsername = '';
+    const objCopy = {...currUser}
+
+    if (objCopy?.githubUsername === null) {
+        objCopy.githubUsername = '';
     }
-    if (currUser?.targetWorkCity === null) {
-        currUser.targetWorkCity = '';
+    if (objCopy?.targetWorkCity === null) {
+        objCopy.targetWorkCity = '';
     }
-    if (currUser?.expectedSalary === null) {
-        currUser.expectedSalary = 0;
+    if (objCopy?.expectedSalary === null) {
+        objCopy.expectedSalary = 0;
     }
-    if (currUser?.expectedContractType === null) {
-        currUser.expectedContractType = ContractType.DEFAULT;
+    if (objCopy?.expectedContractType === null) {
+        objCopy.expectedContractType = ContractType.DEFAULT;
     }
-    if (currUser?.monthsOfCommercialExp === null) {
-        currUser.monthsOfCommercialExp = 0;
+    if (objCopy?.monthsOfCommercialExp === null) {
+        objCopy.monthsOfCommercialExp = 0;
     }
-    if (currUser?.tel === null) {
-        currUser.tel = '';
+    if (objCopy?.tel === null) {
+        objCopy.tel = '';
     }
-    if (currUser?.education === null) {
-        currUser.education = '';
+    if (objCopy?.education === null) {
+        objCopy.education = '';
     }
-    if (currUser?.workExperience === null) {
-        currUser.workExperience = '';
+    if (objCopy?.workExperience === null) {
+        objCopy.workExperience = '';
     }
-    if (currUser?.courses === null) {
-        currUser.courses = '';
+    if (objCopy?.courses === null) {
+        objCopy.courses = '';
     }
-    if (currUser?.bio === null) {
-        currUser.bio = '';
+    if (objCopy?.bio === null) {
+        objCopy.bio = '';
     }
     const onSubmit: SubmitHandler<FormRegisterType> = async (data ) => {
         setLoading(true);
@@ -86,7 +88,7 @@ const StudentForm = (props: Props) => {
                 },
                 body: JSON.stringify({
                     ...data,
-                    id: currUser?.id,
+                    id: objCopy?.id,
                 }),
             });
             // @TODO waiting for backend validation
@@ -115,7 +117,7 @@ const StudentForm = (props: Props) => {
                             <Form.Control
                                 type="text"
                                 className={`input-password text-white`}
-                                defaultValue={props.correctData ? currUser?.firstName : ''}
+                                defaultValue={props.correctData ? objCopy?.firstName : ''}
                                 {...register('firstName', {
                                 required: "To pole nie może być puste!",
                                 maxLength: {
@@ -136,7 +138,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white`}>Nazwisko:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.lastName : ''}
+                                defaultValue={props.correctData ? objCopy?.lastName : ''}
                                 className={`input-password text-white`}
                                 {...register('lastName', {
                                 required: "To pole nie może być puste!",
@@ -158,7 +160,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white`}>Nazwa Użytkonika GitHub:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.githubUsername : ''}
+                                defaultValue={props.correctData ? objCopy?.githubUsername : ''}
                                 className={`input-password text-white`}
                                 {...register('githubUsername', {
                                     required: "To pole nie może być puste!",
@@ -182,7 +184,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white`}>Docelowe miasto, gdzie chce pracować kandydat:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.targetWorkCity : ''}
+                                defaultValue={props.correctData ? objCopy?.targetWorkCity : ''}
                                 className={`input-password text-white`}
                                 {...register('targetWorkCity', {
                                     maxLength: {
@@ -201,7 +203,7 @@ const StudentForm = (props: Props) => {
 
                         <Form.Group className="mb-4" as={Col} controlId="formHorizontalTypeWork" md={12} lg>
                             <Form.Label className={`text-white`}>Wybór preferowanego miejsca pracy:</Form.Label>
-                            <Form.Select defaultValue={props.correctData ? currUser?.expectedTypeWork : 'Dowolne'} {...register('expectedTypeWork')}>
+                            <Form.Select defaultValue={props.correctData ? objCopy?.expectedTypeWork : 'Dowolne'} {...register('expectedTypeWork')}>
                                 <option>Dowolne</option>
                                 <option>Zdalnie</option>
                                 <option>Biuro</option>
@@ -212,7 +214,7 @@ const StudentForm = (props: Props) => {
 
                         <Form.Group className="mb-4" as={Col} controlId="formHorizontalContractType" md={12} lg>
                             <Form.Label className={`text-white`}>Oczekiwany typ kontraktu:</Form.Label>
-                            <Form.Select defaultValue={props.correctData ? currUser?.expectedContractType : 'Dowolny'}  {...register('expectedContractType')}>
+                            <Form.Select defaultValue={props.correctData ? objCopy?.expectedContractType : 'Dowolny'}  {...register('expectedContractType')}>
                                 <option>Dowolny</option>
                                 <option>UoP</option>
                                 <option>B2B</option>
@@ -227,7 +229,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white mt-4`}>Oczekiwane wynagrodzenie miesięczne netto:</Form.Label>
                             <Form.Control
                                 type="number"
-                                defaultValue={props.correctData ? currUser?.expectedSalary : ''}
+                                defaultValue={props.correctData ? objCopy?.expectedSalary : ''}
                                 className={`input-password text-white`}
                                 {...register('expectedSalary', {
                                     max: {
@@ -248,7 +250,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white `}>Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu:</Form.Label>
                             <Form.Control
                                 type="number"
-                                defaultValue={props.correctData ? currUser?.monthsOfCommercialExp : 0}
+                                defaultValue={props.correctData ? objCopy?.monthsOfCommercialExp : 0}
                                 className={`input-password text-white`}
                                 {...register('monthsOfCommercialExp', {
                                     required: "To pole nie może być puste!",
@@ -269,7 +271,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white mt-4`}>Numer telefonu:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.tel : ''}
+                                defaultValue={props.correctData ? objCopy?.tel : ''}
                                 className={`input-password text-white`}
                                 {...register('tel', {
                                     maxLength: {
@@ -291,7 +293,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white`}>Project URL:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.teamProjectUrls : ''}
+                                defaultValue={props.correctData ? objCopy?.teamProjectUrls : ''}
                                 className={`input-password text-white`}
                                 {...register('teamProjectUrls', {
                                     required: "To pole nie może być puste!",
@@ -318,7 +320,7 @@ const StudentForm = (props: Props) => {
                             <Form.Label className={`text-white`}>Portfolio URL:</Form.Label>
                             <Form.Control
                                 type="text"
-                                defaultValue={props.correctData ? currUser?.portfolioUrls : ''}
+                                defaultValue={props.correctData ? objCopy?.portfolioUrls : ''}
                                 className={`input-password text-white`}
                                 {...register('portfolioUrls', {
                                     maxLength: {
@@ -342,25 +344,25 @@ const StudentForm = (props: Props) => {
                     <Row className="mb-3 mt-4">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation1" >
                             <Form.Label>Przebieg edukacji:</Form.Label>
-                            <Form.Control defaultValue={props.correctData ? currUser?.education : ''} as="textarea" rows={2} placeholder="Jakie były Twoje kroki by wejść do świata programowania..." {...register('education')}/>
+                            <Form.Control defaultValue={props.correctData ? objCopy?.education : ''} as="textarea" rows={2} placeholder="Jakie były Twoje kroki by wejść do świata programowania..." {...register('education')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
-                        <Form.Group className="mb-3" controlId="formTextAreaInformation2" defaultValue={props.correctData ? currUser?.workExperience : ''}>
+                        <Form.Group className="mb-3" controlId="formTextAreaInformation2" defaultValue={props.correctData ? objCopy?.workExperience : ''}>
                             <Form.Label>Przebieg doświadczenia zawodowego:</Form.Label>
-                            <Form.Control defaultValue={props.correctData ? currUser?.workExperience : ''} as="textarea" rows={2} placeholder="Jeśli pracowałaś/ałeś w firmie związaną z programwoaniem, pochwal się..." {...register('workExperience')}/>
+                            <Form.Control defaultValue={props.correctData ? objCopy?.workExperience : ''} as="textarea" rows={2} placeholder="Jeśli pracowałaś/ałeś w firmie związaną z programwoaniem, pochwal się..." {...register('workExperience')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation3" >
                             <Form.Label>Kursy i certyfikaty związane z programowaniem:</Form.Label>
-                            <Form.Control defaultValue={props.correctData ? currUser?.courses : ''} as="textarea" rows={2} placeholder="Jakie certyfikaty oraz kursy ukończyłeś, wymień tylko te związane z programowaniem..." {...register('courses')}/>
+                            <Form.Control defaultValue={props.correctData ? objCopy?.courses : ''} as="textarea" rows={2} placeholder="Jakie certyfikaty oraz kursy ukończyłeś, wymień tylko te związane z programowaniem..." {...register('courses')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3 red-line pb-2">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation4" >
                             <Form.Label>Biografia:</Form.Label>
-                            <Form.Control defaultValue={props.correctData ? currUser?.bio : ''} as="textarea" rows={3} placeholder="Napisz coś o sobie..." {...register('bio')}/>
+                            <Form.Control defaultValue={props.correctData ? objCopy?.bio : ''} as="textarea" rows={3} placeholder="Napisz coś o sobie..." {...register('bio')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3 red-line pb-2" >

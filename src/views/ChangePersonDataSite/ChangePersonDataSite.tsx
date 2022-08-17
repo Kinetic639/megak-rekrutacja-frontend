@@ -12,7 +12,6 @@ const ChangePersonDataSite = () => {
             navigate('/login', {replace: true});
         }, [])
     }
-
     return (
         <>
             <Header />
