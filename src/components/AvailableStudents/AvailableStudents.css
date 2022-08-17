@@ -306,3 +306,14 @@
 .popover-custom-button {
   width: 100px;
 }
+.date-reserve {
+  color: #CFCFCF;
+  opacity: 1;
+  font: normal normal normal 14px/18px Catamaran;
+}
+
+.date-show {
+  color: #F7F7F7;
+  opacity: 1;
+  font: normal normal bold 16px/27px Catamaran;
+}

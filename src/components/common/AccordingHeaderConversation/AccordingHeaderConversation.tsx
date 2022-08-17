@@ -178,8 +178,8 @@ const AccordingHeaderConversation = (props: Props) => {
   return (
     <Accordion.Header className="accordion-header">
       <div className={'me-5'}>
-        <div>Rezerwacja do</div>
-        <div>{props.date} r.</div>
+        <div className={'date-reserve'}>Rezerwacja do</div>
+        <div className={'date-show'}>{props.date} r.</div>
       </div>
       {loading ? (
         <Spinner animation="border" variant="danger" className={'me-2 ms-5'} />
