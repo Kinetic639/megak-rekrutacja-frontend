@@ -3,8 +3,6 @@ import './DashboardWrapper.css';
 import { useAppSelector } from '../../redux/hooks/hooks';
 import { CustomSpinner } from '../../components/common/CustomSpinner/CustomSpinner';
 import React from 'react';
-
-import '../../components/filtersPanel/FiltersPanel.css';
 import { AdminDashboard } from '../admin/AdminDashboard/AdminDashboard';
 import { HrDashboard } from '../Hr/HrDashboard/HrDashboard';
 import { StudentDashboard } from '../Student/StudentDashboard/StudentDashboard';
