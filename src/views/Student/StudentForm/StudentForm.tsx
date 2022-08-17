@@ -3,6 +3,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 
 import './StudentForm.css'
+import {apiUrl} from "../../../config/api";
+import {useAppSelector} from "../../../redux/hooks/hooks";
 
 interface FormRegisterType {
     id: string;
@@ -37,7 +39,33 @@ const StudentForm = () => {
     const [resError, setResError] = useState('');
     const [success, setSuccess] = useState('');
 
-    const onSubmit: SubmitHandler<FormRegisterType> = data  => console.log(data);
+    const currUser = useAppSelector((state) => state.user.user?.id);
+
+    const onSubmit: SubmitHandler<FormRegisterType> = async (data ) => {
+        setLoading(true);
+        try {
+            const res = await fetch(`${apiUrl}/student/update`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...data,
+                    id: currUser,
+                }),
+            });
+            // @TODO waiting for backend validation
+            const dataFormRes = await res.json();
+            if (dataFormRes.message !== '') {
+                setResError(dataFormRes.message);
+            }
+            if (dataFormRes.message === '') {
+                setSuccess(dataFormRes.message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
     return (
         <>
             <Container
