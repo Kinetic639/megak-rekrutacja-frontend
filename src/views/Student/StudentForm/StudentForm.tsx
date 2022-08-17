@@ -70,7 +70,7 @@ const StudentForm = () => {
         <>
             <Container
                 fluid
-                className={` container-form-user mt-5`}
+                className={` container-form-user mt-5 mb-3`}
             >
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <h2 className={'mt-3 mb-4 text-white'}>Dane Użytkownika: </h2>
