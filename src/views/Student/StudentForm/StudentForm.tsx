@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
+import { ContractType } from 'types';
 
 import './StudentForm.css'
 import {apiUrl} from "../../../config/api";
@@ -53,6 +54,9 @@ const StudentForm = (props: Props) => {
     }
     if (currUser?.expectedSalary === null) {
         currUser.expectedSalary = 0;
+    }
+    if (currUser?.expectedContractType === null) {
+        currUser.expectedContractType = ContractType.DEFAULT;
     }
     if (currUser?.monthsOfCommercialExp === null) {
         currUser.monthsOfCommercialExp = 0;
@@ -208,7 +212,7 @@ const StudentForm = (props: Props) => {
 
                         <Form.Group className="mb-4" as={Col} controlId="formHorizontalContractType" md={12} lg>
                             <Form.Label className={`text-white`}>Oczekiwany typ kontraktu:</Form.Label>
-                            <Form.Select defaultValue='Dowolny' {...register('expectedContractType')}>
+                            <Form.Select defaultValue={props.correctData ? currUser?.expectedContractType : 'Dowolny'}  {...register('expectedContractType')}>
                                 <option>Dowolny</option>
                                 <option>UoP</option>
                                 <option>B2B</option>
