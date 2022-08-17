@@ -103,7 +103,7 @@ const Header = () => {
               >
                 <NavDropdown.Item
                   className={`text-white fs-5`}
-                  href="/auth/user-form"
+                  as={Link} to={'/auth/user-form'}
                 >
                   Konto
                 </NavDropdown.Item>

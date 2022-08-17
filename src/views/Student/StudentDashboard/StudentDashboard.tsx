@@ -13,6 +13,6 @@ export const StudentDashboard = () => {
   if (!currUser.firstName || !currUser.lastName || !currUser.githubUsername || !currUser.teamProjectUrls) {
     return <StudentForm />
   }
-  console.log(currUser.teamProjectUrls)
+
   return <StudentCV />;
 };

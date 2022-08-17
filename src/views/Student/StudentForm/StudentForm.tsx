@@ -5,6 +5,7 @@ import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import './StudentForm.css'
 import {apiUrl} from "../../../config/api";
 import {useAppSelector} from "../../../redux/hooks/hooks";
+import {useNavigate} from "react-router-dom";
 
 interface FormRegisterType {
     id: string;
@@ -27,20 +28,50 @@ interface FormRegisterType {
     teamProjectUrls: string;
 }
 
+interface Props {
+    correctData?: boolean;
+}
 
-const StudentForm = () => {
+const StudentForm = (props: Props) => {
     const {
         register,
         formState: { errors },
         handleSubmit,
         watch,
     } = useForm<FormRegisterType>();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [resError, setResError] = useState('');
     const [success, setSuccess] = useState('');
 
     const currUser = useAppSelector((state) => state.user.user);
-
+    if (currUser?.githubUsername === null) {
+        currUser.githubUsername = '';
+    }
+    if (currUser?.targetWorkCity === null) {
+        currUser.targetWorkCity = '';
+    }
+    if (currUser?.expectedSalary === null) {
+        currUser.expectedSalary = 0;
+    }
+    if (currUser?.monthsOfCommercialExp === null) {
+        currUser.monthsOfCommercialExp = 0;
+    }
+    if (currUser?.tel === null) {
+        currUser.tel = '';
+    }
+    if (currUser?.education === null) {
+        currUser.education = '';
+    }
+    if (currUser?.workExperience === null) {
+        currUser.workExperience = '';
+    }
+    if (currUser?.courses === null) {
+        currUser.courses = '';
+    }
+    if (currUser?.bio === null) {
+        currUser.bio = '';
+    }
     const onSubmit: SubmitHandler<FormRegisterType> = async (data ) => {
         setLoading(true);
         try {
@@ -80,6 +111,7 @@ const StudentForm = () => {
                             <Form.Control
                                 type="text"
                                 className={`input-password text-white`}
+                                defaultValue={props.correctData ? currUser?.firstName : ''}
                                 {...register('firstName', {
                                 required: "To pole nie może być puste!",
                                 maxLength: {
@@ -100,6 +132,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white`}>Nazwisko:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.lastName : ''}
                                 className={`input-password text-white`}
                                 {...register('lastName', {
                                 required: "To pole nie może być puste!",
@@ -121,6 +154,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white`}>Nazwa Użytkonika GitHub:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.githubUsername : ''}
                                 className={`input-password text-white`}
                                 {...register('githubUsername', {
                                     required: "To pole nie może być puste!",
@@ -144,6 +178,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white`}>Docelowe miasto, gdzie chce pracować kandydat:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.targetWorkCity : ''}
                                 className={`input-password text-white`}
                                 {...register('targetWorkCity', {
                                     maxLength: {
@@ -162,7 +197,7 @@ const StudentForm = () => {
 
                         <Form.Group className="mb-4" as={Col} controlId="formHorizontalTypeWork" md={12} lg>
                             <Form.Label className={`text-white`}>Wybór preferowanego miejsca pracy:</Form.Label>
-                            <Form.Select defaultValue="Dowolne" {...register('expectedTypeWork')}>
+                            <Form.Select defaultValue={props.correctData ? currUser?.expectedTypeWork : 'Dowolne'} {...register('expectedTypeWork')}>
                                 <option>Dowolne</option>
                                 <option>Zdalnie</option>
                                 <option>Biuro</option>
@@ -173,7 +208,7 @@ const StudentForm = () => {
 
                         <Form.Group className="mb-4" as={Col} controlId="formHorizontalContractType" md={12} lg>
                             <Form.Label className={`text-white`}>Oczekiwany typ kontraktu:</Form.Label>
-                            <Form.Select defaultValue="Dowolny" {...register('expectedContractType')}>
+                            <Form.Select defaultValue='Dowolny' {...register('expectedContractType')}>
                                 <option>Dowolny</option>
                                 <option>UoP</option>
                                 <option>B2B</option>
@@ -188,6 +223,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white mt-4`}>Oczekiwane wynagrodzenie miesięczne netto:</Form.Label>
                             <Form.Control
                                 type="number"
+                                defaultValue={props.correctData ? currUser?.expectedSalary : ''}
                                 className={`input-password text-white`}
                                 {...register('expectedSalary', {
                                     max: {
@@ -208,7 +244,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white `}>Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu:</Form.Label>
                             <Form.Control
                                 type="number"
-                                defaultValue={0}
+                                defaultValue={props.correctData ? currUser?.monthsOfCommercialExp : 0}
                                 className={`input-password text-white`}
                                 {...register('monthsOfCommercialExp', {
                                     required: "To pole nie może być puste!",
@@ -229,6 +265,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white mt-4`}>Numer telefonu:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.tel : ''}
                                 className={`input-password text-white`}
                                 {...register('tel', {
                                     maxLength: {
@@ -250,6 +287,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white`}>Project URL:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.teamProjectUrls : ''}
                                 className={`input-password text-white`}
                                 {...register('teamProjectUrls', {
                                     required: "To pole nie może być puste!",
@@ -276,6 +314,7 @@ const StudentForm = () => {
                             <Form.Label className={`text-white`}>Portfolio URL:</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={props.correctData ? currUser?.portfolioUrls : ''}
                                 className={`input-password text-white`}
                                 {...register('portfolioUrls', {
                                     maxLength: {
@@ -299,25 +338,25 @@ const StudentForm = () => {
                     <Row className="mb-3 mt-4">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation1" >
                             <Form.Label>Przebieg edukacji:</Form.Label>
-                            <Form.Control as="textarea" rows={2} placeholder="Jakie były Twoje kroki by wejść do świata programowania..." {...register('education')}/>
+                            <Form.Control defaultValue={props.correctData ? currUser?.education : ''} as="textarea" rows={2} placeholder="Jakie były Twoje kroki by wejść do świata programowania..." {...register('education')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
-                        <Form.Group className="mb-3" controlId="formTextAreaInformation2" >
+                        <Form.Group className="mb-3" controlId="formTextAreaInformation2" defaultValue={props.correctData ? currUser?.workExperience : ''}>
                             <Form.Label>Przebieg doświadczenia zawodowego:</Form.Label>
-                            <Form.Control as="textarea" rows={2} placeholder="Jeśli pracowałaś/ałeś w firmie związaną z programwoaniem, pochwal się..." {...register('workExperience')}/>
+                            <Form.Control defaultValue={props.correctData ? currUser?.workExperience : ''} as="textarea" rows={2} placeholder="Jeśli pracowałaś/ałeś w firmie związaną z programwoaniem, pochwal się..." {...register('workExperience')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation3" >
                             <Form.Label>Kursy i certyfikaty związane z programowaniem:</Form.Label>
-                            <Form.Control as="textarea" rows={2} placeholder="Jakie certyfikaty oraz kursy ukończyłeś, wymień tylko te związane z programowaniem..." {...register('courses')}/>
+                            <Form.Control defaultValue={props.correctData ? currUser?.courses : ''} as="textarea" rows={2} placeholder="Jakie certyfikaty oraz kursy ukończyłeś, wymień tylko te związane z programowaniem..." {...register('courses')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3 red-line pb-2">
                         <Form.Group className="mb-3" controlId="formTextAreaInformation4" >
                             <Form.Label>Biografia:</Form.Label>
-                            <Form.Control as="textarea" rows={3} placeholder="Napisz coś o sobie..." {...register('bio')}/>
+                            <Form.Control defaultValue={props.correctData ? currUser?.bio : ''} as="textarea" rows={3} placeholder="Napisz coś o sobie..." {...register('bio')}/>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3 red-line pb-2" >
@@ -352,6 +391,7 @@ const StudentForm = () => {
                                 )}
                                 {loading ? 'Trwa zapisywanie danych...' : 'Zapisz swoje dane personalne'}
                             </Button>
+                            {props.correctData && <Button className={'float-end'} id={'button-change-password'} variant="secondary" onClick={() => navigate('/dashboard')}>Anuluj</Button>}
                         </Form.Group>
                     </Row>
                 </Form>
