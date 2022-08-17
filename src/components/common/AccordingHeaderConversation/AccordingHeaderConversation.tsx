@@ -25,6 +25,7 @@ interface Props {
   hrID: string;
   setChangeStudentStatus: React.Dispatch<React.SetStateAction<boolean>>;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  date: string;
 }
 
 interface DataDeactivationRes {
@@ -178,7 +179,7 @@ const AccordingHeaderConversation = (props: Props) => {
     <Accordion.Header className="accordion-header">
       <div className={'me-5'}>
         <div>Rezerwacja do</div>
-        <div>11.07.2022 r.</div>
+        <div>{props.date} r.</div>
       </div>
       {loading ? (
         <Spinner animation="border" variant="danger" className={'me-2 ms-5'} />

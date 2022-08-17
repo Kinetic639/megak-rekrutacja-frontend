@@ -27,7 +27,7 @@ interface UserListResponseHr {
   lastName: string;
   status: string;
   githubUsername: string;
-  data?: Date;
+  date: string;
 }
 
 interface Props {
@@ -44,6 +44,9 @@ const AvailableStudents = (props: Props) => {
   const [studentsListPerPage, setStudentsListPerPage] = useState(10);
   const [search, setSearch] = useState('');
   const [hrDashboardSwitch, setHrDashboardSwitch] = useState(false);
+  const [dateReserved, setDateReserved] = useState<{date: string}[]>([{
+    date: ''
+  }]);
   const hrID = useAppSelector((state) => state.user.user!.id);
 
   const filteredBySearch = resDataUserList.filter((filterData) => {
@@ -63,10 +66,19 @@ const AvailableStudents = (props: Props) => {
   const indexOfFirstStudentsList =
     indexOfLastStudentsList - studentsListPerPage;
 
-  const currentStudentsList = filteredBySearch.slice(
+  let currentStudentsList = filteredBySearch.slice(
     indexOfFirstStudentsList,
     indexOfLastStudentsList,
   );
+
+  if(dateReserved[0].date !== '' && hrDashboardSwitch && dateReserved.length == currentStudentsList.length) {
+    currentStudentsList = currentStudentsList.map((data, index) => {
+      return {
+        ...data,
+        date: dateReserved[index].date
+      }
+    })
+  }
 
   if(hrDashboardSwitch) {
     useEffect(() => {
@@ -85,6 +97,19 @@ const AvailableStudents = (props: Props) => {
           });
           const data: UserListResponseHr[] = await res.json();
           setResDataUserList(data);
+          if(data.length > 0) {
+            const res = await fetch(`${apiUrl}/user/list/reservedDate`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                hrId: hrID
+              }),
+            });
+            const data = await res.json();
+            setDateReserved(data);
+          }
         } finally {
           setLoading(false);
         }
@@ -112,7 +137,6 @@ const AvailableStudents = (props: Props) => {
       })();
     }, [changeStudentStatus, hrDashboardSwitch]);
   }
-
 
   return (
     <>

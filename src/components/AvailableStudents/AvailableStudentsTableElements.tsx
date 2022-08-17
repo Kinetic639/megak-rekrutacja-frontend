@@ -25,6 +25,7 @@ interface UserListResponseHr {
   lastName: string;
   status: string;
   githubUsername: string;
+  date: string;
 }
 
 interface Props {
@@ -107,7 +108,7 @@ const AvailableStudentsTableElements = ({
                 </>)}
           {(availableStudentsVariant === 'available-list' && hrDashboardSwitch) &&
               (<>
-                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch}/>
+                <AccordingHeaderConversation firstName={data.firstName} lastName={data.lastName} idStudent={data.id} githubUsername={data.githubUsername} hrID={hrID} setChangeStudentStatus={setChangeStudentStatus} setSearch={setSearch} date={data.date}/>
                 <Accordion.Body>
                   <GradeTable tableSize="sm" grades={grades} />
                 </Accordion.Body>

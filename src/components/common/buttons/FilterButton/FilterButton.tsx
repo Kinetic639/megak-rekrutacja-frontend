@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import { FiFilter } from 'react-icons/fi';
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { FiltersPanel } from '../../../FiltersPanel/FiltersPanel';
+import { FiltersPanel } from '../../../filtersPanel/FiltersPanel';
 
 export const FilterButton = () => {
   const [show, setShow] = useState(false);

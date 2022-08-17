@@ -69,7 +69,10 @@ const PaginationStudents = (props: Props) => {
             id={`back-custom-button`}
             className={`col-custom-button-next-back `}
             disabled={props.currentPage <= 1}
-            onClick={() => props.setCurrentPage((prevState) => prevState - 1)}
+            onClick={() => {
+              props.setCurrentPage((prevState) => prevState - 1)
+              window.scrollTo(0, 0)
+            }}
           ></Button>
         </Col>
         <Col className={`ps-0 pe-0`}>
@@ -79,7 +82,10 @@ const PaginationStudents = (props: Props) => {
             disabled={
               props.numberOfStudents <= props.currentPage * watchSelectedValue
             }
-            onClick={() => props.setCurrentPage((prevState) => prevState + 1)}
+            onClick={() => {
+              props.setCurrentPage((prevState) => prevState + 1)
+              window.scrollTo(0, 0)
+            }}
           ></Button>
         </Col>
       </Row>
