@@ -16,7 +16,7 @@ export const CvLinksList = ({ links }: Props) => {
   const linksArr: string[] = links.split(',');
   return (
     <>
-      {linksArr.map((link: string, index) => (
+      {linksArr.map((link: string, index) => ( // Chyba to `: string` jest zbędne - TS się domyśli.
         <div key={index} className="cv__link cv__link--main">
           <a
             href={link}

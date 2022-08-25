@@ -79,3 +79,4 @@ import type { RootState } from '../store/store';
 //
 // export const { setFilters, setQuery, clearAllFilters } = filtersSlice.actions;
 // export default filtersSlice.reducer;
+// Do poczyszczenia

@@ -17,7 +17,7 @@ const FormPasswordSite = (props: Props) => {
         }, [])
     }
     return (
-        <>
+        <> // Po co? Można od razu zwrócić FormPassword
             <FormPassword token={token} activateOrReset={props.activateOrReset}/>
         </>
     );

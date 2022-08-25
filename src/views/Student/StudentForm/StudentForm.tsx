@@ -78,6 +78,7 @@ const StudentForm = (props: Props) => {
     if (objCopy?.bio === null) {
         objCopy.bio = '';
     }
+    // Do przeniesienia te rzeczy wyżej do osobnej funkcji
     const onSubmit: SubmitHandler<FormRegisterType> = async (data ) => {
         setLoading(true);
         try {
@@ -409,3 +410,5 @@ const StudentForm = (props: Props) => {
 export {
     StudentForm,
 }
+
+// Potencjał do podziału na mniejsze komponenty

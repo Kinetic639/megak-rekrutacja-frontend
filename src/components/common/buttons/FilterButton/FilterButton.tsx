@@ -24,7 +24,7 @@ export const FilterButton = () => {
         {/*  <Button variant="primary" onClick={handleClose}>*/}
         {/*    Save Changes*/}
         {/*  </Button>*/}
-        {/*</Modal.Footer>*/}
+        {/*</Modal.Footer>*/} // Do poczyszczenia
       </Modal>
       <Button onClick={handleShow} variant="dark" className="btn-filter">
         <FiFilter className="icon-filter" />

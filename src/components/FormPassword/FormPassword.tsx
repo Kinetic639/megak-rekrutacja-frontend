@@ -199,5 +199,5 @@ const FormPassword = (props: Props) => {
     </>
   );
 };
-
+ // Czy aby na pewno nazwa tego komponentu oddaje to co on robi?
 export { FormPassword };

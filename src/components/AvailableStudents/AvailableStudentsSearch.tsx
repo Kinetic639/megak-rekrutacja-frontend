@@ -11,7 +11,7 @@ interface Props {
 const AvailableStudentsSearch = (props: Props) => {
   return (
     <>
-      <Nav className={`mt-2 custom-nav-search`}>
+      <Nav className={`mt-2 custom-nav-search`}> // Brzydki zapis. Zwykły string powinien być w "", tak jak niżej. Z resztą tutaj widać, że raz jest tak, a raz inaczej - w tym pliku i w całym projekcie
         <Form className="d-flex">
           <div className={`wrapper`}>
             <div className={`icon`}></div>
@@ -20,7 +20,7 @@ const AvailableStudentsSearch = (props: Props) => {
               type="text"
               placeholder="Search"
               aria-label="Search"
-              value={`${props.search}`}
+              value={`${props.search}`} // Zupełnie zbędny zapis. Krócej: value={props.search}
               onChange={(event) => props.setSearch(event.target.value)}
             />
           </div>
