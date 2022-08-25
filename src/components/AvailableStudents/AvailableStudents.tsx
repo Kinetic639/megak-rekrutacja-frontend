@@ -10,6 +10,7 @@ import { AvailableStudentsTableElements } from './AvailableStudentsTableElements
 import { PaginationStudents } from './PaginationStudents';
 import { useAppSelector} from "../../redux/hooks/hooks";
 
+// Takie rzeczy jak ten interfejs dobrze, żeby lądowały w typach, nie przy komponencie.
 interface UserListResponseHr {
   id: string;
   email: string;
@@ -74,6 +75,7 @@ const AvailableStudents = (props: Props) => {
       setChangeStudentStatus(false);
       (async () => {
         try {
+          // Wydaje mi się, że dosyć często są robione fetche - zatem można je przenieść do jakiejś ogólnej funkcji/klasy, żeby się nie powtarzać
           const res = await fetch(`${apiUrl}/user/list/reserved`, {
             method: 'POST',
                 headers: {
@@ -101,7 +103,7 @@ const AvailableStudents = (props: Props) => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              hrId: hrID
+              hrId: hrID // Trzymajcie się jednakowego zapisu. Poprzednio lista się kończy `,` a teraz nie
             }),
           });
           const data: UserListResponseHr[] = await res.json();

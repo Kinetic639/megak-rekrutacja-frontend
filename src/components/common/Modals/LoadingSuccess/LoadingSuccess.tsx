@@ -24,7 +24,7 @@ const LoadingSuccess = (props: Props) => {
         <Modal.Header>
           <Modal.Title className={`text-white`}>{props.message}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={`text-white`}>
+        <Modal.Body className={`text-white`}> // Zwróćcie na to uwagę, jest to zbędne i powtarza się czesto, że używacie `{''}` do stringóe
           Proszę wcisnąć przycisk "Dalej" aby kontynuować.
         </Modal.Body>
         <Modal.Footer>

@@ -23,7 +23,7 @@ export const StarGrade = ({ stars, size }: Props) => {
           key={index}
           className={`stars__icon stars__icon--empty  ${size}`}
         />
-      ))}
+      ))} // Bardzo sprytnie 👏
     </div>
   );
 };

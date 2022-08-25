@@ -244,5 +244,5 @@ const AccordingHeaderConversation = (props: Props) => {
     </Accordion.Header>
   );
 };
-
+// Dosyć duży komponent - ma potencjał na podział na mniejsze
 export { AccordingHeaderConversation };

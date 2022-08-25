@@ -156,3 +156,4 @@ export const StudentCV = ({
     </div>
   );
 };
+// Potencjał do podziału na mniejsze komponenty
