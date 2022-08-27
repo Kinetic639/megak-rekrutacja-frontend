@@ -107,8 +107,22 @@ const AvailableStudents = (props: Props) => {
                 hrId: hrID
               }),
             });
-            const data = await res.json();
-            setDateReserved(data);
+            const data: {date: string}[] = await res.json();
+            const oldDate = data.filter((data) => new Date(data.date) < new Date());
+            const upToDate = data.filter((data) => new Date(data.date) > new Date())
+            upToDate.length > 0 && setDateReserved(data);
+
+            if (oldDate.length > 0) {
+              await fetch(`${apiUrl}/user/list/reservedDate/filterOldDate`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  oldDate
+                }),
+              });
+            }
           }
         } finally {
           setLoading(false);
