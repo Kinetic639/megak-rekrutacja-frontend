@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, Button } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 
 interface Props {
   hr: any;
