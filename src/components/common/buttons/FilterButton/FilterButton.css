@@ -1,0 +1,8 @@
+.filters-modal {
+  min-width: 520px;
+  width: fit-content; /* Occupy the 90% of the screen width */
+  max-width: 90vw;
+  font-size: 14px;
+  /*max-width: 520px;*/
+  /*margin: 0 auto;*/
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 
 import './AvailableStudents.css';
 import { apiUrl } from '../../config/api';
@@ -8,7 +8,7 @@ import { AvailableStudentsSearch } from './AvailableStudentsSearch';
 import { AvailableStudentsNavigation } from './AvailableStudentsNavigation';
 import { AvailableStudentsTableElements } from './AvailableStudentsTableElements';
 import { PaginationStudents } from './PaginationStudents';
-import { useAppSelector} from "../../redux/hooks/hooks";
+import { useAppSelector } from '../../redux/hooks/hooks';
 
 interface UserListResponseHr {
   id: string;
@@ -45,6 +45,9 @@ const AvailableStudents = (props: Props) => {
   const [search, setSearch] = useState('');
   const [hrDashboardSwitch, setHrDashboardSwitch] = useState(false);
   const hrID = useAppSelector((state) => state.user.user!.id);
+  const filtersQuery = useAppSelector(
+    (state) => state.filters.filtersSet.queryString,
+  );
 
   const filteredBySearch = resDataUserList.filter((filterData) => {
     filterData.firstName === null
@@ -68,7 +71,7 @@ const AvailableStudents = (props: Props) => {
     indexOfLastStudentsList,
   );
 
-  if(hrDashboardSwitch) {
+  if (hrDashboardSwitch) {
     useEffect(() => {
       setLoading(true);
       setChangeStudentStatus(false);
@@ -76,11 +79,11 @@ const AvailableStudents = (props: Props) => {
         try {
           const res = await fetch(`${apiUrl}/user/list/reserved`, {
             method: 'POST',
-                headers: {
+            headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              hrId: hrID
+              hrId: hrID,
             }),
           });
           const data: UserListResponseHr[] = await res.json();
@@ -95,13 +98,13 @@ const AvailableStudents = (props: Props) => {
       setLoading(true);
       (async () => {
         try {
-          const res = await fetch(`${apiUrl}/user/list/basic`, {
+          const res = await fetch(`${apiUrl}/user/list/basic?${filtersQuery}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              hrId: hrID
+              hrId: hrID,
             }),
           });
           const data: UserListResponseHr[] = await res.json();
@@ -110,9 +113,8 @@ const AvailableStudents = (props: Props) => {
           setLoading(false);
         }
       })();
-    }, [changeStudentStatus, hrDashboardSwitch]);
+    }, [changeStudentStatus, hrDashboardSwitch, filtersQuery]);
   }
-
 
   return (
     <>
@@ -125,10 +127,13 @@ const AvailableStudents = (props: Props) => {
       ) : (
         <>
           <div className="list-container pt-0 ps-0">
-            <AvailableStudentsNavigation setHrDashboardSwitch={setHrDashboardSwitch} hrDashboardSwitch={hrDashboardSwitch}/>
+            <AvailableStudentsNavigation
+              setHrDashboardSwitch={setHrDashboardSwitch}
+              hrDashboardSwitch={hrDashboardSwitch}
+            />
           </div>
           <div className="list-container pb-5">
-            <AvailableStudentsSearch setSearch={setSearch} search={search}/>
+            <AvailableStudentsSearch setSearch={setSearch} search={search} />
             <AvailableStudentsTableElements
               userListResHr={currentStudentsList}
               setChangeStudentStatus={setChangeStudentStatus}

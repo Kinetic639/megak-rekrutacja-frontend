@@ -27,9 +27,24 @@
 }
 
 .accordion-header {
+  display: flex;
+  align-items: center;
   border-radius: 0 !important;
   background-color: #292a2b;
 }
+
+.accordion-header--disabled {
+  cursor: default;
+}
+
+.accordion-header__header {
+  flex: 1;
+}
+
+.accordion-header__btn-container {
+  padding-right: 20px;
+}
+
 .spacer {
   flex: 1;
 }
@@ -167,8 +182,11 @@
 
 .custom-button {
   border-radius: unset;
-  margin-left: 20px;
   font-size: 16px;
+}
+
+.custom-button:not(:first-child) {
+  margin-left: 20px;
 }
 
 .custom-button-disabled {
@@ -305,4 +323,15 @@
 
 .popover-custom-button {
   width: 100px;
+}
+
+.search-result__warning {
+  text-align: center;
+  font-size: 16px;
+  color: #f7f7f7;
+  margin-top: 50px;
+}
+.search-result__clear-filters {
+  color: red;
+  cursor: pointer;
 }

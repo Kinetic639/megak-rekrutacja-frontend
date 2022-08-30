@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 
-// import filtersReducer from '../features/filtersSlice';
 import studentsImportReducer from '../features/studentsImportSlice';
 import hrListReducer from '../features/hrListSlice';
 import userReducer from '../features/userSlice';
+import filtersReducer from '../features/filtersSlice';
 import { apiSlice } from '../features/apiSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   hrList: hrListReducer,
-  // filters: filtersReducer,
   studentsImport: studentsImportReducer,
+  filters: filtersReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

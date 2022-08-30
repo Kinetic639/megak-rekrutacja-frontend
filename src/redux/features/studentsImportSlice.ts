@@ -4,7 +4,6 @@ import { createUsersResponse } from 'types';
 export const importStudentsFromFileAsync = createAsyncThunk(
   'students/importStudentsFromFileAsync',
   async (payload: FormData) => {
-    console.log('działą');
     const resp = await fetch(`http://localhost:3001/admin/create/students`, {
       method: 'POST',
       body: payload,
